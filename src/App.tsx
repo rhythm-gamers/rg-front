@@ -1,9 +1,9 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
-import BoxAnimation from "./components/pages/BoxAnimation";
 import Header from "./components/organisms/Header";
 import Login from "./components/pages/Login";
 import RhythmLevelTests from "./components/pages/RhythmLevelTests";
 import PatternPractice from "./components/pages/PatternPractice";
+import Home from "./components/pages/Home";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           </>
         }
       >
-        <Route path="/" element={<BoxAnimation />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/rhythm_level_tests" element={<RhythmLevelTests />} />
         <Route path="/pattern_practice" element={<PatternPractice />} />
