@@ -1,5 +1,5 @@
 {
-  "name": "rhythm-actor",
+  "name": "rhythm-gamers",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,10 +11,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
-    "react-router-dom": "^6.21.2"
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.21.2",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.2.0",
