@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <header className="flex justify-between px-10 py-4 shadow sticky top-0 bg-white z-50">
       <Link data-testid="logo" className="flex items-center gap-4" to={"/"}>
-        <img loading="lazy" src="/src/assets/images/logo.png" alt="로고" />
+        <img loading="lazy" src="/images/logo.png" alt="로고" />
         <h2 className="text-rose-400 text-lg font-semibold">리듬게이머스</h2>
       </Link>
       <nav className="flex items-center w-1/2">

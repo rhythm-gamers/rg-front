@@ -13,16 +13,18 @@ const Home = () => {
         <section className="w-full flex flex-col items-center mb-72">
           <div className="relative mx-32 mb-40">
             <img
+              loading="lazy"
               className="absolute -top-10 -left-40 animate-leftZoom"
-              src="/src/assets/images/lt-bracket.png"
+              src="/images/lt-bracket.png"
               alt="왼쪽 홑낫표"
             />
             <SectionTitle isImportant className="animate-pulse">
               리듬게이머스에 어서오세요!
             </SectionTitle>
             <img
+              loading="lazy"
               className="absolute top-10 -right-40 animate-rightZoom"
-              src="/src/assets/images/rb-bracket.png"
+              src="/images/rb-bracket.png"
               alt="오른쪽 홑낫표"
             />
           </div>
