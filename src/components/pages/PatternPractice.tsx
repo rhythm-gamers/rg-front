@@ -1,4 +1,11 @@
-import React, { useRef, useState, useLayoutEffect, useCallback, useEffect } from "react";
+import React, {
+  useRef,
+  useState,
+  useLayoutEffect,
+  useCallback,
+  useEffect,
+  useDeferredValue,
+} from "react";
 import crispPixel from "../../utils/crispPixel";
 import setCanvasDPR from "../../utils/setCanvasDPR";
 
@@ -11,10 +18,21 @@ interface INoteRef {
   color: string;
 }
 
+interface IJudgeResult {
+  "100%": number;
+  "90%": number;
+  "60%": number;
+  "30%": number;
+  "0%": number;
+  total: number;
+}
+
+type JudgeResult = "100%" | "90%" | "60%" | "30%" | "0%";
+
 const MILLISECOND = 1000;
 
 const NOTE_HEIGHT = 5;
-const NOTE_SPEED = 200;
+const NOTE_SPEED = 280;
 
 const BORDER_LINE_COLOR = "black";
 const BORDER_LINE_HEIGHT = 1;
@@ -22,15 +40,26 @@ const BORDER_LINE_HEIGHT = 1;
 const JUDGE_LINE_COLOR = "red";
 const JUDGE_LINE_OFFSET = 20;
 const JUDGE_LINE_HEIGHT = 1;
-const JUDGE_MAXIMUM_HEIGHT = 20;
+const JUDGE_MAXIMUM_HEIGHT = 30;
 const JUDGE_MAXIMUM_SECONDS = 0.3;
+const JUDGE_POSITIVE_RESULT = ["100%", "90%", "60%"];
+const JUDGE_NEGATIVE_RESULT = ["30%", "0%"];
 
 const KEY_LENGTH = 4;
 
 const PatternPractice: React.FC = () => {
-  const [currentScore, setCurrentScore] = useState(0);
   const [diffTime, setDiffTime] = useState(0);
   const [keyBounding] = useState(["a", "s", ";", "'"]);
+  const [averageOfJudgeResult, setAverageOfJudgeResult] = useState(0);
+  const deferredAverageOfJudgeResult = useDeferredValue(averageOfJudgeResult);
+  const [judgeResult, setJudgeResult] = useState<IJudgeResult>({
+    "100%": 0,
+    "90%": 0,
+    "60%": 0,
+    "30%": 0,
+    "0%": 0,
+    total: 0,
+  });
   const [notes, setNotes] = useState<INoteRef[]>([
     { key: "a", time: 1, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
     { key: "s", time: 2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
@@ -46,6 +75,20 @@ const PatternPractice: React.FC = () => {
     { key: ";", time: 7.5, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
     { key: "s", time: 7.5, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
     { key: "'", time: 8, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+
+    { key: "a", time: 8.5, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: ";", time: 8.6, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "s", time: 8.7, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "'", time: 8.8, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+
+    { key: "a", time: 9, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: ";", time: 9, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "s", time: 9, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "'", time: 9, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "a", time: 9.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: ";", time: 9.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "s", time: 9.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "'", time: 9.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
   ]);
 
   const notesCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -65,6 +108,27 @@ const PatternPractice: React.FC = () => {
   const songDuration = Math.max(...notes.map((note) => note.time)) + 1;
   const maxNotesNumber = notes.length - 1;
   const isPlaying = true;
+
+  const addJudgeResult = (judgement: JudgeResult) => {
+    if (judgement in JUDGE_POSITIVE_RESULT) {
+      comboRef.current += 1;
+    } else if (judgement in JUDGE_NEGATIVE_RESULT) {
+      comboRef.current = 0;
+    }
+    setJudgeResult((prev) => {
+      prev[judgement] += 1;
+      prev["total"] += 1;
+      return prev;
+    });
+    setAverageOfJudgeResult(
+      () =>
+        (100 * judgeResult["100%"] +
+          90 * judgeResult["90%"] +
+          60 * judgeResult["60%"] +
+          30 * judgeResult["30%"]) /
+        judgeResult["total"]
+    );
+  };
 
   const drawNote = (ctx: CanvasRenderingContext2D, note: INoteRef) => {
     if (!notesCanvasRef.current) return;
@@ -116,7 +180,7 @@ const PatternPractice: React.FC = () => {
       lastDiffTimeBetweenFrameRef.current = now - delta;
 
       if (note.positionY > notesCanvasRef.current.height + JUDGE_MAXIMUM_HEIGHT) {
-        comboRef.current = 0;
+        addJudgeResult("0%");
         notesRef.current = notesRef.current.filter((n) => n !== note);
         setNotes((prev) => prev.filter((n) => n !== note));
       } else {
@@ -189,7 +253,7 @@ const PatternPractice: React.FC = () => {
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [notes, isPlaying, songDuration, currentScore, maxNotesNumber, renderNotes]);
+  }, [notes, isPlaying, songDuration, maxNotesNumber, renderNotes]);
 
   const onPressKey = (key: string) => {
     if (!notesCanvasRef.current) return;
@@ -207,11 +271,9 @@ const PatternPractice: React.FC = () => {
       (note) => note.key === key && note.positionY >= rangeOfHitBox
     );
     // 히트박스에 가까운 노트가 없다면 early return;
-    if (notesCloseToHitBox.length === 0) {
-      return;
-    }
+    if (notesCloseToHitBox.length === 0) return;
 
-    // 노트가 히트박스까지 가는 시간을 할당.
+    // 여러 노트 중 가장 판정선과 가까이 있는 노트를 색출.
     const targetNote = notesCloseToHitBox.reduce((minNote, currentNote) => {
       const minSecondsFromNoteToHitBox = Math.abs(
         minNote?.time + totalSeconds - timeRef.current
@@ -225,25 +287,33 @@ const PatternPractice: React.FC = () => {
         ? currentNote
         : minNote;
     });
+    // 노트 색출 후, 바로 해당 노트 바로 제거
+    notesRef.current = notesRef.current.filter((note) => note !== targetNote);
+    setNotes((prev) => prev.filter((note) => note !== targetNote));
 
     const secondsFromNoteToHitBox = targetNote?.time + totalSeconds - timeRef.current;
+    const absSecondsFromNoteToHitBox = Math.abs(secondsFromNoteToHitBox);
+    const msFromNoteToHitBox = secondsFromNoteToHitBox * MILLISECOND;
 
-    const withinTimingThreshold = Math.abs(secondsFromNoteToHitBox) < JUDGE_MAXIMUM_SECONDS;
-    if (!withinTimingThreshold) {
-      return;
-    }
+    // 예외 처리
+    const withinTimingThreshold = absSecondsFromNoteToHitBox < JUDGE_MAXIMUM_SECONDS;
+    if (!withinTimingThreshold) return;
 
-    const msFromNoteToHitBox = secondsFromNoteToHitBox * 1000;
-    if (Math.abs(secondsFromNoteToHitBox) <= JUDGE_MAXIMUM_SECONDS) {
-      comboRef.current += 1;
-      setCurrentScore((prevScore) => prevScore + 1);
+    // 노트 판정
+    if (absSecondsFromNoteToHitBox <= JUDGE_MAXIMUM_SECONDS) {
+      absSecondsFromNoteToHitBox <= 0.03 // 30ms
+        ? addJudgeResult("100%")
+        : absSecondsFromNoteToHitBox <= 0.04 // 40ms
+        ? addJudgeResult("90%")
+        : absSecondsFromNoteToHitBox <= 0.06 // 60ms
+        ? addJudgeResult("60%")
+        : absSecondsFromNoteToHitBox <= 0.09 // 90ms
+        ? addJudgeResult("30%")
+        : addJudgeResult("0%"); // ~300ms
       setDiffTime(msFromNoteToHitBox);
     } else {
       comboRef.current = 0;
     }
-
-    notesRef.current = notesRef.current.filter((note) => note !== targetNote);
-    setNotes((prev) => prev.filter((note) => note !== targetNote));
   };
 
   const activateKeys = useCallback(
@@ -266,13 +336,17 @@ const PatternPractice: React.FC = () => {
 
   return (
     <div className="w-screen max-w-7xl mx-auto my-0 p-8 text-center">
-      <div className="border-1 mx-auto w-[500px] h-[800px] relative">
+      <div className="border-1 mx-auto w-[400px] h-[740px] relative">
         <canvas ref={notesCanvasRef} className="w-full h-full" />
         <canvas ref={constCanvasRef} className="absolute top-0 left-0 w-full h-full" />
       </div>
-      <p>Score: {currentScore}</p>
       <p>Combo: {comboRef.current}</p>
       <p>차이: {diffTime}ms</p>
+      <p>
+        100% - {judgeResult["100%"]}개 90% - {judgeResult["90%"]}개 60% -{judgeResult["60%"]}개
+        30% - {judgeResult["30%"]}개 0% - {judgeResult["0%"]}개
+      </p>
+      <p>평균: {deferredAverageOfJudgeResult}%</p>
     </div>
   );
 };
