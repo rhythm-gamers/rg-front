@@ -5,49 +5,31 @@ import React, {
   useCallback,
   useEffect,
   useDeferredValue,
+  useTransition,
 } from "react";
 import crispPixel from "../../utils/crispPixel";
 import setCanvasDPR from "../../utils/setCanvasDPR";
-
-interface INoteRef {
-  key: string;
-  time: number;
-  positionX: number;
-  positionY: number;
-  width: number;
-  color: string;
-}
-
-interface IJudgeResult {
-  "100%": number;
-  "90%": number;
-  "60%": number;
-  "30%": number;
-  "0%": number;
-  total: number;
-}
-
-type JudgeResult = "100%" | "90%" | "60%" | "30%" | "0%";
-
-const MILLISECOND = 1000;
-
-const NOTE_HEIGHT = 5;
-const NOTE_SPEED = 280;
-
-const BORDER_LINE_COLOR = "black";
-const BORDER_LINE_HEIGHT = 1;
-
-const JUDGE_LINE_COLOR = "red";
-const JUDGE_LINE_OFFSET = 20;
-const JUDGE_LINE_HEIGHT = 1;
-const JUDGE_MAXIMUM_HEIGHT = 30;
-const JUDGE_MAXIMUM_SECONDS = 0.3;
-const JUDGE_POSITIVE_RESULT = ["100%", "90%", "60%"];
-const JUDGE_NEGATIVE_RESULT = ["30%", "0%"];
-
-const KEY_LENGTH = 4;
+import { findCloseNote } from "../../utils/findCloseNoteWorker";
+import {
+  BORDER_LINE_COLOR,
+  BORDER_LINE_HEIGHT,
+  JUDGE_LINE_COLOR,
+  JUDGE_LINE_HEIGHT,
+  JUDGE_LINE_OFFSET,
+  JUDGE_MAXIMUM_HEIGHT,
+  JUDGE_MAXIMUM_SECONDS,
+  JUDGE_NEGATIVE_RESULT,
+  JUDGE_POSITIVE_RESULT,
+  KEY_LENGTH,
+  MILLISECOND,
+  NOTE_HEIGHT,
+  NOTE_SPEED,
+} from "../../utils/constants";
+import { IJudgeResult, INoteRef, JudgeResult } from "../../types/rhythmGameTypes";
 
 const PatternPractice: React.FC = () => {
+  const [_, startTransition] = useTransition();
+
   const [diffTime, setDiffTime] = useState(0);
   const [keyBounding] = useState(["a", "s", ";", "'"]);
   const [averageOfJudgeResult, setAverageOfJudgeResult] = useState(0);
@@ -62,33 +44,29 @@ const PatternPractice: React.FC = () => {
   });
   const [notes, setNotes] = useState<INoteRef[]>([
     { key: "a", time: 1, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: ";", time: 1, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "s", time: 1, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "'", time: 1, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "a", time: 1.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: ";", time: 1.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "s", time: 1.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "'", time: 1.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "a", time: 1.4, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: ";", time: 1.4, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "s", time: 1.4, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "'", time: 1.4, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "a", time: 1.6, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: ";", time: 1.6, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "s", time: 1.6, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "'", time: 1.6, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "a", time: 1.8, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: ";", time: 1.8, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "s", time: 1.8, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "'", time: 1.8, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "a", time: 2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: ";", time: 2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
     { key: "s", time: 2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: ";", time: 3, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "'", time: 4, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-
-    { key: "a", time: 5, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: ";", time: 5.5, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "s", time: 6, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "'", time: 6.5, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-
-    { key: "a", time: 7, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: ";", time: 7.5, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "s", time: 7.5, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "'", time: 8, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-
-    { key: "a", time: 8.5, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: ";", time: 8.6, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "s", time: 8.7, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "'", time: 8.8, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-
-    { key: "a", time: 9, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: ";", time: 9, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "s", time: 9, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "'", time: 9, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "a", time: 9.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: ";", time: 9.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "s", time: 9.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
-    { key: "'", time: 9.2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
+    { key: "'", time: 2, positionX: 0, positionY: 0, width: 0, color: "#3498db" },
   ]);
 
   const notesCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -96,7 +74,7 @@ const PatternPractice: React.FC = () => {
   const deltaRef = useRef(0);
   const timeRef = useRef(0);
   const comboRef = useRef(0);
-  const notesRef = useRef<INoteRef[]>(notes);
+  const visibleNotesRef = useRef<INoteRef[]>(notes);
   const lastDiffTimeBetweenFrameRef = useRef(0);
 
   const keyMappings = new Map();
@@ -168,6 +146,20 @@ const PatternPractice: React.FC = () => {
     ctx.stroke();
   };
 
+  const deleteNote = (targetNote: INoteRef) => {
+    visibleNotesRef.current = visibleNotesRef.current.filter(
+      (note) => note.key !== targetNote.key || note.time !== targetNote.time
+    );
+    setNotes((prev) =>
+      prev.filter((note) => note.key !== targetNote.key || note.time !== targetNote.time)
+    );
+  };
+
+  const deleteLateNote = (targetNote: INoteRef) => {
+    visibleNotesRef.current = visibleNotesRef.current.filter((note) => note !== targetNote);
+    setNotes((prev) => prev.filter((note) => note !== targetNote));
+  };
+
   const update = useCallback(
     (now: number, delta: number, ctx: CanvasRenderingContext2D, note: INoteRef) => {
       if (!notesCanvasRef.current) return;
@@ -181,8 +173,7 @@ const PatternPractice: React.FC = () => {
 
       if (note.positionY > notesCanvasRef.current.height + JUDGE_MAXIMUM_HEIGHT) {
         addJudgeResult("0%");
-        notesRef.current = notesRef.current.filter((n) => n !== note);
-        setNotes((prev) => prev.filter((n) => n !== note));
+        deleteLateNote(note);
       } else {
         drawNote(ctx, note);
       }
@@ -217,7 +208,7 @@ const PatternPractice: React.FC = () => {
     // 메모리에 실제 크기 설정 (픽셀 밀도를 고려하여 크기 조정)
     const dpr = window.devicePixelRatio;
     setCanvasDPR(noteCanvas, noteCtx, dpr);
-    setCanvasDPR(noteCanvas, noteCtx, dpr);
+    setCanvasDPR(constCanvas, constCtx, dpr);
 
     const updateNotes = () => {
       const now = Date.now();
@@ -257,63 +248,13 @@ const PatternPractice: React.FC = () => {
 
   const onPressKey = (key: string) => {
     if (!notesCanvasRef.current) return;
-    const canvasHeight = notesCanvasRef.current.height;
-
-    const totalDistance = canvasHeight - JUDGE_LINE_OFFSET - JUDGE_LINE_HEIGHT / 2;
-    const rangeOfHitBox = totalDistance - JUDGE_MAXIMUM_HEIGHT;
-
-    const distancePerFrame = NOTE_SPEED * (lastDiffTimeBetweenFrameRef.current / MILLISECOND);
-    const timePerFrame = lastDiffTimeBetweenFrameRef.current;
-    const totalFrame = totalDistance / distancePerFrame;
-    const totalSeconds = (totalFrame * timePerFrame) / MILLISECOND;
-
-    const notesCloseToHitBox = notesRef.current.filter(
-      (note) => note.key === key && note.positionY >= rangeOfHitBox
-    );
-    // 히트박스에 가까운 노트가 없다면 early return;
-    if (notesCloseToHitBox.length === 0) return;
-
-    // 여러 노트 중 가장 판정선과 가까이 있는 노트를 색출.
-    const targetNote = notesCloseToHitBox.reduce((minNote, currentNote) => {
-      const minSecondsFromNoteToHitBox = Math.abs(
-        minNote?.time + totalSeconds - timeRef.current
-      );
-
-      const currentSecondsFromNoteToHitBox = Math.abs(
-        currentNote?.time + totalSeconds - timeRef.current
-      );
-
-      return currentSecondsFromNoteToHitBox < minSecondsFromNoteToHitBox
-        ? currentNote
-        : minNote;
+    findCloseNote.postMessage({
+      key,
+      canvasHeight: notesCanvasRef.current.height,
+      timePerFrame: lastDiffTimeBetweenFrameRef.current,
+      visibleNotesRef: visibleNotesRef,
+      timeRef: timeRef,
     });
-    // 노트 색출 후, 바로 해당 노트 바로 제거
-    notesRef.current = notesRef.current.filter((note) => note !== targetNote);
-    setNotes((prev) => prev.filter((note) => note !== targetNote));
-
-    const secondsFromNoteToHitBox = targetNote?.time + totalSeconds - timeRef.current;
-    const absSecondsFromNoteToHitBox = Math.abs(secondsFromNoteToHitBox);
-    const msFromNoteToHitBox = secondsFromNoteToHitBox * MILLISECOND;
-
-    // 예외 처리
-    const withinTimingThreshold = absSecondsFromNoteToHitBox < JUDGE_MAXIMUM_SECONDS;
-    if (!withinTimingThreshold) return;
-
-    // 노트 판정
-    if (absSecondsFromNoteToHitBox <= JUDGE_MAXIMUM_SECONDS) {
-      absSecondsFromNoteToHitBox <= 0.03 // 30ms
-        ? addJudgeResult("100%")
-        : absSecondsFromNoteToHitBox <= 0.04 // 40ms
-        ? addJudgeResult("90%")
-        : absSecondsFromNoteToHitBox <= 0.06 // 60ms
-        ? addJudgeResult("60%")
-        : absSecondsFromNoteToHitBox <= 0.09 // 90ms
-        ? addJudgeResult("30%")
-        : addJudgeResult("0%"); // ~300ms
-      setDiffTime(msFromNoteToHitBox);
-    } else {
-      comboRef.current = 0;
-    }
   };
 
   const activateKeys = useCallback(
@@ -327,12 +268,46 @@ const PatternPractice: React.FC = () => {
     [keyMappings, onPressKey]
   );
 
+  const judgeNoteAndDelete = (targetNote: INoteRef, totalSeconds: number) => {
+    // 노트 색출 후, 바로 해당 노트 바로 제거
+    deleteNote(targetNote);
+    startTransition(() => {
+      const secondsFromNoteToHitBox = targetNote?.time + totalSeconds - timeRef.current;
+      const absSecondsFromNoteToHitBox = Math.abs(secondsFromNoteToHitBox);
+      const msFromNoteToHitBox = secondsFromNoteToHitBox * MILLISECOND;
+
+      // 예외 처리
+      const withinTimingThreshold = absSecondsFromNoteToHitBox < JUDGE_MAXIMUM_SECONDS;
+      if (!withinTimingThreshold) return;
+
+      // 노트 판정
+      if (absSecondsFromNoteToHitBox <= JUDGE_MAXIMUM_SECONDS) {
+        absSecondsFromNoteToHitBox <= 0.034 // 34ms
+          ? addJudgeResult("100%")
+          : absSecondsFromNoteToHitBox <= 0.051 // 51ms
+          ? addJudgeResult("90%")
+          : absSecondsFromNoteToHitBox <= 0.085 // 85ms
+          ? addJudgeResult("60%")
+          : absSecondsFromNoteToHitBox <= 0.1 // 100ms
+          ? addJudgeResult("30%")
+          : addJudgeResult("0%"); // ~300ms
+        setDiffTime(msFromNoteToHitBox);
+      } else {
+        comboRef.current = 0;
+      }
+    });
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", activateKeys);
     return () => {
       window.removeEventListener("keydown", activateKeys);
     };
   }, [activateKeys]);
+
+  useEffect(() => {
+    findCloseNote.onMessage(judgeNoteAndDelete);
+  }, []);
 
   return (
     <div className="w-screen max-w-7xl mx-auto my-0 p-8 text-center">
