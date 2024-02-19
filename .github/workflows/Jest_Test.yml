@@ -15,7 +15,7 @@ jobs:
           node-version: "18.17.0"
 
       - name: npm_install
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: run_test_code
         run: npm test:ci
