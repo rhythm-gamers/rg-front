@@ -1,32 +1,60 @@
 import Header from "@/components/organisms/Header";
+import { makeStore } from "@/lib/store";
 import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import {
+  LINK_COMMUNITY,
+  LINK_LOGIN,
+  LINK_PP,
+  LINK_RLT,
+  LINK_WIKI,
+} from "../../src/const";
+
+jest.mock("next/navigation");
+
+const router = {
+  push: jest.fn(),
+};
+router.push.mockImplementation((pathname: string) => pathname);
 
 describe("Organisms/Header", () => {
   test("로고 클릭", () => {
-    render(<Header />);
-    const logo: HTMLAnchorElement = screen.getByTestId("logo");
+    render(
+      <Provider store={makeStore()}>
+        <Header />
+      </Provider>,
+    );
+    const logo: HTMLButtonElement = screen.getByTestId("logo");
 
     expect(logo).toBeInTheDocument();
-    expect(logo.href).toMatch(/\/$/);
   });
 
   test.each([
-    { testId: "nav-rlt", pathname: "/level_tests" },
-    { testId: "nav-pp", pathname: "/pattern_practice" },
-  ])("네비게이션 클릭 (pathname: $pathname)", ({ testId, pathname }) => {
-    render(<Header />);
-    const el: HTMLAnchorElement = screen.getByTestId(testId);
-    const regex = `${pathname}$`;
+    { testId: "link-rlt", href: "/level_tests", constants: LINK_RLT },
+    { testId: "link-pp", href: "/pattern_practice", constants: LINK_PP },
+    { testId: "link-wiki", href: "/wiki", constants: LINK_WIKI },
+    { testId: "link-community", href: "/community", constants: LINK_COMMUNITY },
+  ])("네비게이션 클릭 (pathname: $href)", ({ testId, href, constants }) => {
+    render(
+      <Provider store={makeStore()}>
+        <Header />
+      </Provider>,
+    );
+    const el: HTMLButtonElement = screen.getByTestId(testId);
 
     expect(el).toBeInTheDocument();
-    expect(el.href).toMatch(new RegExp(regex));
+    expect(router.push(constants)).toMatch(href);
   });
 
   test("로그인 링크 클릭", () => {
-    render(<Header />);
-    const login: HTMLAnchorElement = screen.getByTestId("link-login");
+    render(
+      <Provider store={makeStore()}>
+        <Header />
+      </Provider>,
+    );
+    const login: HTMLButtonElement = screen.getByTestId("link-login");
 
     expect(login).toBeInTheDocument();
-    expect(login.href).toMatch(/\/login$/);
+    expect(router.push(LINK_LOGIN)).toMatch("/login");
   });
 });
