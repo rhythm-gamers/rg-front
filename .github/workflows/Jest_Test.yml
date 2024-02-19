@@ -12,10 +12,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: "18.x"
+          node-version: "18.17.0"
 
       - name: npm_install
-        run: npm install
+        run: npm ci
 
       - name: run_test_code
         run: npm test:ci
