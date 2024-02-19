@@ -18,7 +18,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: run_test_code
-        run: npm test:ci
+        run: npm run test:ci
 
       - name: if_fail
         uses: actions/github-script@v4
