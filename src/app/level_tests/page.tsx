@@ -33,7 +33,7 @@ const RhythmLevelTests = () => {
   };
 
   return (
-    <div className="h-[70vh] flex flex-col justify-center items-center text-white">
+    <main className="h-[70vh] flex flex-col justify-center items-center text-white">
       <button type="button" onClick={increaseCounter} className="bg-red-400">
         증가 버튼
       </button>
@@ -70,7 +70,7 @@ const RhythmLevelTests = () => {
       >
         개수 감소
       </button>
-    </div>
+    </main>
   );
 };
 
