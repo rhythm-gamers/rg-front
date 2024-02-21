@@ -3,9 +3,15 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface UnityState {
   unload: (() => Promise<void>) | null;
+  speed: number;
+  judgementLineOffset: number;
 }
 
-const initialState: UnityState = { unload: null };
+const initialState: UnityState = {
+  unload: null,
+  speed: 3.0,
+  judgementLineOffset: 0,
+};
 
 const unitySlice = createSlice({
   name: "unity",

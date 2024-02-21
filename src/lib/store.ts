@@ -1,16 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { EnhancedStore, configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./rootReducer";
-import {
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
+import { Persistor, persistReducer, persistStore } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
+export interface IPersistStore extends EnhancedStore {
+  __persistor?: Persistor;
+}
 const createNoopStorage = () => {
   return {
     getItem(_key: any) {
@@ -41,7 +36,7 @@ const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 // middleware부분은 안 넣으면 직렬화 에러 뜸 자세한 내용은 아래 링크 참고
 // https://redux-toolkit.js.org/usage/usage-guide#working-with-non-serializable-data
 export const makeStore = () => {
-  return configureStore({
+  const store: IPersistStore = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
@@ -49,6 +44,8 @@ export const makeStore = () => {
       }),
     devTools: process.env.NODE_ENV === "development",
   });
+  store.__persistor = persistStore(store);
+  return store;
 };
 
 // useSelector 사용할 때 이용하는 타입
