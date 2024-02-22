@@ -1,10 +1,11 @@
 "use client";
 
-import { setUnload } from "@/lib/features/unity/unitySlice";
+import { setSpeed, setUnload } from "@/lib/features/unity/unitySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
+import { ReactUnityEventParameter } from "react-unity-webgl/distribution/types/react-unity-event-parameters";
 
 const UnityContainer = () => {
   const {
@@ -29,6 +30,21 @@ const UnityContainer = () => {
     requestFullscreen(true);
   };
 
+  /** Set Speed From Unity */
+  const handleSetSpeed = useCallback((speed: ReactUnityEventParameter) => {
+    if (typeof speed === "string") {
+      dispatch(setSpeed(parseFloat(speed)));
+    }
+  }, []);
+
+  useEffect(() => {
+    addEventListener("SetSpeed", handleSetSpeed);
+    return () => {
+      removeEventListener("SetSpeed", handleSetSpeed);
+    };
+  }, [addEventListener, removeEventListener, handleSetSpeed]);
+  /** END Set Speed From Unity */
+
   const initGameState = () => {
     sendMessage("GameManager", "WebGLInitUserSpeed", speed);
   };
@@ -37,7 +53,7 @@ const UnityContainer = () => {
     if (isLoaded) initGameState();
   }, [isLoaded]);
 
-  /* Prevent WebGL Canvas Unmount Error */
+  /** Prevent WebGL Canvas Unmount Error */
   const unloadAndBack = useCallback(async () => {
     await unload();
     dispatch(setUnload(null));
@@ -60,7 +76,7 @@ const UnityContainer = () => {
       window.removeEventListener("popstate", unloadAndBack);
     };
   }, [unloadAndBack]);
-  /* END Prevent WebGL Canvas Unmount Error */
+  /** END Prevent WebGL Canvas Unmount Error */
 
   return (
     <>
