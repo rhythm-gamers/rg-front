@@ -1,9 +1,14 @@
 "use client";
 
-import { setSpeed, setUnload } from "@/lib/features/unity/unitySlice";
+import {
+  setJudgeTime,
+  setSpeed,
+  setUnload,
+} from "@/lib/features/unity/unitySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
+import { SlSizeFullscreen } from "react-icons/sl";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { ReactUnityEventParameter } from "react-unity-webgl/distribution/types/react-unity-event-parameters";
 
@@ -22,7 +27,7 @@ const UnityContainer = () => {
     frameworkUrl: "unity/build/Build/build.framework.js.gz",
     codeUrl: "unity/build/Build/build.wasm.gz",
   });
-  const { speed, judgementLineOffset } = useAppSelector((state) => state.unity);
+  const { speed, judgeTime } = useAppSelector((state) => state.unity);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -30,28 +35,45 @@ const UnityContainer = () => {
     requestFullscreen(true);
   };
 
-  /** Set Speed From Unity */
+  /** Send User Setting To Unity */
+  const initGameState = () => {
+    sendMessage("GameManager", "WebGLInitUserSpeed", speed);
+    sendMessage("Judgement", "WebGLInitUserJudgeTime", judgeTime);
+  };
+
+  useEffect(() => {
+    if (isLoaded) initGameState();
+  }, [isLoaded]);
+  /** END Send User Setting To Unity */
+
+  /** Set Speed, JudgeTime From Unity */
   const handleSetSpeed = useCallback((speed: ReactUnityEventParameter) => {
     if (typeof speed === "string") {
       dispatch(setSpeed(parseFloat(speed)));
     }
   }, []);
 
+  const handleSetJudgeTime = useCallback((speed: ReactUnityEventParameter) => {
+    if (typeof speed === "number") {
+      console.log(speed);
+      dispatch(setJudgeTime(speed));
+    }
+  }, []);
+
   useEffect(() => {
     addEventListener("SetSpeed", handleSetSpeed);
+    addEventListener("SetJudgeTime", handleSetJudgeTime);
     return () => {
       removeEventListener("SetSpeed", handleSetSpeed);
+      removeEventListener("SetJudgeTime", handleSetJudgeTime);
     };
-  }, [addEventListener, removeEventListener, handleSetSpeed]);
-  /** END Set Speed From Unity */
-
-  const initGameState = () => {
-    sendMessage("GameManager", "WebGLInitUserSpeed", speed);
-  };
-
-  useEffect(() => {
-    if (isLoaded) initGameState();
-  }, [isLoaded]);
+  }, [
+    addEventListener,
+    removeEventListener,
+    handleSetSpeed,
+    handleSetJudgeTime,
+  ]);
+  /** END Set Speed, JudgeTime From Unity */
 
   /** Prevent WebGL Canvas Unmount Error */
   const unloadAndBack = useCallback(async () => {
@@ -81,7 +103,11 @@ const UnityContainer = () => {
   return (
     <>
       <Unity unityProvider={unityProvider} className="w-full" />
-      <button onClick={enableFullScreen}>전체화면</button>
+      <SlSizeFullscreen
+        onClick={enableFullScreen}
+        className="absolute right-12 bottom-12 cursor-pointer text-white"
+        size={30}
+      />
     </>
   );
 };
