@@ -4,13 +4,13 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 interface UnityState {
   unload: (() => Promise<void>) | null;
   speed: number;
-  judgementLineOffset: number;
+  judgeTime: number;
 }
 
 const initialState: UnityState = {
   unload: null,
   speed: 1.0,
-  judgementLineOffset: 0,
+  judgeTime: 0,
 };
 
 const unitySlice = createSlice({
@@ -23,9 +23,12 @@ const unitySlice = createSlice({
     setSpeed(state, action: PayloadAction<typeof state.speed>) {
       state.speed = action.payload;
     },
+    setJudgeTime(state, action: PayloadAction<typeof state.judgeTime>) {
+      state.judgeTime = action.payload;
+    },
   },
 });
 
-export const { setUnload, setSpeed } = unitySlice.actions;
+export const { setUnload, setSpeed, setJudgeTime } = unitySlice.actions;
 
 export default unitySlice.reducer;
