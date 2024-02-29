@@ -10,9 +10,13 @@ const SectionTitle = ({ children, isImportant, className }: ISectionTitle) => {
   return (
     <>
       {isImportant ? (
-        <h1 className={`text-4xl font-bold ${className}`}>{children}</h1>
+        <h1 className={`text-2xl font-bold text-black ${className ?? ""}`}>
+          {children}
+        </h1>
       ) : (
-        <h2 className={`text-4xl font-bold ${className}`}>{children}</h2>
+        <h2 className={`text-2xl font-bold text-black ${className ?? ""}`}>
+          {children}
+        </h2>
       )}
     </>
   );
