@@ -51,7 +51,7 @@ const Header = () => {
               type="button"
               data-testid="link-pp"
               onClick={() => unloadAndNavigate(LINK_PP)}
-              className={`relative block after:block after:content-[''] after:absolute after:h-[2px] after:bg-rose-400 after:w-full after:-bottom-2 ${
+              className={`relative after:block after:content-[''] after:absolute after:h-[2px] after:bg-rose-400 after:w-full after:-bottom-2 ${
                 pathname !== LINK_PP &&
                 "after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300"
               }`}
@@ -64,7 +64,7 @@ const Header = () => {
               type="button"
               data-testid="link-rlt"
               onClick={() => unloadAndNavigate(LINK_RLT)}
-              className={`relative block after:block after:content-[''] after:absolute after:h-[2px] after:bg-rose-400 after:w-full after:-bottom-2 ${
+              className={`relative after:block after:content-[''] after:absolute after:h-[2px] after:bg-rose-400 after:w-full after:-bottom-2 ${
                 pathname !== LINK_RLT &&
                 "after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300"
               }`}
@@ -76,7 +76,7 @@ const Header = () => {
             <button
               type="button"
               data-testid="link-wiki"
-              className={`relative block after:block after:content-[''] after:absolute after:h-[2px] after:bg-rose-400 after:w-full after:-bottom-2 ${
+              className={`relative after:block after:content-[''] after:absolute after:h-[2px] after:bg-rose-400 after:w-full after:-bottom-2 ${
                 pathname !== LINK_WIKI &&
                 "after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300"
               }`}
@@ -89,7 +89,7 @@ const Header = () => {
             <button
               type="button"
               data-testid="link-community"
-              className={`relative block after:block after:content-[''] after:absolute after:h-[2px] after:bg-rose-400 after:w-full after:-bottom-2 ${
+              className={`relative after:block after:content-[''] after:absolute after:h-[2px] after:bg-rose-400 after:w-full after:-bottom-2 ${
                 pathname !== LINK_COMMUNITY &&
                 "after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300"
               }`}
