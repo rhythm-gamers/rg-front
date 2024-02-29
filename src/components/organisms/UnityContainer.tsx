@@ -22,10 +22,10 @@ const UnityContainer = () => {
     unload,
     isLoaded,
   } = useUnityContext({
-    loaderUrl: "unity/build/Build/build.loader.js",
-    dataUrl: "unity/build/Build/build.data.gz",
-    frameworkUrl: "unity/build/Build/build.framework.js.gz",
-    codeUrl: "unity/build/Build/build.wasm.gz",
+    loaderUrl: "/unity/build/Build/build.loader.js",
+    dataUrl: "/unity/build/Build/build.data.gz",
+    frameworkUrl: "/unity/build/Build/build.framework.js.gz",
+    codeUrl: "/unity/build/Build/build.wasm.gz",
   });
   const { speed, judgeTime } = useAppSelector((state) => state.unity);
   const dispatch = useAppDispatch();
