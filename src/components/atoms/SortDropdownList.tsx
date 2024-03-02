@@ -19,7 +19,7 @@ const SortDropdownList = ({ value }: ISortDropdownList) => {
     <li className="first:py-3 pb-3">
       <button
         type="button"
-        className="flex items-center gap-2 cursor-pointer"
+        className="flex items-center w-full gap-2 cursor-pointer"
         onClick={handleClickDropdownList}
       >
         {value}
