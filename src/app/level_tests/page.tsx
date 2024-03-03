@@ -1,4 +1,4 @@
-import AdSideBox from "@/components/atoms/AdSideBox";
+import AdSideBox from "@/components/atoms/AdSideBox/AdSideBox";
 import FullSizeSection from "@/components/atoms/FullSizeSection";
 import SectionTitle from "@/components/atoms/SectionTitle";
 

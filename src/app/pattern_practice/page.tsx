@@ -1,6 +1,6 @@
 "use client";
 
-import AdSideBox from "@/components/atoms/AdSideBox";
+import AdSideBox from "@/components/atoms/AdSideBox/AdSideBox";
 import CategoryBtn from "@/components/atoms/CategoryBtn";
 import CategoryWrapper from "@/components/atoms/CategoryWrapper";
 import FilterAndSortWrapper from "@/components/atoms/FilterWrapper";

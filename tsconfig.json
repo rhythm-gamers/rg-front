@@ -12,7 +12,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*", "./storybook/*"]
     },
 
     /* Bundler mode */

@@ -19,16 +19,16 @@ const SortBox = ({ value }: ISortBox) => {
   };
 
   return (
-    <div className="relative min-w-40 rounded-md">
+    <div className="relative rounded-md">
       <button
         type="button"
-        className="w-full relative px-4 py-2 text-start"
+        className="relative pr-6 py-2 text-end"
         onClick={toggleStoredDropdownId}
       >
         {sortType}
         <IoIosArrowDown
           size={20}
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-10"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10"
         />
       </button>
       {dropdownType === value && <SortDropdown />}
