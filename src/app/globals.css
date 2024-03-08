@@ -16,3 +16,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+body::-webkit-scrollbar,
+div::-webkit-scrollbar {
+  width: 1rem;
+}
+
+body::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb {
+  height: 15%;
+  background: rgb(251 113 133);
+  border-radius: 10px;
+  border: 3px solid rgb(254 205 211);
+}
