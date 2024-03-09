@@ -17,7 +17,7 @@ const PracticeCard = ({
   return (
     <Link
       href={`/pattern_practice/${practiceId}`}
-      className="flex flex-col items-center w-full py-4 gap-3 bg-white"
+      className="flex flex-col items-center w-full py-4 gap-3 rounded-2xl shadow-lg bg-white"
     >
       <Image
         src={imgSrc}
