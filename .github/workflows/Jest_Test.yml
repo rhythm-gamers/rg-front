@@ -14,11 +14,11 @@ jobs:
         with:
           node-version: "18.17.0"
 
-      - name: npm_install
-        run: npm ci --legacy-peer-deps
+      - name: yarn_install
+        run: yarn install --immutable --immutable-cache --check-cache
 
       - name: run_test_code
-        run: npm run test:ci
+        run: yarn test:ci
 
       - name: if_fail
         uses: actions/github-script@v4
