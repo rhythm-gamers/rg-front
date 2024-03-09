@@ -1,21 +1,10 @@
-import AdSideBox from "@/components/atoms/AdSideBox/AdSideBox";
-import FullSizeSection from "@/components/atoms/FullSizeSection";
-import SectionTitle from "@/components/atoms/SectionTitle";
+import LevelCards from "@/components/level_tests/organisms/LevelCards";
 
-// redux state 사용예시
 const RhythmLevelTests = () => {
   return (
-    <FullSizeSection className="flex">
-      <AdSideBox />
-      <main className="w-full h-[70vh] flex flex-col justify-center items-center text-white">
-        <FullSizeSection>
-          <SectionTitle className="mt-10" isImportant>
-            리듬레벨 테스트
-          </SectionTitle>
-        </FullSizeSection>
-      </main>
-      <AdSideBox />
-    </FullSizeSection>
+    <main className="flex flex-col items-center w-full h-[calc(100vh-3.75rem)] bg-orange-100">
+      <LevelCards />
+    </main>
   );
 };
 
