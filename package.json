@@ -63,5 +63,8 @@
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "resolutions": {
+    "string-width": "4.2.3"
   }
 }
