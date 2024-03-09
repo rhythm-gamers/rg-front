@@ -24,7 +24,7 @@ const PatternPractice = () => {
   useEffect(() => {
     window.addEventListener("click", clearDropdownType);
     return () => {
-      window.removeEventListener("click", () => clearDropdownType);
+      window.removeEventListener("click", clearDropdownType);
     };
   }, [clearDropdownType]);
 
