@@ -4,7 +4,7 @@ import { MdStar } from "react-icons/md";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { useRef, useState } from "react";
 import Image from "next/image";
-import SectionTitle from "@/components/atoms/SectionTitle";
+import SectionTitle from "@/components/public/atoms/SectionTitle/SectionTitle";
 
 const Home = () => {
   const cardRef = useRef<HTMLDivElement>(null);

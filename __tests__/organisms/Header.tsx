@@ -1,4 +1,3 @@
-import Header from "@/components/organisms/Header";
 import { makeStore } from "@/lib/store";
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
@@ -9,6 +8,7 @@ import {
   LINK_RLT,
   LINK_WIKI,
 } from "../../src/const";
+import Header from "@/components/public/organisms/Header/Header";
 
 jest.mock("next/navigation");
 

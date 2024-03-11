@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/organisms/Header";
 import StoreProvider from "./storeProvider";
+import Header from "@/components/public/organisms/Header/Header";
 
 export const metadata: Metadata = {
   title: "리듬게이머스",

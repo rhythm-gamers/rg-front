@@ -11,11 +11,12 @@ import { setUnload } from "@/lib/features/unity/unitySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import logo from "/public/images/logo.png";
 
 const Header = () => {
   const pathname = usePathname();
-  const router = useRouter();
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const unloadUnity = useAppSelector((state) => state.unity.unload);
 
   const unloadAndNavigate = async (href: string) => {
@@ -38,7 +39,7 @@ const Header = () => {
           width={20}
           height={0}
           loading="lazy"
-          src="/images/logo.png"
+          src={logo}
           alt="로고"
           className="w-auto"
         />

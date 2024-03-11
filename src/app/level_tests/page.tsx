@@ -1,4 +1,4 @@
-import LevelCards from "@/components/level_tests/organisms/LevelCards";
+import LevelCards from "@/components/level_tests/organisms/LevelCards/LevelCards";
 
 const RhythmLevelTests = () => {
   return (

@@ -1,5 +1,5 @@
 import { MdArrowDropDown } from "react-icons/md";
-import FilterDropdown from "../moleclues/FilterDropdown";
+import FilterDropdown from "../../molecules/FilterDropdown/FilterDropdown";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { toggleDropdownType } from "@/lib/features/practice/practiceSlice";
 import { MouseEvent } from "react";
@@ -31,7 +31,7 @@ const FilterBox = ({ value }: IFilterBox) => {
           className="absolute right-3 top-1/2 -translate-y-1/2 z-10"
         />
       </button>
-      {dropdownType === value && <FilterDropdown />}
+      <FilterDropdown dropdownType={dropdownType} />
     </div>
   );
 };

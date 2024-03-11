@@ -1,19 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import AdSideBox from "./AdSideBox";
-import StoreProvider from "@/app/storeProvider";
 
 const meta = {
-  title: "Atoms/AdSideBox",
+  title: "AdSideBox",
   component: AdSideBox,
   tags: ["autodocs"],
   parameters: {},
-  decorators: [
-    (Story) => (
-      <StoreProvider>
-        <Story />
-      </StoreProvider>
-    ),
-  ],
 } satisfies Meta<typeof AdSideBox>;
 
 export default meta;

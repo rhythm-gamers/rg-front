@@ -1,12 +1,12 @@
 "use client";
 
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
-import LevelCard from "../molecules/LevelCard";
+import LevelCard from "../../molecules/LevelCard/LevelCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { TbHandClick } from "react-icons/tb";
-import { useEffect, useRef } from "react";
+import { MouseEvent, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setCurrentLevel } from "@/lib/features/levelTest/levelTestSlice";
@@ -29,6 +29,12 @@ const LevelCards = () => {
       dispatch(setCurrentLevel(currentLevel.current));
       router.push(`/level_tests/${currentLevel.current}`);
     }
+  };
+  const navigateToLevelTestByClick = (e: MouseEvent, level: number) => {
+    e.preventDefault();
+    if (isDragging.current) return;
+    dispatch(setCurrentLevel(level));
+    router.push(`/level_tests/${level}`);
   };
 
   const settings = {
@@ -78,7 +84,11 @@ const LevelCards = () => {
         {...settings}
       >
         {[1, 2, 3, 4, 5, 6].map((value) => (
-          <LevelCard key={value} level={value} isDragging={isDragging} />
+          <LevelCard
+            key={value}
+            level={value}
+            onClick={navigateToLevelTestByClick}
+          />
         ))}
       </Slider>
       <div className="flex flex-col items-center gap-3 absolute bottom-8 mx-auto text-rose-400">

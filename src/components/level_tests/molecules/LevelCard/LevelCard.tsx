@@ -1,36 +1,25 @@
-import { setCurrentLevel } from "@/lib/features/levelTest/levelTestSlice";
-import { useAppDispatch } from "@/lib/hooks";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { MouseEvent, MutableRefObject } from "react";
+import Image from "next/image";
+import levelTestPreviewImg from "/public/images/pp_stair.png";
+import { MouseEvent } from "react";
 
 interface ILevelCard {
   level: number;
-  isDragging: MutableRefObject<boolean>;
+  onClick: (e: MouseEvent, level: number) => void;
 }
 
-const LevelCard = ({ level, isDragging }: ILevelCard) => {
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-
-  const navigateToLevelTestByClick = (e: MouseEvent) => {
-    e.preventDefault();
-    if (isDragging.current) return;
-    dispatch(setCurrentLevel(level));
-    router.push(`/level_tests/${level}`);
-  };
-
+const LevelCard = ({ level, onClick }: ILevelCard) => {
   return (
-    <Link
-      href={`/level_tests/${level}`}
+    <button
       id={`lt-${level}`}
       onDragStart={(e) => e.preventDefault()}
-      onClick={navigateToLevelTestByClick}
-      className="flex flex-col min-w-[26rem] h-full bg-white hover:scale-110 hover:ring-4 hover:ring-rose-200 focus:scale-110 focus:outline-none focus:ring-4 focus:ring-rose-200 origin-center transition-all p-2 rounded-2xl shadow-xl"
+      onClick={(e) => onClick(e, level)}
+      className="flex flex-col w-[28rem] bg-white hover:scale-110 hover:ring-4 hover:ring-rose-200 focus:scale-110 focus:outline-none focus:ring-4 focus:ring-rose-200 origin-center transition-all p-2 rounded-2xl shadow-xl"
     >
       <div className="w-full h-full my-5">
-        <img
-          src="/images/pp_stair.png"
+        <Image
+          width={2000}
+          height={0}
+          src={levelTestPreviewImg}
           alt="레벨 테스트별 자켓 사진"
           loading="lazy"
         />
@@ -44,24 +33,30 @@ const LevelCard = ({ level, isDragging }: ILevelCard) => {
         <hr className="w-full mt-10 border-2 border-rose-200 rounded-lg" />
         <div className="flex flex-nowrap min-h-24 items-center gap-5 mt-2">
           <div className="flex flex-col w-10 items-center gap-1">
-            <img
-              src="/images/pp_stair.png"
+            <Image
+              width={50}
+              height={50}
+              src={levelTestPreviewImg}
               alt="레벨 테스트별 패턴 아이콘"
               loading="lazy"
             />
             <p>Lv.{level}</p>
           </div>
           <div className="flex flex-col w-10 items-center gap-1">
-            <img
-              src="/images/pp_stair.png"
+            <Image
+              width={50}
+              height={50}
+              src={levelTestPreviewImg}
               alt="레벨 테스트별 패턴 아이콘"
               loading="lazy"
             />
             <p>Lv.{level}</p>
           </div>
           <div className="flex flex-col w-10 items-center gap-1">
-            <img
-              src="/images/pp_stair.png"
+            <Image
+              width={50}
+              height={50}
+              src={levelTestPreviewImg}
               alt="레벨 테스트별 패턴 아이콘"
               loading="lazy"
             />
@@ -69,7 +64,7 @@ const LevelCard = ({ level, isDragging }: ILevelCard) => {
           </div>
         </div>
       </div>
-    </Link>
+    </button>
   );
 };
 
