@@ -1,4 +1,4 @@
-import UnityContainer from "@/components/organisms/UnityContainer";
+import UnityContainer from "@/components/public/organisms/UnityContainer/UnityContainer";
 
 interface IPatternPracticeFromPracticeId {
   params: {

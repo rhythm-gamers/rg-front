@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
 interface IPracticeCard {
   practiceId: number;
   title: string;
-  imgSrc: string;
+  imgSrc: StaticImageData;
   patterns: string[];
 }
 

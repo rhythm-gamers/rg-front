@@ -1,9 +1,10 @@
-import { useAppSelector } from "@/lib/hooks";
-import FilterDropdownList from "../atoms/FilterDropdownList";
+import FilterDropdownList from "../../atoms/FilterDropdownList/FilterDropdownList";
 
-const FilterDropdown = () => {
-  const { dropdownType } = useAppSelector((state) => state.practice);
+interface IFilterDropdown {
+  dropdownType: string;
+}
 
+const FilterDropdown = ({ dropdownType }: IFilterDropdown) => {
   return (
     <ul
       className="flex flex-col absolute z-10 w-full px-4 bg-white border rounded-md mt-1"

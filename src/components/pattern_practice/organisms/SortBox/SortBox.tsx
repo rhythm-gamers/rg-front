@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { MouseEvent } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { toggleDropdownType } from "@/lib/features/practice/practiceSlice";
-import SortDropdown from "../moleclues/SortDropdown";
+import SortDropdown from "../../molecules/SortDropdown/SortDropdown";
 
 interface ISortBox {
   value: string;

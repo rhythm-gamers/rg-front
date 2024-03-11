@@ -1,18 +1,18 @@
 "use client";
 
-import AdSideBox from "@/components/atoms/AdSideBox/AdSideBox";
-import CategoryBtn from "@/components/atoms/CategoryBtn";
-import CategoryWrapper from "@/components/atoms/CategoryWrapper";
-import FilterAndSortWrapper from "@/components/atoms/FilterWrapper";
-import FullSizeSection from "@/components/atoms/FullSizeSection";
-import SectionTitle from "@/components/atoms/SectionTitle";
-import FilterBox from "@/components/organisms/FilterBox";
-import ActiveFilterItems from "@/components/organisms/ActiveFilterItems";
+import CategoryBtn from "@/components/pattern_practice/atoms/CategoryBtn/CategoryBtn";
+import FullSizeSection from "@/components/public/atoms/FullSizeSection/FullSizeSection";
+import SectionTitle from "@/components/public/atoms/SectionTitle/SectionTitle";
+import FilterBox from "@/components/pattern_practice/organisms/FilterBox/FilterBox";
+import ActiveFilterItems from "@/components/pattern_practice/organisms/ActiveFilterItem/ActiveFilterItems";
 import { useEffect } from "react";
 import { toggleDropdownType } from "@/lib/features/practice/practiceSlice";
 import { useAppDispatch } from "@/lib/hooks";
-import PracticeCard from "@/components/moleclues/PracticeCard";
-import SortBox from "@/components/organisms/SortBox";
+import PracticeCard from "@/components/pattern_practice/molecules/PracticeCard/PracticeCard";
+import SortBox from "@/components/pattern_practice/organisms/SortBox/SortBox";
+import CategoryWrapper from "@/components/pattern_practice/atoms/CategoryWrapper/CategoryWrapper";
+import AdSideBox from "@/components/public/atoms/AdSideBox/AdSideBox";
+import ppThumbnail from "/public/images/pp_stair.png";
 
 const PatternPractice = () => {
   const dispatch = useAppDispatch();
@@ -41,19 +41,19 @@ const PatternPractice = () => {
             <CategoryBtn value="5키" />
             <CategoryBtn value="6키" />
           </CategoryWrapper>
-          <FilterAndSortWrapper>
+          <div className="flex justify-between w-full text-black mt-3">
             <div className="flex gap-5">
               <FilterBox value="레벨" />
               <FilterBox value="패턴" />
             </div>
             <SortBox value="정렬" />
-          </FilterAndSortWrapper>
+          </div>
           <ActiveFilterItems />
           <div className="grid grid-cols-5 text-gray-500 mt-10">
             <PracticeCard
               practiceId={1}
               title="계단 연습 1"
-              imgSrc="/images/pp_stair.png"
+              imgSrc={ppThumbnail}
               patterns={["계단 Lv.1", "폭타 Lv.1"]}
             />
           </div>

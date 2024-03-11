@@ -1,4 +1,4 @@
-import SortDropdownList from "../atoms/SortDropdownList";
+import SortDropdownList from "../../atoms/SortDropdownList/SortDropdownList";
 
 const SortDropdown = () => {
   return (
