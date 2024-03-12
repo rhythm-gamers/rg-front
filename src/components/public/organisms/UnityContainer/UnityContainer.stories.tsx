@@ -4,7 +4,6 @@ import UnityContainer from "./UnityContainer";
 const meta = {
   title: "UnityContainer",
   component: UnityContainer,
-  tags: ["autodocs"],
   args: {},
 } satisfies Meta<typeof UnityContainer>;
 

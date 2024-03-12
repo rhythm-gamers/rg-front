@@ -4,7 +4,6 @@ import SortDropdownList from "./SortDropdownList";
 const meta = {
   title: "SortDropdownList",
   component: SortDropdownList,
-  tags: ["autodocs"],
   args: {
     value: "요소1",
   },

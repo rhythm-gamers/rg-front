@@ -4,7 +4,6 @@ import CategoryBtn from "./CategoryBtn";
 const meta = {
   title: "CategoryBtn",
   component: CategoryBtn,
-  tags: ["autodocs"],
   args: {
     value: "4키",
   },

@@ -4,7 +4,6 @@ import SectionTitle from "./SectionTitle";
 const meta = {
   title: "SectionTitle",
   component: SectionTitle,
-  tags: ["autodocs"],
   args: { children: "해당 섹션 제목" },
 } satisfies Meta<typeof SectionTitle>;
 

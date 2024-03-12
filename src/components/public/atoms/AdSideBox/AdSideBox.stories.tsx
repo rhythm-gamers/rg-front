@@ -4,7 +4,6 @@ import AdSideBox from "./AdSideBox";
 const meta = {
   title: "AdSideBox",
   component: AdSideBox,
-  tags: ["autodocs"],
   parameters: {},
 } satisfies Meta<typeof AdSideBox>;
 

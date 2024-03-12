@@ -5,7 +5,6 @@ import CategoryBtn from "../CategoryBtn/CategoryBtn";
 const meta = {
   title: "CategoryWrapper",
   component: CategoryWrapper,
-  tags: ["autodocs"],
   args: {
     children: (
       <>
