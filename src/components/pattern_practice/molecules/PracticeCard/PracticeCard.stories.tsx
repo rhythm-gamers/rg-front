@@ -5,7 +5,6 @@ import ppThumbnail from "/public/images/pp_stair.png";
 const meta = {
   title: "PracticeCard",
   component: PracticeCard,
-  tags: ["autodocs"],
   args: {
     practiceId: 1,
     title: "계단 연습 1",

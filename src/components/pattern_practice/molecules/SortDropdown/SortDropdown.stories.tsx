@@ -4,7 +4,6 @@ import SortDropdown from "./SortDropdown";
 const meta = {
   title: "SortDropdown",
   component: SortDropdown,
-  tags: ["autodocs"],
   args: {},
 } satisfies Meta<typeof SortDropdown>;
 

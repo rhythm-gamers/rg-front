@@ -4,7 +4,6 @@ import FilterDropdown from "./FilterDropdown";
 const meta = {
   title: "FilterDropdown",
   component: FilterDropdown,
-  tags: ["autodocs"],
   args: { dropdownType: "레벨" },
   argTypes: { dropdownType: { control: "select", options: ["레벨", "패턴"] } },
 } satisfies Meta<typeof FilterDropdown>;

@@ -31,7 +31,7 @@ const FilterBox = ({ value }: IFilterBox) => {
           className="absolute right-3 top-1/2 -translate-y-1/2 z-10"
         />
       </button>
-      <FilterDropdown dropdownType={dropdownType} />
+      {dropdownType === value && <FilterDropdown dropdownType={dropdownType} />}
     </div>
   );
 };

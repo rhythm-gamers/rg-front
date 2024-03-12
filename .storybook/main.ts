@@ -33,6 +33,11 @@ const config: StorybookConfig = {
       titlePrefix: "public/atoms",
     },
     {
+      directory: "../src/components/public/molecules",
+      files: "**/*.stories.*",
+      titlePrefix: "public/molecules",
+    },
+    {
       directory: "../src/components/public/organisms",
       files: "**/*.stories.*",
       titlePrefix: "public/organisms",

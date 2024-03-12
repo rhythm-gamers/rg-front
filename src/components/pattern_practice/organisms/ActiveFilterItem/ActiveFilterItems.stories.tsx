@@ -4,7 +4,6 @@ import ActiveFilterItems from "./ActiveFilterItems";
 const meta = {
   title: "ActiveFilterItems",
   component: ActiveFilterItems,
-  tags: ["autodocs"],
   args: {},
 } satisfies Meta<typeof ActiveFilterItems>;
 

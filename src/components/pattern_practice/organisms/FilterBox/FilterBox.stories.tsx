@@ -4,7 +4,6 @@ import FilterBox from "./FilterBox";
 const meta = {
   title: "FilterBox",
   component: FilterBox,
-  tags: ["autodocs"],
   args: { value: "레벨" },
   argTypes: { value: { control: "select", options: ["레벨", "패턴"] } },
 } satisfies Meta<typeof FilterBox>;

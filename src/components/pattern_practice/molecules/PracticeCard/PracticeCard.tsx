@@ -17,16 +17,9 @@ const PracticeCard = ({
   return (
     <Link
       href={`/pattern_practice/${practiceId}`}
-      className="flex flex-col items-center w-full py-4 gap-3 rounded-2xl shadow-lg bg-white"
+      className="flex flex-col items-center max-w-80 py-4 gap-3 rounded-2xl shadow-lg bg-white border hover:scale-105 transition-all"
     >
-      <Image
-        src={imgSrc}
-        alt="계단"
-        width={200}
-        height={200}
-        className="w-auto h-full"
-        priority
-      />
+      <Image src={imgSrc} alt="계단" width={1000} height={0} priority />
       <p className="font-semibold">{title}</p>
       <p className="text-sm text-rose-400 break-keep">{patterns.join(" | ")}</p>
     </Link>

@@ -4,7 +4,6 @@ import LevelCards from "./LevelCards";
 const meta = {
   title: "LevelCards",
   component: LevelCards,
-  tags: ["autodocs"],
   args: {
     level: 1,
   },
