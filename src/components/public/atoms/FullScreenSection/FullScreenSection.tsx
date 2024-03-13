@@ -1,24 +1,38 @@
 import { ReactNode } from "react";
 
-interface IFullSizeSection {
+interface IFullScreenSection {
   children: ReactNode;
   direction: "row" | "col";
   className?: string;
+  asMainTag?: boolean;
 }
 
 const FullScreenSection = ({
   children,
   className,
   direction,
-}: IFullSizeSection) => {
+  asMainTag,
+}: IFullScreenSection) => {
   return (
-    <section
-      className={`flex w-screen h-screen ${
-        direction === "col" && "flex-col"
-      } ${className}`}
-    >
-      {children}
-    </section>
+    <>
+      {asMainTag ? (
+        <main
+          className={`flex w-full min-h-[calc(100vh-3.75rem)] ${
+            direction === "col" && "flex-col"
+          } ${className}`}
+        >
+          {children}
+        </main>
+      ) : (
+        <section
+          className={`flex w-full min-h-[calc(100vh-3.75rem)] ${
+            direction === "col" && "flex-col"
+          } ${className}`}
+        >
+          {children}
+        </section>
+      )}
+    </>
   );
 };
 
