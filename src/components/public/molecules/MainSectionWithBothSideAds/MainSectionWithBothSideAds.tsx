@@ -15,7 +15,7 @@ const MainSectionWithBothSideAds = ({
   return (
     <FullScreenSection direction="row">
       <AdSideBox />
-      <main className="flex flex-col">
+      <main className="flex flex-col w-full">
         {sectionTitle && (
           <SectionTitle isImportant>{sectionTitle}</SectionTitle>
         )}
