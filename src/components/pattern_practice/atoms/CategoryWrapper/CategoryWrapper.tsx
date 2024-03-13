@@ -6,7 +6,7 @@ interface ICategoryWrapper {
 
 const CategoryWrapper = ({ children }: ICategoryWrapper) => {
   return (
-    <div className="flex text-black py-2 mt-10 text-lg bg-white border rounded-md">
+    <div className="flex text-black py-2 mt-5 text-lg bg-white border rounded-md">
       {children}
     </div>
   );

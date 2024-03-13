@@ -1,11 +1,12 @@
 import LevelCards from "@/components/level_tests/organisms/LevelCards/LevelCards";
+import FullScreenSection from "@/components/public/atoms/FullScreenSection/FullScreenSection";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { TbHandClick } from "react-icons/tb";
 
 const RhythmLevelTests = () => {
   return (
-    <main className="flex flex-col items-center w-full h-[calc(100vh-3.75rem)] bg-orange-100">
-      <div className="flex w-full h-full justify-evenly items-center relative">
+    <FullScreenSection direction="col" className="bg-orange-100" asMainTag>
+      <div className="flex w-full h-full justify-evenly items-center">
         <LevelCards />
         <div className="flex flex-col items-center gap-3 absolute bottom-8 mx-auto text-rose-400">
           <div className="flex justify-between w-[35rem]">
@@ -25,7 +26,7 @@ const RhythmLevelTests = () => {
           <p className="text-black">Tip: 방향키로도 이동 가능해요.</p>
         </div>
       </div>
-    </main>
+    </FullScreenSection>
   );
 };
 
