@@ -5,7 +5,7 @@ import SectionTitle from "../../atoms/SectionTitle/SectionTitle";
 
 interface IMainSectionWithBothSideAds {
   children: ReactNode;
-  sectionTitle: string;
+  sectionTitle?: string;
 }
 
 const MainSectionWithBothSideAds = ({
@@ -15,13 +15,11 @@ const MainSectionWithBothSideAds = ({
   return (
     <FullScreenSection direction="row">
       <AdSideBox />
-      <main className="w-full flex flex-col">
-        <section className="flex flex-col">
-          <SectionTitle className="mt-10 mb-5" isImportant>
-            {sectionTitle}
-          </SectionTitle>
-          {children}
-        </section>
+      <main className="flex flex-col">
+        {sectionTitle && (
+          <SectionTitle isImportant>{sectionTitle}</SectionTitle>
+        )}
+        {children}
       </main>
       <AdSideBox />
     </FullScreenSection>
