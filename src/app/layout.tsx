@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import StoreProvider from "./storeProvider";
 import Header from "@/components/public/organisms/Header/Header";
+import { RouteChangesProvider } from "nextjs-router-events";
 
 export const metadata: Metadata = {
   title: "리듬게이머스",
@@ -36,8 +37,10 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <StoreProvider>
-          <Header />
-          {children}
+          <RouteChangesProvider>
+            <Header />
+            {children}
+          </RouteChangesProvider>
         </StoreProvider>
       </body>
     </html>

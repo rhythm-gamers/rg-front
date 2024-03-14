@@ -1,13 +1,9 @@
 "use client";
 
-import {
-  setJudgeTime,
-  setSpeed,
-  setUnload,
-} from "@/lib/features/unity/unitySlice";
+import { setJudgeTime, setSpeed } from "@/lib/features/unity/unitySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useRouteChangeEvents, useRouter } from "nextjs-router-events";
+import { useCallback, useEffect, useRef } from "react";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { ReactUnityEventParameter } from "react-unity-webgl/distribution/types/react-unity-event-parameters";
@@ -30,6 +26,7 @@ const UnityContainer = () => {
   const { speed, judgeTime } = useAppSelector((state) => state.unity);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const unloadRef = useRef<() => Promise<void>>();
 
   const enableFullScreen = () => {
     requestFullscreen(true);
@@ -76,33 +73,41 @@ const UnityContainer = () => {
   /** END Set Speed, JudgeTime From Unity */
 
   /** Prevent WebGL Canvas Unmount Error */
-  const unloadAndBack = useCallback(async () => {
-    await unload();
-    dispatch(setUnload(null));
-    // Because of unload state updating, stack two dummy hrefs
-    router.back();
-    router.back();
-  }, [unload]);
+  useRouteChangeEvents({
+    onBeforeRouteChange: async () => {
+      await unloadRef.current!();
+    },
+  });
 
   useEffect(() => {
-    history.pushState(null, "", location.pathname);
-  }, []);
+    unloadRef.current = unload;
+  }, [isLoaded]);
 
   useEffect(() => {
-    dispatch(setUnload(unload));
-  }, [unload]);
+    const unloadAndBack = async () => {
+      if (!unloadRef.current) return;
+      await unloadRef.current();
+      // delete pushState history and back
+      router.back();
+      router.back();
+    };
 
-  useEffect(() => {
+    history.pushState(null, "", "");
     window.addEventListener("popstate", unloadAndBack);
+    window.addEventListener("beforeunload", unloadAndBack);
     return () => {
       window.removeEventListener("popstate", unloadAndBack);
+      window.removeEventListener("beforeunload", unloadAndBack);
     };
-  }, [unloadAndBack]);
+  }, []);
   /** END Prevent WebGL Canvas Unmount Error */
 
   return (
     <>
-      <Unity unityProvider={unityProvider} className="w-full" />
+      <Unity
+        unityProvider={unityProvider}
+        className={`w-full ${isLoaded ? "block" : "hidden"}`}
+      />
       <SlSizeFullscreen
         onClick={enableFullScreen}
         className="absolute right-12 bottom-12 cursor-pointer text-white"
