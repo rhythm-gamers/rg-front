@@ -2,7 +2,8 @@
 
 import { setJudgeTime, setSpeed } from "@/lib/features/unity/unitySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useRouteChangeEvents, useRouter } from "nextjs-router-events";
+import { useRouter } from "next/navigation";
+import { useRouteChangeEvents } from "nextjs-router-events";
 import { useCallback, useEffect, useRef } from "react";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { Unity, useUnityContext } from "react-unity-webgl";
