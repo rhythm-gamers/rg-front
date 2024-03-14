@@ -2,6 +2,7 @@ import React from "react";
 import "../src/app/globals.css";
 import { Preview } from "@storybook/react";
 import StoreProvider from "../src/app/storeProvider";
+import { RouteChangesProvider } from "nextjs-router-events";
 
 const preview: Preview = {
   parameters: {
@@ -19,7 +20,9 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <StoreProvider>
-        <Story />
+        <RouteChangesProvider>
+          <Story />
+        </RouteChangesProvider>
       </StoreProvider>
     ),
   ],
