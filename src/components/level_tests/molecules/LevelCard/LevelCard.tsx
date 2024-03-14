@@ -1,6 +1,7 @@
 import Image from "next/image";
 import levelTestPreviewImg from "/public/images/pp_stair.png";
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 interface ILevelCard {
   level: number;
@@ -8,6 +9,11 @@ interface ILevelCard {
 }
 
 const LevelCard = ({ level, onClick }: ILevelCard) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch(`/level_tests/${level}`);
+  }, []);
   return (
     <button
       id={`lt-${level}`}
@@ -21,7 +27,7 @@ const LevelCard = ({ level, onClick }: ILevelCard) => {
           height={0}
           src={levelTestPreviewImg}
           alt="레벨 테스트별 자켓 사진"
-          loading="lazy"
+          priority
         />
       </div>
       <div className="flex flex-col items-center w-full h-full px-10">
