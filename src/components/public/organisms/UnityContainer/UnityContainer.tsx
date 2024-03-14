@@ -4,7 +4,7 @@ import { setJudgeTime, setSpeed } from "@/lib/features/unity/unitySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
 import { useRouteChangeEvents } from "nextjs-router-events";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { ReactUnityEventParameter } from "react-unity-webgl/distribution/types/react-unity-event-parameters";
@@ -103,10 +103,34 @@ const UnityContainer = () => {
   }, []);
   /** END Prevent WebGL Canvas Unmount Error */
 
+  /** Use Device Pixel Ratio */
+  const [devicePixelRatio, setDevicePixelRatio] = useState(
+    window.devicePixelRatio,
+  );
+
+  useEffect(
+    function () {
+      const updateDevicePixelRatio = function () {
+        setDevicePixelRatio(window.devicePixelRatio);
+      };
+      // A media matcher which watches for changes in the device pixel ratio.
+      const mediaMatcher = window.matchMedia(
+        `screen and (resolution: ${devicePixelRatio}dppx)`,
+      );
+      mediaMatcher.addEventListener("change", updateDevicePixelRatio);
+      return function () {
+        mediaMatcher.removeEventListener("change", updateDevicePixelRatio);
+      };
+    },
+    [devicePixelRatio],
+  );
+  /** END Use Device Pixel Ratio */
+
   return (
     <>
       <Unity
         unityProvider={unityProvider}
+        devicePixelRatio={devicePixelRatio}
         className={`w-full ${isLoaded ? "block" : "hidden"}`}
       />
       <SlSizeFullscreen
