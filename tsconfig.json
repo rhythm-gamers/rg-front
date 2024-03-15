@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "module": "esnext",
@@ -12,26 +16,36 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*", "./storybook/*"]
+      "@/*": [
+        "./src/*",
+        "./storybook/*"
+      ]
     },
-
     /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "Node",
+    // "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-
     /* Jest */
     "esModuleInterop": true,
-    "types": ["@testing-library/jest-dom"]
+    "types": [
+      "@testing-library/jest-dom"
+    ],
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
