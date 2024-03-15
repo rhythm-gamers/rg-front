@@ -10,10 +10,14 @@ import {
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import logo from "/public/images/logo.png";
+import profileImg from "/public/images/pp_stair.png";
 import Link from "next/link";
+import { useAppSelector } from "@/lib/hooks";
 
 const Header = () => {
   const pathname = usePathname();
+  const { isLogin } = useAppSelector((state) => state.user);
+  console.log(isLogin);
 
   return (
     <header className="flex justify-between px-10 py-4 shadow sticky top-0 bg-white z-50">
@@ -80,9 +84,20 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <Link href={LINK_LOGIN} data-testid="link-login">
-        로그인
-      </Link>
+      {isLogin ? (
+        <Link
+          href={"/mypage"}
+          className="flex items-center gap-5"
+          data-testid="link-mypage"
+        >
+          <Image width={40} height={40} src={profileImg} alt="프로필 사진" />
+          <span>이름</span>
+        </Link>
+      ) : (
+        <Link href={LINK_LOGIN} data-testid="link-login">
+          로그인
+        </Link>
+      )}
     </header>
   );
 };
