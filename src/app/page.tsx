@@ -14,20 +14,18 @@ const Home = () => {
     <div className="w-full h-full bg-gradient-to-r from-rose-400 to-orange-200 relative">
       <div className="w-3/5 flex flex-col items-center mx-auto py-32">
         <section className="w-full flex flex-col items-center mb-72">
-          <div className="relative mx-32 mb-40">
+          <div className="relative mb-40">
             <Image
-              className="absolute -top-10 -left-40 animate-leftZoom"
+              className="absolute -top-12 -left-40 animate-leftZoom"
               width={50}
               height={50}
               loading="lazy"
               src="/images/lt-bracket.png"
               alt="왼쪽 홑낫표"
             />
-            <SectionTitle isImportant className="animate-pulse">
-              리듬게이머스에 어서오세요!
-            </SectionTitle>
+            <h2 className="text-4xl font-bold">리듬게이머스에 어서오세요!</h2>
             <Image
-              className="absolute top-10 -right-40 animate-rightZoom"
+              className="absolute top-8 -right-40 animate-rightZoom"
               width={50}
               height={50}
               loading="lazy"
@@ -36,12 +34,14 @@ const Home = () => {
             />
           </div>
           <div className="w-full h-56 bg-violet-300 rounded-3xl border-2 border-orange-300 border-opacity-50 shadow-[0px_7px_0px_7px_rgba(109,40,217)]">
-            <div className="h-full flex flex-col justify-center items-center relative text-white text-3xl leading-[2.7]">
+            <div className="h-full flex flex-col justify-center items-center relative text-white text-3xl leading-[2.7] break-keep">
               <p>리듬게이머스는 초심자부터 숙련자까지,</p>
-              <div className="relative ml-28">
+              <div className="relative ml-28 w-fit">
                 <MdStar className="text-yellow-300 absolute -left-36 top-2 z-10" />
-                <p className="w-32 h-10 flex justify-center items-center absolute -left-[8.1rem] top-5 bg-rose-400 rounded-xl shadow-md">
-                  리듬레벨
+                <p>
+                  <span className="w-32 h-10 flex justify-center items-center absolute -left-[8.1rem] top-5 bg-rose-400 rounded-xl shadow-md">
+                    리듬레벨
+                  </span>
                 </p>
                 에 맞춰 패턴을 연습할 수 있도록 도와주는 플랫폼입니다.
               </div>
