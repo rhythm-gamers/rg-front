@@ -20,7 +20,7 @@ const Home = () => {
               width={50}
               height={50}
               loading="lazy"
-              src="/images/lt-bracket.png"
+              src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/lt-bracket.png`}
               alt="왼쪽 홑낫표"
             />
             <h2 className="text-4xl font-bold">리듬게이머스에 어서오세요!</h2>
@@ -29,7 +29,7 @@ const Home = () => {
               width={50}
               height={50}
               loading="lazy"
-              src="/images/rb-bracket.png"
+              src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/rb-bracket.png`}
               alt="오른쪽 홑낫표"
             />
           </div>
