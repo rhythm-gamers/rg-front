@@ -17,7 +17,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: process.env.AWS_CLOUDFRONT_HOSTNAME,
+        hostname:
+          process.env.AWS_CLOUDFRONT_HOSTNAME ||
+          process.env.STORYBOOK_AWS_CLOUDFRONT_HOSTNAME,
         port: "",
         pathname: "/**",
       },
