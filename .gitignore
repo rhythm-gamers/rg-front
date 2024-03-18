@@ -37,3 +37,9 @@ next-env.d.ts
 
 # storybook
 build-storybook.log
+
+#env
+.env
+
+#unity builds
+/public/unity*
