@@ -14,3 +14,6 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          STORYBOOK_AWS_CLOUDFRONT_HOSTNAME: ${{secrets.STORYBOOK_AWS_CLOUDFRONT_HOSTNAME}}
+          STORYBOOK_AWS_CLOUDFRONT_URL: ${{secrets.STORYBOOK_AWS_CLOUDFRONT_URL}}
