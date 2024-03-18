@@ -53,6 +53,11 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs",
     options: {},
   },
+  env: (config) => ({
+    ...config,
+    AWS_CLOUDFRONT_HOSTNAME: process.env.AWS_CLOUDFRONT_HOSTNAME!,
+    NEXT_PUBLIC_AWS_CLOUDFRONT_URL: process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL!,
+  }),
   docs: {
     autodocs: "tag",
   },
