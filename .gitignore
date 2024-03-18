@@ -46,3 +46,6 @@ build-storybook.log
 
 # image assets
 /public/images*
+
+# storybook builds
+storybook-static/
