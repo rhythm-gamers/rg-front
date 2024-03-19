@@ -1,5 +1,4 @@
 import Image from "next/image";
-import levelTestPreviewImg from "/public/images/pp_stair.png";
 import { MouseEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -25,7 +24,7 @@ const LevelCard = ({ level, onClick }: ILevelCard) => {
         <Image
           width={2000}
           height={0}
-          src={levelTestPreviewImg}
+          src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/pp_stair.png`}
           alt="레벨 테스트별 자켓 사진"
           priority
         />
@@ -42,7 +41,7 @@ const LevelCard = ({ level, onClick }: ILevelCard) => {
             <Image
               width={50}
               height={50}
-              src={levelTestPreviewImg}
+              src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/pp_stair.png`}
               alt="레벨 테스트별 패턴 아이콘"
               loading="lazy"
             />
@@ -52,7 +51,7 @@ const LevelCard = ({ level, onClick }: ILevelCard) => {
             <Image
               width={50}
               height={50}
-              src={levelTestPreviewImg}
+              src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/pp_stair.png`}
               alt="레벨 테스트별 패턴 아이콘"
               loading="lazy"
             />
@@ -62,7 +61,7 @@ const LevelCard = ({ level, onClick }: ILevelCard) => {
             <Image
               width={50}
               height={50}
-              src={levelTestPreviewImg}
+              src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/pp_stair.png`}
               alt="레벨 테스트별 패턴 아이콘"
               loading="lazy"
             />

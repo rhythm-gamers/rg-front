@@ -1,24 +1,35 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  headers: async () => {
+  headers: async () => [
+    {
+      source: "/:path*",
+      headers: [
+        { key: "Access-Control-Allow-Credentials", value: "true" },
+        { key: "Access-Control-Allow-Origin", value: "*" },
+        {
+          key: "Access-Control-Allow-Methods",
+          value: "GET,DELETE,PATCH,POST,PUT",
+        },
+      ],
+    },
+  ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname:
+          process.env.AWS_CLOUDFRONT_HOSTNAME ||
+          process.env.STORYBOOK_AWS_CLOUDFRONT_HOSTNAME,
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+  rewrites: async () => {
     return [
       {
-        source: "/unity/build/Build/build.:data.gz",
-        headers: [
-          {
-            key: "Content-Encoding",
-            value: "gzip",
-          },
-        ],
-      },
-      {
-        source: "/Sheet/:sheetName/:sheetData",
-        headers: [
-          {
-            key: "Access-Control-Allow-Origin",
-            value: "*",
-          },
-        ],
+        source: "/Sheet/:path*",
+        destination: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/Sheet/:path*`,
       },
     ];
   },
