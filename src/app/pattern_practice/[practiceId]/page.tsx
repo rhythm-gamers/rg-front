@@ -10,9 +10,8 @@ const PatternPracticeFromPracticeId = ({
   params: { practiceId },
 }: IPatternPracticeFromPracticeId) => {
   return (
-    <main className="w-screen max-w-7xl mx-auto my-0 p-8 text-center relative">
-      {practiceId}
-      <UnityContainer />
+    <main className="w-screen max-w-7xl mx-auto mt-10 text-center relative">
+      <UnityContainer category="pattern_practice" id={practiceId} />
     </main>
   );
 };

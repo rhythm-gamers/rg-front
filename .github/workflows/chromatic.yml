@@ -1,16 +1,32 @@
 name: "Chromatic Deployment"
 
 on:
-  push:
+  pull_request:
     branches: [develop]
 
 jobs:
-  test:
+  chromatic_build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - run: yarn
-      - uses: chromaui/action@v1
+      - name: checkout repository
+        uses: actions/checkout@v1
+
+      - name: yarn install
+        run: yarn
+
+      - name: publish to chromatic
+        id: chromatic
+        uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          STORYBOOK_AWS_CLOUDFRONT_HOSTNAME: ${{secrets.STORYBOOK_AWS_CLOUDFRONT_HOSTNAME}}
+          STORYBOOK_AWS_CLOUDFRONT_URL: ${{secrets.STORYBOOK_AWS_CLOUDFRONT_URL}}
+
+      - name: comment deployed storybook url
+        uses: thollander/actions-comment-pull-request@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: "🚀storybook: ${{ steps.chromatic.outputs.storybookUrl }}"

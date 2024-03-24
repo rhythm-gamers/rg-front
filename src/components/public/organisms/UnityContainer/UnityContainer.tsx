@@ -9,7 +9,12 @@ import { SlSizeFullscreen } from "react-icons/sl";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { ReactUnityEventParameter } from "react-unity-webgl/distribution/types/react-unity-event-parameters";
 
-const UnityContainer = () => {
+interface IUnityContainer {
+  category: "pattern_practice" | "level_tests";
+  id: number;
+}
+
+const UnityContainer = ({ id, category }: IUnityContainer) => {
   const {
     unityProvider,
     sendMessage,
@@ -19,10 +24,10 @@ const UnityContainer = () => {
     unload,
     isLoaded,
   } = useUnityContext({
-    loaderUrl: "/unity/build/Build/build.loader.js",
-    dataUrl: "/unity/build/Build/build.data.gz",
-    frameworkUrl: "/unity/build/Build/build.framework.js.gz",
-    codeUrl: "/unity/build/Build/build.wasm.gz",
+    loaderUrl: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/unity/build/Build/build.loader.js`,
+    dataUrl: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/unity/build/Build/build.data`,
+    frameworkUrl: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/unity/build/Build/build.framework.js`,
+    codeUrl: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/unity/build/Build/build.wasm`,
   });
   const { speed, judgeTime } = useAppSelector((state) => state.unity);
   const dispatch = useAppDispatch();
@@ -127,7 +132,8 @@ const UnityContainer = () => {
   /** END Use Device Pixel Ratio */
 
   return (
-    <>
+    <div className="relative">
+      {category + " - " + id}
       <Unity
         unityProvider={unityProvider}
         devicePixelRatio={devicePixelRatio}
@@ -135,10 +141,10 @@ const UnityContainer = () => {
       />
       <SlSizeFullscreen
         onClick={enableFullScreen}
-        className="absolute right-12 bottom-12 cursor-pointer text-white"
+        className="absolute right-6 bottom-6 cursor-pointer text-white"
         size={30}
       />
-    </>
+    </div>
   );
 };
 

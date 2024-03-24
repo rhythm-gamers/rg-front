@@ -10,9 +10,8 @@ const LevelTestFromLevelTestId = ({
   params: { levelTestId },
 }: ILevelTestFromLevelTestId) => {
   return (
-    <main className="w-screen max-w-7xl mx-auto my-0 p-8 text-center relative">
-      {levelTestId}
-      <UnityContainer />
+    <main className="w-screen max-w-7xl mx-auto mt-10 text-center relative">
+      <UnityContainer category="level_tests" id={levelTestId} />
     </main>
   );
 };

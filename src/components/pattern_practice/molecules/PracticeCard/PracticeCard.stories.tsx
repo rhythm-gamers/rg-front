@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import PracticeCard from "./PracticeCard";
-import ppThumbnail from "/public/images/pp_stair.png";
 
 const meta = {
   title: "PracticeCard",
@@ -8,7 +7,7 @@ const meta = {
   args: {
     practiceId: 1,
     title: "계단 연습 1",
-    imgSrc: ppThumbnail,
+    imgSrc: `${process.env.STORYBOOK_AWS_CLOUDFRONT_URL}/pp_stair.png`,
     patterns: ["계단 Lv.1", "폭타 Lv.1"],
   },
 } satisfies Meta<typeof PracticeCard>;

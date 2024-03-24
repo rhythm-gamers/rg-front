@@ -4,7 +4,10 @@ import UnityContainer from "./UnityContainer";
 const meta = {
   title: "UnityContainer",
   component: UnityContainer,
-  args: {},
+  args: {
+    category: "level_tests",
+    id: 1,
+  },
 } satisfies Meta<typeof UnityContainer>;
 
 export default meta;

@@ -9,7 +9,6 @@ import { useAppDispatch } from "@/lib/hooks";
 import PracticeCard from "@/components/pattern_practice/molecules/PracticeCard/PracticeCard";
 import SortBox from "@/components/pattern_practice/organisms/SortBox/SortBox";
 import CategoryWrapper from "@/components/pattern_practice/atoms/CategoryWrapper/CategoryWrapper";
-import ppThumbnail from "/public/images/pp_stair.png";
 import MainSectionWithBothSideAds from "@/components/public/molecules/MainSectionWithBothSideAds/MainSectionWithBothSideAds";
 
 const PatternPractice = () => {
@@ -47,7 +46,7 @@ const PatternPractice = () => {
             key={id}
             practiceId={id}
             title="계단 연습 1"
-            imgSrc={ppThumbnail}
+            imgSrc={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/pp_stair.png`}
             patterns={["계단 Lv.1", "폭타 Lv.1"]}
           />
         ))}

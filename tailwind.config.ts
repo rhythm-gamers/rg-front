@@ -9,20 +9,24 @@ const config: Config = {
   theme: {
     extend: {
       animation: {
-        leftZoom: "leftZoom 4s ease-in-out infinite",
-        rightZoom: "rightZoom 4s ease-in-out infinite",
+        leftZoom: "leftZoom 6s ease-in-out infinite",
+        rightZoom: "rightZoom 6s ease-in-out infinite",
         clickAndDrag: "clickAndDrag 6s ease-in-out infinite",
         leftDrag: "leftDrag 3s ease-in-out infinite",
         rightDrag: "rightDrag 3s ease-in-out infinite",
       },
       keyframes: {
         leftZoom: {
-          "0, 40%": { transform: "translate(0, 0)" },
-          "30%": { transform: "translate(50%, 0)" },
+          "0%": { transform: "translate(0, 0)" },
+          "20%": { transform: "translate(150%, 0) scale(1.2)" },
+          "60%": { transform: "translate(150%, 0) scale(1.2)" },
+          "75%": { transform: "translate(0, 0)" },
         },
         rightZoom: {
-          "0, 40%": { transform: "translate(0, 0)" },
-          "30%": { transform: "translate(-50%, 0)" },
+          "0%": { transform: "translate(0, 0)" },
+          "20%": { transform: "translate(-150%, 0) scale(1.2)" },
+          "60%": { transform: "translate(-150%, 0) scale(1.2)" },
+          "75%": { transform: "translate(0, 0)" },
         },
         clickAndDrag: {
           "10%": { transform: "scale(0.8)" },

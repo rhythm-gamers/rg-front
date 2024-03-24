@@ -9,8 +9,6 @@ import {
 } from "@/const";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import logo from "/public/images/logo.png";
-import profileImg from "/public/images/pp_stair.png";
 import Link from "next/link";
 import { useAppSelector } from "@/lib/hooks";
 
@@ -26,7 +24,7 @@ const Header = () => {
           width={20}
           height={0}
           loading="lazy"
-          src={logo}
+          src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/logo.png`}
           alt="로고"
           className="w-auto"
         />
@@ -90,7 +88,12 @@ const Header = () => {
           className="flex items-center gap-5"
           data-testid="link-mypage"
         >
-          <Image width={40} height={40} src={profileImg} alt="프로필 사진" />
+          <Image
+            width={40}
+            height={40}
+            src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/pp_stair.png`}
+            alt="프로필 사진"
+          />
           <span>이름</span>
         </Link>
       ) : (

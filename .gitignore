@@ -37,3 +37,15 @@ next-env.d.ts
 
 # storybook
 build-storybook.log
+
+# env
+.env
+
+# unity builds
+/public/unity*
+
+# image assets
+/public/images*
+
+# storybook builds
+storybook-static/
