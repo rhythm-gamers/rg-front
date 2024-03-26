@@ -18,16 +18,16 @@ const FullScreenSection = ({
       {asMainTag ? (
         <main
           className={`flex w-full min-h-[calc(100vh-3.75rem)] ${
-            direction === "col" && "flex-col"
-          } ${className}`}
+            direction === "col" ? "flex-col" : ""
+          } ${className || ""}`}
         >
           {children}
         </main>
       ) : (
         <section
           className={`flex w-full min-h-[calc(100vh-3.75rem)] ${
-            direction === "col" && "flex-col"
-          } ${className}`}
+            direction === "col" ? "flex-col" : ""
+          } ${className || ""}`}
         >
           {children}
         </section>
