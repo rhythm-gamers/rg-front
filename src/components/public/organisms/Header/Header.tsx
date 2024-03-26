@@ -3,6 +3,7 @@
 import {
   LINK_COMMUNITY,
   LINK_LOGIN,
+  LINK_MYPAGE,
   LINK_PP,
   LINK_RLT,
   LINK_WIKI,
@@ -15,7 +16,6 @@ import { useAppSelector } from "@/lib/hooks";
 const Header = () => {
   const pathname = usePathname();
   const { isLogin } = useAppSelector((state) => state.user);
-  console.log(isLogin);
 
   return (
     <header className="flex justify-between px-10 py-4 shadow sticky top-0 bg-white z-50">
@@ -84,7 +84,7 @@ const Header = () => {
       </nav>
       {isLogin ? (
         <Link
-          href={"/mypage"}
+          href={LINK_MYPAGE}
           className="flex items-center gap-5"
           data-testid="link-mypage"
         >
