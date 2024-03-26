@@ -9,7 +9,7 @@ interface IMainSection {
 
 const MainSection = ({ children, sectionTitle }: IMainSection) => {
   return (
-    <FullScreenSection className="px-20" direction="col" asMainTag>
+    <FullScreenSection className="px-20 bg-gray-50" direction="col" asMainTag>
       {sectionTitle && <SectionTitle>{sectionTitle}</SectionTitle>}
       {children}
     </FullScreenSection>

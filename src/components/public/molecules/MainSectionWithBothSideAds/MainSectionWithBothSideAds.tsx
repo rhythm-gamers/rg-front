@@ -13,7 +13,7 @@ const MainSectionWithBothSideAds = ({
   sectionTitle,
 }: IMainSectionWithBothSideAds) => {
   return (
-    <FullScreenSection direction="row">
+    <FullScreenSection direction="row" className="bg-gray-50">
       <AdSideBox />
       <main className="flex flex-col w-full">
         {sectionTitle && (
