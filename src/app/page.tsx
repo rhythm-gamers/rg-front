@@ -5,6 +5,7 @@ import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import SectionTitle from "@/components/public/atoms/SectionTitle/SectionTitle";
+import PlateFront from "@/components/public/atoms/PlateFront/PlateFront";
 
 const Home = () => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -78,7 +79,7 @@ const Home = () => {
         }}
       >
         <div
-          className={`fixed left-1/2 -translate-x-1/2 -bottom-[14rem] w-[27rem] h-[17rem] rounded-lg bg-gradient-to-b from-red-500 to-white transition-all ease-out shadow-lg cursor-pointer ${
+          className={`fixed left-1/2 -translate-x-1/2 -bottom-[14rem] transition-all ease-out shadow-lg cursor-pointer ${
             isCardClicked ? "" : "hover:-bottom-[13.5rem]"
           }`}
           ref={cardRef}
@@ -90,9 +91,7 @@ const Home = () => {
             }
           }}
         >
-          <div className="flex justify-between px-6 py-3">
-            <p className="text-lg">Lv.3</p>
-          </div>
+          <PlateFront nickname="닉네임" level={3} chingho="디맥 플레이어" />
         </div>
       </div>
     </div>

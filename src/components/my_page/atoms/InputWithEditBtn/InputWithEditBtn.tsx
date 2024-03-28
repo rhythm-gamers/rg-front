@@ -21,6 +21,11 @@ const InputWithEditBtn = ({ placeholder }: IInputWithEditBtn) => {
         type="text"
         value={value}
         onChange={changeValue}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            toggleIsEditing();
+          }
+        }}
         placeholder={placeholder}
         className="w-full border-b-2 p-2 outline-rose-400 disabled:bg-white"
         disabled={!isEditing}
