@@ -3,7 +3,7 @@ import SettingSubtitle from "../../atoms/SettingSubtitle/SettingSubtitle";
 
 interface ISettingElem {
   title: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const SettingElem = ({ title, children }: ISettingElem) => {

@@ -3,7 +3,7 @@ import SettingTitle from "../../atoms/SettingTitle/SettingTitle";
 
 interface ISettingSection {
   title: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const SettingSection = forwardRef(
@@ -12,7 +12,7 @@ const SettingSection = forwardRef(
     ref: ForwardedRef<HTMLTableSectionElement>,
   ) => {
     return (
-      <section ref={ref} className="flex flex-col gap-20">
+      <section ref={ref} className="flex flex-col gap-24">
         <SettingTitle>{title}</SettingTitle>
         {children}
         <hr className="border-2 rounded-lg" />

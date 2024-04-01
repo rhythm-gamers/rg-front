@@ -12,6 +12,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useAppSelector } from "@/lib/hooks";
+import CustomImage from "../../atoms/CustomImage/CustomImage";
 
 const Header = () => {
   const pathname = usePathname();
@@ -20,14 +21,7 @@ const Header = () => {
   return (
     <header className="flex justify-between px-10 py-4 shadow sticky top-0 bg-white z-50">
       <Link href={"/"} data-testid="logo" className="flex items-center gap-4">
-        <Image
-          width={20}
-          height={0}
-          loading="lazy"
-          src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/logo.png`}
-          alt="로고"
-          className="w-auto"
-        />
+        <CustomImage size="xs" src="/logo.png" alt="로고" />
         <h2 className="text-rose-400 text-lg font-semibold">리듬게이머스</h2>
       </Link>
       <nav className="flex items-center w-1/2">

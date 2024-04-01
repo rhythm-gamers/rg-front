@@ -1,9 +1,16 @@
 import { MdStar } from "react-icons/md";
 
-const PlateBack = () => {
+interface IPlateBack {
+  fromBgColor: string;
+  toBgColor: string;
+}
+
+const PlateBack = ({ fromBgColor, toBgColor }: IPlateBack) => {
   return (
-    <div className="w-[27rem] h-[17rem] rounded-lg bg-gradient-to-b from-red-500 to-red-50">
-      <div className="flex justify-end px-6 py-3">
+    <div
+      className={`w-[30rem] h-[17rem] rounded-xl shadow-lg bg-gradient-to-b ${`${fromBgColor} ${toBgColor}`}`}
+    >
+      <div className="flex justify-end px-6 py-4">
         <MdStar className="text-yellow-400" size={40} />
         <MdStar className="text-indigo-400" size={40} />
         <MdStar className="text-purple-400" size={40} />
