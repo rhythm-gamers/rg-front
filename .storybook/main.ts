@@ -43,6 +43,12 @@ const config: StorybookConfig = {
       titlePrefix: "public/organisms",
     },
   ],
+  refs: {
+    "chromatic-published-storybook": {
+      title: "Rhythm-gamers Design System",
+      url: "https://rhythm-gamers.chromatic.com", // The url provided by Chromatic when it was published
+    },
+  },
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
