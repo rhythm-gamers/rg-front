@@ -89,12 +89,18 @@ const Home = () => {
         >
           <PlateFront
             nickname="닉네임"
+            comment="한줄 소개"
             level={3}
             fromBgColor="from-red-500"
             toBgColor="to-red-50"
             chinghoSettings={{
               rank: 1,
               children: "디맥 플레이어",
+            }}
+            plateVisibleSettings={{
+              visibleChingho: true,
+              visibleChinghoIcon: true,
+              visibleLevel: true,
             }}
           />
         </div>

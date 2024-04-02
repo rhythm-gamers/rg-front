@@ -5,7 +5,7 @@ interface IInput {
 }
 
 const Input = ({ placeholder }: IInput) => {
-  const [value, changeValue] = useInput("");
+  const [value, changeValue] = useInput({ type: "text", initValue: "" });
 
   return (
     <input

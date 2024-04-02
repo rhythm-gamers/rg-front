@@ -2,7 +2,7 @@
 
 import InputWithEditBtn from "@/components/my_page/atoms/InputWithEditBtn/InputWithEditBtn";
 import MainSection from "@/components/public/molecules/MainSection/MainSection";
-import { ChangeEvent, ReactNode, RefObject, useRef, useState } from "react";
+import { ReactNode, RefObject, useRef, useState } from "react";
 import SettingElem from "@/components/my_page/molecules/SettingElem/SettingElem";
 import SettingSection from "@/components/my_page/organisms/SettingSection/SettingSection";
 import PlateFront from "@/components/public/atoms/PlateFront/PlateFront";
@@ -14,8 +14,39 @@ import PlateChinghoRankExpl from "@/components/my_page/atoms/PlateChinghoRankExp
 import PlateBgSample from "@/components/my_page/atoms/PlateBgSample/PlateBgSample";
 import PlateChinghoListByRank from "@/components/my_page/molecules/PlateChinghoListByRank/PlateChinghoListByRank";
 import CustomImage from "../../components/public/atoms/CustomImage/CustomImage";
+import useInput from "@/hooks/useInput";
+import Checkbox from "@/components/public/atoms/Checkbox/Checkbox";
 
 const MyPage = () => {
+  // Input Management
+  const [nickname, changeNickname] = useInput({
+    type: "text",
+    initValue: "닉네임",
+    notIncludes: ["space", "specialChar"],
+  });
+  const [comment, changeComment] = useInput({
+    type: "text",
+    initValue: "한줄 소개",
+  });
+
+  const [localProfileImgSrc, changeLocalProfileImgSrc] = useInput({
+    type: "file",
+    initValue: "",
+  });
+
+  const [visibleLevel, changeVisibleLevel] = useInput({
+    type: "checkbox",
+    initValue: true,
+  });
+  const [visibleChingho, changeVisibleChingho] = useInput({
+    type: "checkbox",
+    initValue: true,
+  });
+  const [visibleChinghoIcon, changeVisibleChinghoIcon] = useInput({
+    type: "checkbox",
+    initValue: true,
+  });
+
   // Plate Background Color Management
   const [plateBgColor, setPlateBgColor] = useState("red");
 
@@ -48,82 +79,76 @@ const MyPage = () => {
     scrollTo({ top: finalPosition, behavior: "smooth" });
   };
 
-  // Local File Preview
-  const [localProfileImgSrc, setLocalProfileImgSrc] = useState("");
-
-  const encodeFileToBase64 = (e: ChangeEvent<HTMLInputElement>) => {
-    const fileBlob = e.target.files?.[0];
-    if (!fileBlob) return;
-
-    const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
-    return new Promise<void>((resolve) => {
-      reader.onload = () => {
-        if (typeof reader.result === "string") {
-          setLocalProfileImgSrc(reader.result);
-        }
-        resolve();
-      };
-    });
-  };
-
   return (
     <MainSection>
       <div className="flex w-full h-full px-20 py-5 gap-10">
-        <div className="w-[25rem] h-[35rem] sticky top-20 bg-white rounded-lg shadow-md">
-          <div className="flex flex-col px-10">
-            <h1 className="mt-8 mb-5 text-lg font-bold">마이페이지</h1>
-            <div className="flex flex-col">
-              <button
-                type="button"
-                onClick={() => moveToSettingSectionByRef(accountSettingRef)}
-                className="w-full py-3 rounded-lg text-left hover:text-rose-400 transition-all"
-              >
-                계정 설정
-              </button>
-              <button
-                type="button"
-                onClick={() => moveToSettingSectionByRef(plateSettingRef)}
-                className="w-full py-3 rounded-lg text-left hover:text-rose-400 transition-all"
-              >
-                플레이트 설정
-              </button>
-              <button
-                type="button"
-                className="w-full py-3 rounded-lg text-left hover:text-rose-400 transition-all"
-              >
-                게임 설정
-              </button>
+        <aside className="flex flex-col justify-between w-[25rem] h-full gap-10 sticky top-20">
+          <div className="h-[35rem] bg-white rounded-lg shadow-md">
+            <div className="flex flex-col px-10">
+              <h1 className="mt-8 mb-5 text-lg font-bold">마이페이지</h1>
+              <div className="flex flex-col">
+                <button
+                  type="button"
+                  onClick={() => moveToSettingSectionByRef(accountSettingRef)}
+                  className="w-full py-3 rounded-lg text-left hover:text-rose-400 transition-all"
+                >
+                  계정 설정
+                </button>
+                <button
+                  type="button"
+                  onClick={() => moveToSettingSectionByRef(plateSettingRef)}
+                  className="w-full py-3 rounded-lg text-left hover:text-rose-400 transition-all"
+                >
+                  플레이트 설정
+                </button>
+                <button
+                  type="button"
+                  className="w-full py-3 rounded-lg text-left hover:text-rose-400 transition-all"
+                >
+                  게임 설정
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+          <button
+            type="button"
+            className="py-6 bg-blue-400 rounded-3xl text-white"
+          >
+            변경사항 저장
+          </button>
+        </aside>
         <main className="flex flex-col w-full bg-white shadow-md rounded-lg gap-12 px-20 py-12">
           <SettingSection ref={accountSettingRef} title="계정 설정">
             <SettingElem title="프로필 설정">
               <div className="flex items-center">
-                <div className="relative">
+                <div className="relative mr-10">
                   <CustomImage
                     size="md"
-                    src="/logo.png"
+                    src="/pp_stair.png"
                     alt="프로필 이미지"
                     highPriorityImgSrc={localProfileImgSrc}
                     roundedFull
                     border
-                    objectCover
                   />
                   <label className="flex justify-center items-center w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 hover:opacity-100 rounded-full transition-all cursor-pointer">
                     <input
                       type="file"
                       accept="image/*"
                       className="hidden"
-                      onChange={encodeFileToBase64}
+                      onChange={changeLocalProfileImgSrc}
                     />
-                    <span className="text-white font-semibold absolute z-50">
+                    <span className="text-white font-semibold">
                       프로필 변경
                     </span>
                   </label>
                 </div>
-                <InputWithEditBtn placeholder="당신의 새로운 닉네임을 입력해주세요!" />
+                <InputWithEditBtn
+                  value={nickname}
+                  changeValue={changeNickname}
+                  placeholder="당신의 새로운 닉네임을 입력해주세요! (최소 1자 ~ 최대 12자)"
+                  maxLength={15}
+                  required
+                />
               </div>
             </SettingElem>
             <SettingElem title="계정 연동">
@@ -140,11 +165,17 @@ const MyPage = () => {
             <SettingElem title="플레이트 미리보기">
               <div className="flex justify-around items-center w-full">
                 <PlateFront
-                  nickname="닉네임"
+                  nickname={nickname}
                   level={3}
                   fromBgColor={`from-${plateBgColor}-500`}
                   toBgColor={`to-${plateBgColor}-50`}
+                  comment={comment}
                   chinghoSettings={plateChingoSettings}
+                  plateVisibleSettings={{
+                    visibleLevel,
+                    visibleChingho,
+                    visibleChinghoIcon,
+                  }}
                   localImgSrc={localProfileImgSrc}
                 />
                 <PlateBack
@@ -206,6 +237,31 @@ const MyPage = () => {
                 <PlateChinghoListByRank rank={3} onClick={changePlateChingho} />
                 <PlateChinghoListByRank rank={4} onClick={changePlateChingho} />
               </div>
+            </SettingElem>
+            <SettingElem title="한줄 소개">
+              <InputWithEditBtn
+                value={comment}
+                changeValue={changeComment}
+                placeholder="당신의 한줄 소개를 적어주세요!"
+                maxLength={25}
+              />
+            </SettingElem>
+            <SettingElem title="플레이트 표시 설정">
+              <Checkbox
+                value="레벨"
+                checked={visibleLevel}
+                onChange={changeVisibleLevel}
+              />
+              <Checkbox
+                value="칭호"
+                checked={visibleChingho}
+                onChange={changeVisibleChingho}
+              />
+              <Checkbox
+                value="칭호 아이콘"
+                checked={visibleChinghoIcon}
+                onChange={changeVisibleChinghoIcon}
+              />
             </SettingElem>
           </SettingSection>
         </main>

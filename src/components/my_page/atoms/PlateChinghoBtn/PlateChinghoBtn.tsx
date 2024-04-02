@@ -1,4 +1,5 @@
 import { IChingho } from "@/interfaces";
+import { MdPeople } from "react-icons/md";
 
 const PlateChinghoBtn = ({
   size,
@@ -6,12 +7,14 @@ const PlateChinghoBtn = ({
   children,
   viewOnly,
   disabled,
+  visibleChingho = true,
+  visibleChinghoIcon = true,
   onClick,
 }: IChingho) => {
   return (
     <button
       type="button"
-      className={`flex justify-center items-center rounded-3xl shadow-md ${
+      className={`flex justify-center items-center w-fit rounded-3xl shadow-md gap-2 ${
         viewOnly ? "cursor-default" : ""
       } ${disabled ? "opacity-50" : ""} ${
         size === "sm" ? "px-4 py-2" : "px-6 py-3"
@@ -29,7 +32,8 @@ const PlateChinghoBtn = ({
       disabled={disabled}
       onClick={() => !viewOnly && onClick && onClick(rank, children)}
     >
-      {children}
+      {visibleChinghoIcon && <MdPeople />}
+      {visibleChingho && children}
     </button>
   );
 };

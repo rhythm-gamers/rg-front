@@ -1,12 +1,21 @@
-import useInput from "@/hooks/useInput";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 interface IInputWithEditBtn {
+  value: string;
+  changeValue: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
+  maxLength?: number;
+  required?: boolean;
 }
 
-const InputWithEditBtn = ({ placeholder }: IInputWithEditBtn) => {
-  const [value, changeValue, inputRef] = useInput("");
+const InputWithEditBtn = ({
+  value,
+  changeValue,
+  placeholder,
+  maxLength,
+  required,
+}: IInputWithEditBtn) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isEditing, setIsEditing] = useState(false);
   const toggleIsEditing = () => setIsEditing((prev) => !prev);
 
@@ -15,7 +24,7 @@ const InputWithEditBtn = ({ placeholder }: IInputWithEditBtn) => {
   }, [isEditing]);
 
   return (
-    <div className="flex flex-col items-start w-full ml-10 gap-5">
+    <div className="flex flex-col items-start w-full gap-5">
       <input
         ref={inputRef}
         type="text"
@@ -29,6 +38,8 @@ const InputWithEditBtn = ({ placeholder }: IInputWithEditBtn) => {
         placeholder={placeholder}
         className="w-full border-b-2 p-2 outline-rose-400 disabled:bg-white"
         disabled={!isEditing}
+        maxLength={maxLength}
+        required={required}
       />
       <div className="flex gap-5">
         <button

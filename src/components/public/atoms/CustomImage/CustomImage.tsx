@@ -27,12 +27,16 @@ const CustomImage = ({
   return (
     <div
       className={`relative ${
-        size === "xs" ? "w-7 h-7" : size === "sm" ? "w-14 h-14" : "w-32 h-32"
+        size === "xs"
+          ? "min-w-7 min-h-7"
+          : size === "sm"
+          ? "min-w-14 min-h-14"
+          : "min-w-32 min-h-32"
       } ${className ? className : ""}`}
     >
       <Image
         className={`${border ? "border" : ""} ${
-          objectCover ? "object-cover" : ""
+          objectCover ? "object-cover" : "object-contain"
         } ${roundedFull ? "rounded-full" : ""}`}
         src={`${
           highPriorityImgSrc || process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL + src
