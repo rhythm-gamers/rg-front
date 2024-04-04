@@ -1,6 +1,6 @@
 import PlateChinghoBtn from "@/components/my_page/atoms/PlateChinghoBtn/PlateChinghoBtn";
 import { IChingho, IPlateVisible } from "@/interfaces";
-import CustomImage from "../CustomImage/CustomImage";
+import CustomImage from "../../atoms/CustomImage/CustomImage";
 
 interface IPlateFront {
   nickname: string;
@@ -41,9 +41,8 @@ const PlateFront = ({
           <p>{nickname}</p>
           <p className="text-sm text-neutral-700 mt-1">{comment}</p>
         </div>
-        {(visibleChingho || visibleChinghoIcon) && (
-          <PlateChinghoBtn {...advancedChinghoSettings} size="sm" viewOnly />
-        )}
+
+        <PlateChinghoBtn {...advancedChinghoSettings} size="sm" viewOnly />
       </div>
       <CustomImage
         size="md"

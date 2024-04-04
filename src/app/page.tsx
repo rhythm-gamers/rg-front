@@ -4,7 +4,7 @@ import { MdStar } from "react-icons/md";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { useRef, useState } from "react";
 import SectionTitle from "@/components/public/atoms/SectionTitle/SectionTitle";
-import PlateFront from "@/components/public/atoms/PlateFront/PlateFront";
+import PlateFront from "@/components/public/molecules/PlateFront/PlateFront";
 import CustomImage from "@/components/public/atoms/CustomImage/CustomImage";
 
 const Home = () => {
