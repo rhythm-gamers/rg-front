@@ -1,3 +1,4 @@
+import Checkbox from "@/components/public/atoms/Checkbox/Checkbox";
 import { toggleFilterItems } from "@/lib/features/practice/practiceSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 
@@ -10,18 +11,12 @@ const FilterDropdownList = ({ value }: IFilterDropdownList) => {
   const dispatch = useAppDispatch();
   return (
     <li className="first:py-3 pb-3">
-      <label
-        className="flex items-center gap-2 cursor-pointer"
+      <Checkbox
+        value={value}
+        checked={filterItems.includes(value)}
         onClick={(e) => e.stopPropagation()}
-      >
-        <input
-          type="checkbox"
-          className="w-4 h-4 border-2 checked:bg-red-300 appearance-none cursor-pointer"
-          onChange={() => dispatch(toggleFilterItems(value))}
-          checked={filterItems.includes(value)}
-        />
-        {value}
-      </label>
+        onChange={() => dispatch(toggleFilterItems(value))}
+      />
     </li>
   );
 };

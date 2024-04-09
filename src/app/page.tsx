@@ -3,8 +3,9 @@
 import { MdStar } from "react-icons/md";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { useRef, useState } from "react";
-import Image from "next/image";
 import SectionTitle from "@/components/public/atoms/SectionTitle/SectionTitle";
+import PlateFront from "@/components/public/molecules/PlateFront/PlateFront";
+import CustomImage from "@/components/public/atoms/CustomImage/CustomImage";
 
 const Home = () => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -15,22 +16,18 @@ const Home = () => {
       <div className="w-3/5 flex flex-col items-center mx-auto py-32">
         <section className="w-full flex flex-col items-center mb-72">
           <div className="relative mb-40">
-            <Image
-              className="absolute -top-12 -left-40 animate-leftZoom"
-              width={50}
-              height={50}
-              loading="lazy"
-              src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/lt-bracket.png`}
+            <CustomImage
+              size="sm"
+              src="/lt-bracket.png"
               alt="왼쪽 홑낫표"
+              className="!absolute -top-12 -left-40 animate-leftZoom"
             />
             <h2 className="text-4xl font-bold">리듬게이머스에 어서오세요!</h2>
-            <Image
-              className="absolute top-8 -right-40 animate-rightZoom"
-              width={50}
-              height={50}
-              loading="lazy"
-              src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/rb-bracket.png`}
+            <CustomImage
+              size="sm"
+              src="/rb-bracket.png"
               alt="오른쪽 홑낫표"
+              className="!absolute top-8 -right-40 animate-rightZoom"
             />
           </div>
           <div className="w-full h-56 bg-violet-300 rounded-3xl border-2 border-orange-300 border-opacity-50 shadow-[0px_7px_0px_7px_rgba(109,40,217)]">
@@ -78,7 +75,7 @@ const Home = () => {
         }}
       >
         <div
-          className={`fixed left-1/2 -translate-x-1/2 -bottom-[14rem] w-[27rem] h-[17rem] rounded-lg bg-gradient-to-b from-red-500 to-white transition-all ease-out shadow-lg cursor-pointer ${
+          className={`fixed left-1/2 -translate-x-1/2 -bottom-[14rem] transition-all ease-out shadow-lg cursor-pointer ${
             isCardClicked ? "" : "hover:-bottom-[13.5rem]"
           }`}
           ref={cardRef}
@@ -90,9 +87,22 @@ const Home = () => {
             }
           }}
         >
-          <div className="flex justify-between px-6 py-3">
-            <p className="text-lg">Lv.3</p>
-          </div>
+          <PlateFront
+            nickname="닉네임"
+            comment="한줄 소개"
+            level={3}
+            fromBgColor="from-red-500"
+            toBgColor="to-red-50"
+            chinghoSettings={{
+              rank: 1,
+              children: "디맥 플레이어",
+            }}
+            plateVisibleSettings={{
+              visibleChingho: true,
+              visibleChinghoIcon: true,
+              visibleLevel: true,
+            }}
+          />
         </div>
       </div>
     </div>

@@ -28,6 +28,21 @@ const config: StorybookConfig = {
       titlePrefix: "pattern_practice/organisms",
     },
     {
+      directory: "../src/components/my_page/atoms",
+      files: "**/*.stories.*",
+      titlePrefix: "my_page/atoms",
+    },
+    {
+      directory: "../src/components/my_page/molecules",
+      files: "**/*.stories.*",
+      titlePrefix: "my_page/molecules",
+    },
+    {
+      directory: "../src/components/my_page/organisms",
+      files: "**/*.stories.*",
+      titlePrefix: "my_page/organisms",
+    },
+    {
       directory: "../src/components/public/atoms",
       files: "**/*.stories.*",
       titlePrefix: "public/atoms",

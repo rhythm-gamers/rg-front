@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
 
 const config: Config = {
   content: [
@@ -8,6 +9,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "chingho-rank-1": colors.gray[200],
+        "chingho-rank-2": colors.lime[300],
+        "chingho-rank-3": colors.indigo[400],
+        "chingho-rank-4": colors.red[400],
+      },
       animation: {
         leftZoom: "leftZoom 6s ease-in-out infinite",
         rightZoom: "rightZoom 6s ease-in-out infinite",
