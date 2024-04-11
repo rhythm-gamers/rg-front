@@ -4,7 +4,7 @@ import fetchExtended from "../fetchExtended";
 import { reqObjectToBody } from "../utils";
 
 /**
- * @param {number} id
+ * @param {number} id level test id
  * @param {ILevelTestReq} req
  * { title, level, goalRate, keyNum, imgSrc, noteSrc, musicSrc, patternInfo }
  * @returns

@@ -4,7 +4,7 @@ import { reqObjectToBody } from "../utils";
 import { IPatternPracticeReqOptional } from ".";
 
 /**
- * @param {number} id
+ * @param {number} id pattern practice id
  * @param {ILevelTestReq} req
  * { title, level, keyNum, imgSrc, noteSrc, musicSrc, patternInfo }
  * @returns
