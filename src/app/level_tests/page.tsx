@@ -5,11 +5,13 @@ import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { TbHandClick } from "react-icons/tb";
 
 const RhythmLevelTests = async () => {
-  const data = await LevelTestAPI.getAll();
+  const { data: lists } = await LevelTestAPI.getAll();
 
   return (
     <FullScreenSection direction="col" className="bg-orange-100" asMainTag>
-      <p>{+data}</p>
+      {lists.map((list) => (
+        <p key={list.testId}>{list.title}</p>
+      ))}
       <div className="flex w-full h-full justify-evenly items-center">
         <LevelCards />
         <div className="flex flex-col items-center gap-3 absolute bottom-8 mx-auto text-rose-400">
