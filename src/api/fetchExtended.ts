@@ -12,9 +12,15 @@ const fetchExtended = returnFetch({
     },
 
     response: async (response, requestArgs) => {
-      console.log("********* after receiving response *********");
-      console.log("url:", requestArgs[0].toString());
-      console.log("requestInit:", requestArgs[1], "\n\n");
+      try {
+        if (response.status === 500) throw new Error("Server went wrong!");
+
+        console.log("********* after receiving response *********");
+        console.log("url:", requestArgs[0].toString());
+        console.log("requestInit:", requestArgs[1], "\n\n");
+      } catch (error) {
+        console.error(error);
+      }
       return response;
     },
   },
