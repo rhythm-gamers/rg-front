@@ -6,7 +6,7 @@ import { reqObjectToBody } from "../utils";
 /**
  * @param {number} id level test id
  * @param {ILevelTestReq} req
- * { title, level, goalRate, keyNum, imgSrc, noteSrc, musicSrc, patternInfo }
+ * { title?, level?, goalRate?, keyNum?, imgSrc?, noteSrc?, musicSrc?, patternInfo? }
  * @returns
  */
 const update = async (id: number, req: ILevelTestReqOptional) => {

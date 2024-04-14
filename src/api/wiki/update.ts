@@ -5,8 +5,8 @@ import { IWikiReqOptional } from ".";
 
 /**
  * @param {string} title wiki title
- * @param {ILevelTestReq} req
- * { title, level, keyNum, imgSrc, noteSrc, musicSrc, patternInfo }
+ * @param {IWikiReqOptional} req
+ * { title?, level?, keyNum?, imgSrc?, noteSrc?, musicSrc?, patternInfo? }
  * @returns
  */
 const update = async (title: string, req: IWikiReqOptional) => {
