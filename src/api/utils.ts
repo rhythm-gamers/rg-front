@@ -22,3 +22,8 @@ export const parseJsonWithWrap = (json: string) => {
   const wrappedJson = JSON.stringify({ data: json });
   return JSON.parse(wrappedJson);
 };
+
+export const makePagingQueryString = (page: number, limit?: number) => {
+  const defaultLimit = 10;
+  return `?page=${page}?limit=${limit || defaultLimit}`;
+};
