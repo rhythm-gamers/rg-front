@@ -18,20 +18,10 @@ export interface ILevelTestReq {
   [type: string]: string | number | IPatternInfo;
 }
 
-export interface ILevelTestReqOptional {
-  title?: string;
-  level?: number;
-  goalRate?: number;
-  keyNum?: TKeyNum;
-  imgSrc?: string;
-  noteSrc?: string;
-  musicSrc?: string;
-  patternInfo?: IPatternInfo;
-  [type: string]: string | number | IPatternInfo | undefined;
-}
+export interface ILevelTestReqOptional extends Partial<ILevelTestReq> {}
 
 export interface ILevelTestRes {
-  testId: number;
+  id: number;
   title: string;
   level: number;
   goalRate: number;

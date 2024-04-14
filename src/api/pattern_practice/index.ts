@@ -17,16 +17,8 @@ export interface IPatternPracticeReq {
   [type: string]: string | number | IPatternInfo;
 }
 
-export interface IPatternPracticeReqOptional {
-  title?: string;
-  level?: number;
-  keyNum?: TKeyNum;
-  imgSrc?: string;
-  noteSrc?: string;
-  musicSrc?: string;
-  patternInfo?: IPatternInfo;
-  [type: string]: string | number | IPatternInfo | undefined;
-}
+export interface IPatternPracticeReqOptional
+  extends Partial<IPatternPracticeReq> {}
 
 export interface IPatternPracticeRes {
   id: number;

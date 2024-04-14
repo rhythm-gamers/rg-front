@@ -17,15 +17,12 @@ export interface IWikiReq {
   mustRead: boolean;
 }
 
-export interface IWikiReqOptional {
-  title?: string;
-  content?: string;
-  mustRead?: boolean;
-}
+export interface IWikiReqOptional extends Partial<IWikiReq> {}
 
 export interface IWikiRes {
+  id: number;
   mustread: IWiki[];
-  [type: string]: IWiki[];
+  [type: string]: number | IWiki[];
 }
 
 const PatternPracticeAPI = {
