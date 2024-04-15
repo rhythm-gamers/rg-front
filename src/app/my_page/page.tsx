@@ -16,6 +16,7 @@ import PlateChinghoListByRank from "@/components/my_page/molecules/PlateChinghoL
 import CustomImage from "../../components/public/atoms/CustomImage/CustomImage";
 import useInput from "@/hooks/useInput";
 import Checkbox from "@/components/public/atoms/Checkbox/Checkbox";
+import AuthAPI from "@/api/auth";
 
 const MyPage = () => {
   // Input Management
@@ -155,6 +156,7 @@ const MyPage = () => {
               <button
                 type="button"
                 className="w-20 h-10 rounded-lg bg-gray-100"
+                onClick={() => AuthAPI.steamLogin()}
               >
                 스팀
               </button>
