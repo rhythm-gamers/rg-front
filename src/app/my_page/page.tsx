@@ -83,7 +83,7 @@ const MyPage = () => {
   return (
     <MainSection>
       <div className="flex w-full h-full px-20 py-5 gap-10">
-        <aside className="flex flex-col justify-between w-[25rem] h-full gap-10 sticky top-20">
+        <aside className="flex flex-col justify-between min-w-[20rem] h-full gap-10 sticky top-20">
           <div className="h-[35rem] bg-white rounded-lg shadow-md">
             <div className="flex flex-col px-10">
               <h1 className="mt-8 mb-5 text-lg font-bold">마이페이지</h1>
@@ -114,11 +114,15 @@ const MyPage = () => {
           <button
             type="button"
             className="py-6 bg-blue-400 rounded-3xl text-white"
+            onClick={()=>AuthAPI.login({
+              username: "",
+              password: ""
+            })}
           >
-            변경사항 저장
+            임시 로그인 버튼
           </button>
         </aside>
-        <main className="flex flex-col w-full bg-white shadow-md rounded-lg gap-12 px-20 py-12">
+        <section className="flex flex-col w-full bg-white shadow-md rounded-lg gap-12 px-20 py-12">
           <SettingSection ref={accountSettingRef} title="계정 설정">
             <SettingElem title="프로필 설정">
               <div className="flex items-center">
@@ -266,7 +270,7 @@ const MyPage = () => {
               />
             </SettingElem>
           </SettingSection>
-        </main>
+        </section>
       </div>
     </MainSection>
   );
