@@ -8,6 +8,7 @@
 <!-- [Prefix] -->
 <!-- PC: Public Component 관련 작업 시 -->
 <!-- HK: Custom Hook 관련 작업 시 -->
+<!-- API: API 모듈 관련 작업 시 -->
 <!-- ETC: 이외의 파일 작업 시 -->
 <!-- 필요시, 이외에도 Convention 추가 -->
 
