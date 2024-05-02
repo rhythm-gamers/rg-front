@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 import { IWikiReq } from ".";
 
 /**
@@ -9,7 +8,7 @@ import { IWikiReq } from ".";
  * @returns
  */
 const create = async (req: IWikiReq) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended("/wiki", {
     method: "post",
     body,

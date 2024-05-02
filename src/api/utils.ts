@@ -3,13 +3,14 @@
  * @param req
  * @returns
  */
-export const reqObjectToBody = (req: { [type: string]: any }) => {
+export const reqObjectToFormData = (req: { [type: string]: any }) => {
   const body = new FormData();
   for (let key in req) {
     if (req[key]) {
       body.append(key, JSON.stringify(req[key]));
     }
   }
+
   return body;
 };
 

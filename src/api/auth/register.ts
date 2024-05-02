@@ -1,6 +1,6 @@
 import { IAuthRes, IRegisterReq } from ".";
 import fetchExtended from "../fetchExtended";
-import { parseJsonWithWrap, reqObjectToBody } from "../utils";
+import { parseJsonWithWrap } from "../utils";
 
 /**
  *
@@ -9,7 +9,7 @@ import { parseJsonWithWrap, reqObjectToBody } from "../utils";
  * @returns
  */
 const register = async (req: IRegisterReq): Promise<{ data: IAuthRes }> => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended(`/auth/register`, {
     method: "post",
     body,

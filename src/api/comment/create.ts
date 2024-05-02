@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { ICommentReq } from ".";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 
 /**
  * @param {ICommentReq} req
@@ -9,7 +8,7 @@ import { reqObjectToBody } from "../utils";
  * @returns
  */
 const create = async (req: ICommentReq) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended("/comment", {
     method: "post",
     body,

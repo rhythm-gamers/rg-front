@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 import { IBoardReqOptional } from ".";
 
 /**
@@ -10,7 +9,7 @@ import { IBoardReqOptional } from ".";
  * @returns
  */
 const update = async (boardName: string, req: IBoardReqOptional) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const parsedBoardName = new URLSearchParams(boardName);
   const res = await fetchExtended(`/board/${parsedBoardName}`, {
     method: "patch",

@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 import { IBoardReq } from ".";
 
 /**
@@ -9,7 +8,7 @@ import { IBoardReq } from ".";
  * @returns
  */
 const create = async (req: IBoardReq) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended("/board", {
     method: "post",
     body,

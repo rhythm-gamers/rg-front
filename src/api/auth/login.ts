@@ -1,6 +1,5 @@
-import { IAuthRes, ILoginReq } from ".";
+import { ILoginReq } from ".";
 import fetchExtended from "../fetchExtended";
-import { parseJsonWithWrap, reqObjectToBody } from "../utils";
 
 /**
  *
@@ -8,15 +7,12 @@ import { parseJsonWithWrap, reqObjectToBody } from "../utils";
  *  { username, password }
  * @returns
  */
-const login = async (req: ILoginReq): Promise<{ data: IAuthRes }> => {
-  const body = reqObjectToBody(req);
-  const res = await fetchExtended(`/auth/login`, {
+const login = async (req: ILoginReq) => {
+  const body = JSON.stringify(req);
+  await fetchExtended(`/auth/login`, {
     method: "post",
     body,
   });
-  const json = await res.json();
-  const parsedJson = parseJsonWithWrap(json);
-  return parsedJson;
 };
 
 export default login;

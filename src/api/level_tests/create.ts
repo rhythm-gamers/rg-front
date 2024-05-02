@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { ILevelTestReq } from ".";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 
 /**
  * @param {ILevelTestReq} req
@@ -9,7 +8,7 @@ import { reqObjectToBody } from "../utils";
  * @returns
  */
 const create = async (req: ILevelTestReq) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended("/level-test", {
     method: "post",
     body,
