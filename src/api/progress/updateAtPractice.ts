@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 import { IProgressReq } from ".";
 
 /**
@@ -10,7 +9,7 @@ import { IProgressReq } from ".";
  * @returns
  */
 const updateAtPractice = async (practiceId: number, req: IProgressReq) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended(`/progress/practice/${practiceId}`, {
     method: "post",
     body,

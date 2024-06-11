@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 import { IWikiReqOptional } from ".";
 
 /**
@@ -10,7 +9,7 @@ import { IWikiReqOptional } from ".";
  * @returns
  */
 const update = async (title: string, req: IWikiReqOptional) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const parsedTitle = new URLSearchParams(title);
   const res = await fetchExtended(`/wiki/${parsedTitle}`, {
     method: "patch",

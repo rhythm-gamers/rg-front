@@ -2,7 +2,7 @@ import returnFetch from "return-fetch";
 
 const fetchExtended = returnFetch({
   baseUrl: process.env.NEXT_PUBLIC_API_SERVER_URL,
-  headers: { Accept: "application/json" },
+  headers: { Accept: "application/json", "Content-Type": "application/json" },
   interceptors: {
     request: async (args) => {
       console.log("********* before sending request *********");

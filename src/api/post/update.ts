@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 import { IPostReqOptional } from ".";
 
 /**
@@ -10,7 +9,7 @@ import { IPostReqOptional } from ".";
  * @returns
  */
 const update = async (id: number, req: IPostReqOptional) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended(`/post/${id}`, {
     method: "patch",
     body,

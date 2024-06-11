@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { ILevelTestReqOptional } from ".";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 
 /**
  * @param {number} id level test id
@@ -10,7 +9,7 @@ import { reqObjectToBody } from "../utils";
  * @returns
  */
 const update = async (id: number, req: ILevelTestReqOptional) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended(`/level-test/${id}`, {
     method: "patch",
     body,

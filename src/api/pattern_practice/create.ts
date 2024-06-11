@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 import { IPatternPracticeReq } from ".";
 
 /**
@@ -9,7 +8,7 @@ import { IPatternPracticeReq } from ".";
  * @returns
  */
 const create = async (req: IPatternPracticeReq) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended("/practice", {
     method: "post",
     body,

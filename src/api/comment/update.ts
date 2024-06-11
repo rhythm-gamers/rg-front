@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 import { ICommentReqOptional } from ".";
 
 /**
@@ -10,7 +9,7 @@ import { ICommentReqOptional } from ".";
  * @returns
  */
 const update = async (id: number, req: ICommentReqOptional) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended(`/comment/${id}`, {
     method: "patch",
     body,

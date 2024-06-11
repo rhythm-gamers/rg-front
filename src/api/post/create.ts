@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import fetchExtended from "../fetchExtended";
-import { reqObjectToBody } from "../utils";
 import { IPostReq } from ".";
 
 /**
@@ -9,7 +8,7 @@ import { IPostReq } from ".";
  * @returns
  */
 const create = async (req: IPostReq) => {
-  const body = reqObjectToBody(req);
+  const body = JSON.stringify(req);
   const res = await fetchExtended("/post", {
     method: "post",
     body,
