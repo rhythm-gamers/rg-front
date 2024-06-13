@@ -1,3 +1,4 @@
+import { IAuthRes } from ".";
 import fetchExtended from "../fetchExtended";
 import { parseJsonWithWrap } from "../utils";
 

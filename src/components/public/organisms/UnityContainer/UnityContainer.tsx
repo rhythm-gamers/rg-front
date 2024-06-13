@@ -1,6 +1,5 @@
 "use client";
 
-import PatternPracticeAPI from "@/api/pattern_practice";
 import { setJudgeTime, setSpeed } from "@/lib/features/unity/unitySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
@@ -54,9 +53,12 @@ const UnityContainer = ({ id, category }: IUnityContainer) => {
   };
 
   const loadSheet = async () => {
-    const {
-      data: { title },
-    } = await PatternPracticeAPI.getOne(id);
+    // 추후 아래 주석의 코드로 변경
+    const title = "Splendid Circus";
+    // const {
+    //   data: { title },
+    // } = await PatternPracticeAPI.getOne(id);
+
     sendMessage("SheetLoader", "WebGLLoadSheet", title);
   };
 

@@ -4,7 +4,7 @@ import { parseJsonWithWrap } from "../utils";
 
 /**
  *
- * @param id level test id
+ * @param id pattern practice id
  * @returns
  */
 const getOne = async (id: number): Promise<{ data: IPatternPracticeRes }> => {
