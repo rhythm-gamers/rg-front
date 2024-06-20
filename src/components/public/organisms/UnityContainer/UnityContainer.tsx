@@ -15,6 +15,10 @@ interface IUnityContainer {
 }
 
 const UnityContainer = ({ id, category }: IUnityContainer) => {
+  const CLOUDFRONT_URL = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL;
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const {
     unityProvider,
     sendMessage,
@@ -24,28 +28,42 @@ const UnityContainer = ({ id, category }: IUnityContainer) => {
     unload,
     isLoaded,
   } = useUnityContext({
-    loaderUrl: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/unity/build/Build/build.loader.js`,
-    dataUrl: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/unity/build/Build/build.data`,
-    frameworkUrl: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/unity/build/Build/build.framework.js`,
-    codeUrl: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/unity/build/Build/build.wasm`,
+    loaderUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.loader.js`,
+    dataUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.data`,
+    frameworkUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.framework.js`,
+    codeUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.wasm`,
   });
+
   const { speed, judgeTime } = useAppSelector((state) => state.unity);
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-  const unloadRef = useRef<() => Promise<void>>();
+  const unloadRef = useRef<() => void>();
 
   const enableFullScreen = () => {
     requestFullscreen(true);
   };
 
-  /** Send User Setting To Unity */
-  const initGameState = () => {
+  /** Send User Settings and SheetName To Unity */
+  const initGame = async () => {
+    await loadSheet();
+    initUserState();
+  };
+
+  const initUserState = () => {
     sendMessage("GameManager", "WebGLInitUserSpeed", speed);
     sendMessage("Judgement", "WebGLInitUserJudgeTime", judgeTime);
   };
 
+  const loadSheet = async () => {
+    // 추후 아래 주석의 코드로 변경
+    const title = "Splendid Circus";
+    // const {
+    //   data: { title },
+    // } = await PatternPracticeAPI.getOne(id);
+
+    sendMessage("SheetLoader", "WebGLLoadSheet", title);
+  };
+
   useEffect(() => {
-    if (isLoaded) initGameState();
+    if (isLoaded) initGame();
   }, [isLoaded]);
   /** END Send User Setting To Unity */
 
@@ -80,8 +98,8 @@ const UnityContainer = ({ id, category }: IUnityContainer) => {
 
   /** Prevent WebGL Canvas Unmount Error */
   useRouteChangeEvents({
-    onBeforeRouteChange: async () => {
-      await unloadRef.current!();
+    onBeforeRouteChange: () => {
+      unloadRef.current!();
     },
   });
 
@@ -90,9 +108,9 @@ const UnityContainer = ({ id, category }: IUnityContainer) => {
   }, [isLoaded]);
 
   useEffect(() => {
-    const unloadAndBack = async () => {
+    const unloadAndBack = () => {
       if (!unloadRef.current) return;
-      await unloadRef.current();
+      unloadRef.current();
       // delete pushState history and back
       router.back();
       router.back();

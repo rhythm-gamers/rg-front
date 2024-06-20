@@ -25,7 +25,7 @@ export interface IWikiRes {
   [type: string]: number | IWiki[];
 }
 
-const PatternPracticeAPI = {
+const WikiAPI = {
   create,
   getAll,
   getOne,
@@ -33,4 +33,4 @@ const PatternPracticeAPI = {
   deleteOne,
 };
 
-export default PatternPracticeAPI;
+export default WikiAPI;
