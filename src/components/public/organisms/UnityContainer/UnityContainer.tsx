@@ -29,10 +29,10 @@ const UnityContainer = ({ id, category, keyNum }: IUnityContainer) => {
     unload,
     isLoaded,
   } = useUnityContext({
-    loaderUrl: `/unity/build/Build/build.loader.js`,
-    dataUrl: `/unity/build/Build/build.data`,
-    frameworkUrl: `/unity/build/Build/build.framework.js`,
-    codeUrl: `/unity/build/Build/build.wasm`,
+    loaderUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.loader.js`,
+    dataUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.data`,
+    frameworkUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.framework.js`,
+    codeUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.wasm`,
   });
 
   const unloadRef = useRef<() => void>();
