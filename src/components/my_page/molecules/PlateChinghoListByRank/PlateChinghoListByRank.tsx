@@ -24,6 +24,7 @@ const rank2Chinghos = [
 ];
 const rank3Chinghos = ["능동적인 디맥 리게이", "능동적인 이지투 리게이"];
 const rank4Chinghos = ["사볼 악귀"];
+
 const PlateChinghoListByRank = ({ rank, onClick }: IPlateChinghoList) => {
   return (
     <div className="my-8">

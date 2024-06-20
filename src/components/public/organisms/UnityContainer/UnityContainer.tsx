@@ -12,9 +12,10 @@ import { ReactUnityEventParameter } from "react-unity-webgl/distribution/types/r
 interface IUnityContainer {
   category: "pattern_practice" | "level_tests";
   id: number;
+  keyNum: number;
 }
 
-const UnityContainer = ({ id, category }: IUnityContainer) => {
+const UnityContainer = ({ id, category, keyNum }: IUnityContainer) => {
   const CLOUDFRONT_URL = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL;
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -28,14 +29,15 @@ const UnityContainer = ({ id, category }: IUnityContainer) => {
     unload,
     isLoaded,
   } = useUnityContext({
-    loaderUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.loader.js`,
-    dataUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.data`,
-    frameworkUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.framework.js`,
-    codeUrl: `${CLOUDFRONT_URL}/unity/build/Build/build.wasm`,
+    loaderUrl: `/unity/build/Build/build.loader.js`,
+    dataUrl: `/unity/build/Build/build.data`,
+    frameworkUrl: `/unity/build/Build/build.framework.js`,
+    codeUrl: `/unity/build/Build/build.wasm`,
   });
 
-  const { speed, judgeTime } = useAppSelector((state) => state.unity);
   const unloadRef = useRef<() => void>();
+  const { speed, judgeTime, fourKeyMaps, fiveKeyMaps, sixKeyMaps } =
+    useAppSelector((state) => state.unity);
 
   const enableFullScreen = () => {
     requestFullscreen(true);
@@ -43,16 +45,12 @@ const UnityContainer = ({ id, category }: IUnityContainer) => {
 
   /** Send User Settings and SheetName To Unity */
   const initGame = async () => {
-    await loadSheet();
+    loadSheet();
+    rebindAllNoteKey();
     initUserState();
   };
 
-  const initUserState = () => {
-    sendMessage("GameManager", "WebGLInitUserSpeed", speed);
-    sendMessage("Judgement", "WebGLInitUserJudgeTime", judgeTime);
-  };
-
-  const loadSheet = async () => {
+  const loadSheet = () => {
     // 추후 아래 주석의 코드로 변경
     const title = "Splendid Circus";
     // const {
@@ -60,6 +58,32 @@ const UnityContainer = ({ id, category }: IUnityContainer) => {
     // } = await PatternPracticeAPI.getOne(id);
 
     sendMessage("SheetLoader", "WebGLLoadSheet", title);
+  };
+
+  const rebindAllNoteKey = () => {
+    if (keyNum === 4) {
+      fourKeyMaps.forEach((key, idx) => {
+        rebindNoteKey(idx, key);
+      });
+    } else if (keyNum === 5) {
+      fiveKeyMaps.forEach((key, idx) => {
+        rebindNoteKey(idx, key);
+      });
+    } else if (keyNum === 6) {
+      sixKeyMaps.forEach((key, idx) => {
+        rebindNoteKey(idx, key);
+      });
+    }
+  };
+
+  const rebindNoteKey = (noteLine: number, newKey: string) => {
+    const combinedArgs = `${noteLine},${newKey}`;
+    sendMessage("RebindController", "WebGLRebindNoteKey", combinedArgs);
+  };
+
+  const initUserState = () => {
+    sendMessage("GameManager", "WebGLInitUserSpeed", speed);
+    sendMessage("Judgement", "WebGLInitUserJudgeTime", judgeTime);
   };
 
   useEffect(() => {
@@ -150,7 +174,7 @@ const UnityContainer = ({ id, category }: IUnityContainer) => {
   /** END Use Device Pixel Ratio */
 
   return (
-    <div className="relative">
+    <div className="w-2/3 relative">
       {category + " - " + id}
       <Unity
         unityProvider={unityProvider}

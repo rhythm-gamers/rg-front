@@ -28,9 +28,9 @@ const PatternPractice = () => {
   return (
     <MainSectionWithBothSideAds sectionTitle="패턴 연습">
       <CategoryWrapper>
-        <CategoryBtn value="4키" />
-        <CategoryBtn value="5키" />
-        <CategoryBtn value="6키" />
+        <CategoryBtn value={4} />
+        <CategoryBtn value={5} />
+        <CategoryBtn value={6} />
       </CategoryWrapper>
       <div className="flex justify-between w-full text-black mt-3">
         <div className="flex gap-5">

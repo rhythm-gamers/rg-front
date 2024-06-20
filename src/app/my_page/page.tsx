@@ -17,6 +17,7 @@ import CustomImage from "../../components/public/atoms/CustomImage/CustomImage";
 import useInput from "@/hooks/useInput";
 import Checkbox from "@/components/public/atoms/Checkbox/Checkbox";
 import AuthAPI from "@/api/auth";
+import KeySetting from "@/components/my_page/molecules/KeySetting/KeySetting";
 
 const MyPage = () => {
   // Input Management
@@ -59,15 +60,24 @@ const MyPage = () => {
   const [plateChingoSettings, setPlateChinghoSettings] = useState<IChingho>({
     rank: 1,
     children: "디맥 플레이어",
+    visibleChingho,
+    visibleChinghoIcon,
   });
 
   const changePlateChingho = (rank: TChinghoRank, children: ReactNode) => {
     setPlateChinghoSettings({ rank, children });
   };
 
+  // Game Key Settings Management
+  const [keyNum, setKeyNum] = useState<4 | 5 | 6>(4);
+  const [keySettingState, setKeySettingState] = useState<
+    "init" | "started" | "finished"
+  >("init");
+
   // Sidebar Shortcut
   const accountSettingRef = useRef<HTMLTableSectionElement>(null);
   const plateSettingRef = useRef<HTMLTableSectionElement>(null);
+  const gameSettingRef = useRef<HTMLTableSectionElement>(null);
 
   const moveToSettingSectionByRef = (
     ref: RefObject<HTMLTableSectionElement>,
@@ -104,6 +114,7 @@ const MyPage = () => {
                 </button>
                 <button
                   type="button"
+                  onClick={() => moveToSettingSectionByRef(gameSettingRef)}
                   className="w-full py-3 rounded-lg text-left hover:text-rose-400 transition-all"
                 >
                   게임 설정
@@ -114,10 +125,12 @@ const MyPage = () => {
           <button
             type="button"
             className="py-6 bg-blue-400 rounded-3xl text-white"
-            onClick={()=>AuthAPI.login({
-              username: "",
-              password: ""
-            })}
+            onClick={() =>
+              AuthAPI.login({
+                username: "",
+                password: "",
+              })
+            }
           >
             임시 로그인 버튼
           </button>
@@ -267,6 +280,17 @@ const MyPage = () => {
                 value="칭호 아이콘"
                 checked={visibleChinghoIcon}
                 onChange={changeVisibleChinghoIcon}
+              />
+            </SettingElem>
+          </SettingSection>
+
+          <SettingSection ref={gameSettingRef} title="게임 설정">
+            <SettingElem title="키 설정">
+              <KeySetting
+                keyNum={keyNum}
+                setKeyNum={setKeyNum}
+                state={keySettingState}
+                setState={setKeySettingState}
               />
             </SettingElem>
           </SettingSection>

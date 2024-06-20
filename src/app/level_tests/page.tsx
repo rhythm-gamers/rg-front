@@ -10,7 +10,7 @@ const RhythmLevelTests = async () => {
   return (
     <FullScreenSection direction="col" className="bg-orange-100" asMainTag>
       {lists.map((list) => (
-        <p key={list.testId}>{list.title}</p>
+        <p key={list.id}>{list.title}</p>
       ))}
       <div className="flex w-full h-full justify-evenly items-center">
         <LevelCards />

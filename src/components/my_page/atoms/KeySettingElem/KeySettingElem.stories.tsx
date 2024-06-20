@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CategoryBtn from "./CategoryBtn";
+import KeySettingElem from "./KeySettingElem";
 
 const meta = {
-  title: "CategoryBtn",
-  component: CategoryBtn,
+  title: "KeySettingElem",
+  component: KeySettingElem,
   args: {
-    value: 4,
+    value: "a",
   },
-} satisfies Meta<typeof CategoryBtn>;
+} satisfies Meta<typeof KeySettingElem>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

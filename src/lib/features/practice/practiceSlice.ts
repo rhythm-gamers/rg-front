@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface PracticeState {
-  keyName: string;
+  keyNum: number;
   filterItems: string[];
   dropdownType: string;
   sortType: string;
 }
 
 const initialState: PracticeState = {
-  keyName: "4키",
+  keyNum: 4,
   filterItems: [],
   dropdownType: "",
   sortType: "클리어 레이트순",
@@ -19,10 +19,10 @@ const practiceSlice = createSlice({
   name: "practice",
   initialState,
   reducers: {
-    setKeyName(state, action: PayloadAction<string>) {
-      state.keyName = action.payload;
+    setKeyNum(state, action: PayloadAction<typeof state.keyNum>) {
+      state.keyNum = action.payload;
     },
-    setSortType(state, action: PayloadAction<string>) {
+    setSortType(state, action: PayloadAction<typeof state.sortType>) {
       state.sortType = action.payload;
     },
     toggleFilterItems(state, action: PayloadAction<string>) {
@@ -42,11 +42,7 @@ const practiceSlice = createSlice({
   },
 });
 
-export const {
-  setKeyName,
-  setSortType,
-  toggleFilterItems,
-  toggleDropdownType,
-} = practiceSlice.actions;
+export const { setKeyNum, setSortType, toggleFilterItems, toggleDropdownType } =
+  practiceSlice.actions;
 
 export default practiceSlice.reducer;
