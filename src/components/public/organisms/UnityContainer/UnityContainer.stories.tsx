@@ -7,6 +7,7 @@ const meta = {
   args: {
     category: "level_tests",
     id: 1,
+    keyNum: 4,
   },
 } satisfies Meta<typeof UnityContainer>;
 

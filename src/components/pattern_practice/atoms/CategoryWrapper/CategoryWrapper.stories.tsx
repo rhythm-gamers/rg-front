@@ -8,9 +8,9 @@ const meta = {
   args: {
     children: (
       <>
-        <CategoryBtn value="4키" />
-        <CategoryBtn value="5키" />
-        <CategoryBtn value="6키" />
+        <CategoryBtn value={4} />
+        <CategoryBtn value={5} />
+        <CategoryBtn value={6} />
       </>
     ),
   },
