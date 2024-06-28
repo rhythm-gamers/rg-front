@@ -18,6 +18,7 @@ import useInput from "@/hooks/useInput";
 import Checkbox from "@/components/public/atoms/Checkbox/Checkbox";
 import AuthAPI from "@/api/auth";
 import KeySetting from "@/components/my_page/molecules/KeySetting/KeySetting";
+import CustomBtn from "@/components/public/atoms/CustomBtn/CustomBtn";
 
 const MyPage = () => {
   // Input Management
@@ -96,35 +97,44 @@ const MyPage = () => {
         <aside className="flex flex-col justify-between min-w-[20rem] h-full gap-10 sticky top-20">
           <div className="h-[35rem] bg-white rounded-lg shadow-md">
             <div className="flex flex-col px-10">
-              <h1 className="mt-8 mb-5 text-lg font-bold">마이페이지</h1>
+              <h1 className="my-8 text-lg font-bold">마이페이지</h1>
               <div className="flex flex-col">
-                <button
-                  type="button"
+                <CustomBtn
+                  size="md"
+                  type="clear"
                   onClick={() => moveToSettingSectionByRef(accountSettingRef)}
-                  className="w-full py-3 rounded-lg text-left hover:text-rose-400 transition-all"
+                  className="text-left hover:text-rose-400"
+                  widthFull
                 >
                   계정 설정
-                </button>
-                <button
-                  type="button"
+                </CustomBtn>
+                <CustomBtn
+                  size="md"
+                  type="clear"
                   onClick={() => moveToSettingSectionByRef(plateSettingRef)}
-                  className="w-full py-3 rounded-lg text-left hover:text-rose-400 transition-all"
+                  className="text-left hover:text-rose-400"
+                  widthFull
                 >
                   플레이트 설정
-                </button>
-                <button
-                  type="button"
+                </CustomBtn>
+                <CustomBtn
+                  size="md"
+                  type="clear"
                   onClick={() => moveToSettingSectionByRef(gameSettingRef)}
-                  className="w-full py-3 rounded-lg text-left hover:text-rose-400 transition-all"
+                  className="text-left hover:text-rose-400"
+                  widthFull
                 >
                   게임 설정
-                </button>
+                </CustomBtn>
               </div>
             </div>
           </div>
-          <button
-            type="button"
-            className="py-6 bg-blue-400 rounded-3xl text-white"
+          <CustomBtn
+            size="xl"
+            type="accept"
+            widthFull
+            roundedFull
+            haveShadow
             onClick={() =>
               AuthAPI.login({
                 username: "",
@@ -133,7 +143,7 @@ const MyPage = () => {
             }
           >
             임시 로그인 버튼
-          </button>
+          </CustomBtn>
         </aside>
         <section className="flex flex-col w-full bg-white shadow-md rounded-lg gap-12 px-20 py-12">
           <SettingSection ref={accountSettingRef} title="계정 설정">
@@ -170,13 +180,14 @@ const MyPage = () => {
               </div>
             </SettingElem>
             <SettingElem title="계정 연동">
-              <button
-                type="button"
-                className="w-20 h-10 rounded-lg bg-gray-100"
+              <CustomBtn
+                size="lg"
+                type="disabled"
                 onClick={() => AuthAPI.steamLogin()}
+                roundedFull
               >
                 스팀
-              </button>
+              </CustomBtn>
             </SettingElem>
           </SettingSection>
 
