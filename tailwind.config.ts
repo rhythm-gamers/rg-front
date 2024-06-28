@@ -14,7 +14,6 @@ const config: Config = {
         "chingho-rank-2": colors.lime[300],
         "chingho-rank-3": colors.indigo[400],
         "chingho-rank-4": colors.red[400],
-        "miku-green": "#39c5bb",
       },
       animation: {
         leftZoom: "leftZoom 6s ease-in-out infinite",
