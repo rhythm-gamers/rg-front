@@ -12,9 +12,9 @@ interface UnityState {
 const initialState: UnityState = {
   speed: 1.0,
   judgeTime: 0,
-  fourKeyMaps: ["a", "s", "d", ";", "'"],
+  fourKeyMaps: ["a", "s", ";", "'"],
   fiveKeyMaps: ["a", "s", "d", "l", ";", "'"],
-  sixKeyMaps: ["a", "s", "d", ";", "l", "'"],
+  sixKeyMaps: ["a", "s", "d", "l", ";", "'"],
 };
 
 const unitySlice = createSlice({
