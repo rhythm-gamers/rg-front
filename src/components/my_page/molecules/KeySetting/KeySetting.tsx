@@ -109,7 +109,7 @@ const KeySetting = ({ keyNum, setKeyNum, state, setState }: IKeySetting) => {
         type="button"
         onClick={modifyKeys}
         onKeyDown={onKeyDown}
-        className="w-1/2 h-14 mx-auto bg-blue-400 text-white rounded-full text-lg outline-none"
+        className="w-1/2 h-14 mx-auto bg-blue-400 text-white rounded-full text-lg shadow-md outline-none"
       >
         재설정
       </button>
