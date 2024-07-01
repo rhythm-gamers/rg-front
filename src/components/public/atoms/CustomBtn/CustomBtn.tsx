@@ -11,7 +11,7 @@ interface ICustomBtn {
   roundedFull?: boolean;
   haveShadow?: boolean;
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const CustomBtn = ({
@@ -27,7 +27,7 @@ const CustomBtn = ({
 }: ICustomBtn) => {
   return (
     <button
-      type="button"
+      type="submit"
       onClick={onClick}
       className={` ${
         size === "xs"
