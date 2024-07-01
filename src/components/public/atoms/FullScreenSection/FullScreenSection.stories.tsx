@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import FullScreenSection from "./FullScreenSection";
 
 const meta = {
-  title: "FullSizeSection",
+  title: "FullScreenSection",
   component: FullScreenSection,
   args: { direction: "row", children: "width: 100vw and height: 100vh" },
   argTypes: {

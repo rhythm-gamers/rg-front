@@ -1,3 +1,4 @@
+import CustomBtn from "@/components/public/atoms/CustomBtn/CustomBtn";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 interface IInputWithEditBtn {
@@ -42,19 +43,21 @@ const InputWithEditBtn = ({
         required={required}
       />
       <div className="flex gap-5">
-        <button
-          type="button"
+        <CustomBtn
+          size="sm"
+          type="accept"
+          haveShadow
           onClick={() => {
             toggleIsEditing();
           }}
-          className={`rounded-xl px-4 py-1 transition-colors ${
+          className={`${
             isEditing
-              ? "border-2 border-blue-400 text-blue-400"
+              ? "border-2 bg-white border-blue-400 !text-blue-400"
               : "bg-blue-400 text-white"
           }`}
         >
           {isEditing ? "수정 완료" : "수정"}
-        </button>
+        </CustomBtn>
       </div>
     </div>
   );
