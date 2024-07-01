@@ -6,9 +6,12 @@ import Checkbox from '../../components/public/atoms/Checkbox/Checkbox';
 import Link from "next/link";
 import AuthAPI from "@/api/auth";
 import { FormEvent } from "react";
+import CustomBtn from '../../components/public/atoms/CustomBtn/CustomBtn';
+import { useRouter } from "next/navigation";
 
 const Login = () => {
-
+  const router = useRouter()
+  
   const [userEmail, changeUserEmail] = useInput({
     type: "text",
     initValue: "",
@@ -32,20 +35,22 @@ const Login = () => {
       username: userEmail,
       password: userPassword,
     })
+
+    router.push('/')
   }
 
   return (
     <div className="w-full h-full bg-gradient-to-r from-rose-400 to-orange-200 relative">
   <FullScreenSection direction={"row"} className="text-white flex justify-center items-center">
-    <form className="w-1/5 backdrop-blur-2xl flex flex-col justify-center items-center border-2 rounded-3xl border-bright-cream-1 p-10 gap-4" onSubmit={login}>
+    <form className="w-1/5 backdrop-blur-2xl flex flex-col justify-center items-center border-2 rounded-3xl border-bright-cream-1 p-10 gap-4 shadow-lg" onSubmit={login}>
       <h3 className="text-3xl mb-4">로그인</h3>
-      <input className="bg-transparent border-2 rounded-3xl border-bright-cream-1 w-full px-4 py-2 placeholder-white" type="text" value={userEmail} placeholder="Email" onChange={changeUserEmail}/>
-      <input className="bg-transparent border-2 rounded-3xl border-bright-cream-1 w-full px-4 py-2 placeholder-white" type="password" value={userPassword} placeholder="Password" onChange={changeUserPassword}/>
+      <input className="bg-transparent border-2 rounded-3xl border-bright-cream-1 w-full px-4 py-2 placeholder-white focus:outline-white" type="text" value={userEmail} placeholder="Email" onChange={changeUserEmail}/>
+      <input className="bg-transparent border-2 rounded-3xl border-bright-cream-1 w-full px-4 py-2 placeholder-white focus:outline-white" type="password" value={userPassword} placeholder="Password" onChange={changeUserPassword}/>
       <div className="w-full flex justify-between">
         <Checkbox value={"아이디 저장"} checked={isRemember} onChange={changeIsRemember}/>
         <Link href={"/"}>비밀번호 찾기</Link>
       </div>
-      <button className="border-2 rounded-3xl border-bright-cream-1 bg-bright-cream-1 w-full py-2 text-black">로그인</button>
+      <CustomBtn className="bg-bright-cream-1 text-black" size={"md"} type={"clear"} roundedFull widthFull haveShadow>로그인</CustomBtn>
       <div className="w-full flex justify-center">
         계정이 없으신가요?
         <Link className="mx-4" href={"/"}>회원가입</Link>
