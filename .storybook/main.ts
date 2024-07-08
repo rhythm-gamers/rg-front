@@ -43,6 +43,11 @@ const config: StorybookConfig = {
       titlePrefix: "my_page/organisms",
     },
     {
+      directory: "../src/components/wiki/atoms",
+      files: "**/*.stories.*",
+      titlePrefix: "wiki/atoms",
+    },
+    {
       directory: "../src/components/public/atoms",
       files: "**/*.stories.*",
       titlePrefix: "public/atoms",
