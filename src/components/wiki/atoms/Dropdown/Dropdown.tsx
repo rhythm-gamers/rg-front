@@ -1,3 +1,4 @@
+import { IWiki } from "@/api/wiki";
 import React, { Dispatch, SetStateAction } from "react";
 
 interface IDropdown {
@@ -6,18 +7,12 @@ interface IDropdown {
   activeIdx: number;
   active: boolean;
   setActiveIdx: Dispatch<SetStateAction<number>>;
-  subMenu: ISubMenu[];
-}
-
-export interface ISubMenu {
-  idx: number;
-  name: string;
+  subMenu: IWiki[];
 }
 
 const Dropdown = ({
   menuItem,
   idx,
-  activeIdx,
   active,
   setActiveIdx,
   subMenu,
@@ -25,7 +20,7 @@ const Dropdown = ({
   return (
     <>
       <div
-        className="w-[300px] h-[65px] bg-[#FCFCFC] border-[1px] border-black rounded-lg flex justify-center items-center cursor-pointer hover:bg-blue-gray-50 transition-all"
+        className="w-full py-2 flex justify-center items-center cursor-pointer hover:bg-blue-gray-50 transition-all"
         onClick={() => {
           setActiveIdx(idx);
         }}
@@ -34,7 +29,7 @@ const Dropdown = ({
       </div>
       <div
         className={`${active ? "visibile" : "invisible"} ${
-          active && subMenu.length > 0 ? "h-[100px]" : "h-0"
+          active && subMenu.length > 0 ? "" : "h-0"
         } transition-all duration-300`}
       >
         {active &&
@@ -42,9 +37,9 @@ const Dropdown = ({
             return (
               <div
                 key={index}
-                className="w-[300px] h-[50px] bg-white flex justify-center items-center cursor-pointer hover:bg-blue-gray-50 transition-all"
+                className="w-full flex first-letter:flex justify-center items-center cursor-pointer hover:bg-blue-gray-50 transition-all"
               >
-                {submenu.name}
+                {submenu.title}
               </div>
             );
           })}
