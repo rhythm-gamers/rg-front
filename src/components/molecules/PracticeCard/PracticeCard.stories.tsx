@@ -5,10 +5,12 @@ const meta = {
   title: "PracticeCard",
   component: PracticeCard,
   args: {
-    practiceId: 1,
+    id: 0,
     title: "계단 연습 1",
     imgSrc: `${process.env.STORYBOOK_AWS_CLOUDFRONT_URL}/pp_stair.png`,
-    patterns: ["계단 Lv.1", "폭타 Lv.1"],
+    patternInfo: { stairs: 2, trill: 1 },
+    level: 2,
+    keyNum: 4,
   },
 } satisfies Meta<typeof PracticeCard>;
 

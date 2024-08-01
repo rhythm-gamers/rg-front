@@ -1,11 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import LTLevelCards from "./LevelCards";
+import LTLevelCards from "./LTLevelCards";
 
 const meta = {
-  title: "LevelCards",
+  title: "LTLevelCards",
   component: LTLevelCards,
   args: {
-    level: 1,
+    levelTests: [
+      {
+        level: 1,
+        id: 0,
+        title: "",
+        goalRate: 0,
+        keyNum: 4,
+        imgSrc: "",
+        noteSrc: "",
+        musicSrc: "",
+        patternInfo: {},
+      },
+    ],
   },
 } satisfies Meta<typeof LTLevelCards>;
 

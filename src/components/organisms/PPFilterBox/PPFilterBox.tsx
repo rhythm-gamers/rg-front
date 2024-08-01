@@ -4,11 +4,11 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { toggleDropdownType } from "@/lib/features/practice/practiceSlice";
 import { MouseEvent } from "react";
 
-interface IFilterBox {
+interface IPPFilterBox {
   value: string;
 }
 
-const FilterBox = ({ value }: IFilterBox) => {
+const PPFilterBox = ({ value }: IPPFilterBox) => {
   const dispatch = useAppDispatch();
   const { dropdownType } = useAppSelector((state) => state.practice);
 
@@ -36,4 +36,4 @@ const FilterBox = ({ value }: IFilterBox) => {
   );
 };
 
-export default FilterBox;
+export default PPFilterBox;

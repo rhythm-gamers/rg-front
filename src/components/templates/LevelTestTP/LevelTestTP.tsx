@@ -4,7 +4,7 @@ import LTLevelCards from "@/components/organisms/LTLevelCards/LTLevelCards";
 import LTTips from "@/components/organisms/LTTips/LTTips";
 import React from "react";
 
-const LTLevelTestTP = async () => {
+const LevelTestTP = async () => {
   const { data: levelTests } = await LevelTestAPI.getAll();
 
   return (
@@ -20,4 +20,4 @@ const LTLevelTestTP = async () => {
   );
 };
 
-export default LTLevelTestTP;
+export default LevelTestTP;

@@ -33,7 +33,7 @@ const PlateFront = ({
 
   return (
     <div
-      className={`flex justify-between items-center min-w-[31rem] min-h-[17rem] p-10 rounded-xl shadow-lg bg-gradient-to-b ${fromBgColor} ${toBgColor}`}
+      className={`flex justify-between items-center w-[31rem] h-[17rem] p-10 rounded-xl shadow-lg bg-gradient-to-b ${fromBgColor} ${toBgColor}`}
     >
       <div className="flex flex-col gap-7">
         <div className="text-4xl">

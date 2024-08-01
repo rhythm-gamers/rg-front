@@ -1,7 +1,7 @@
-import LTLevelTestTP from "@/components/templates/LevelTestTP/LevelTestTP";
+import LevelTestTP from "@/components/templates/LevelTestTP/LevelTestTP";
 
 const RhythmLevelTests = async () => {
-  return <LTLevelTestTP />;
+  return <LevelTestTP />;
 };
 
 export default RhythmLevelTests;

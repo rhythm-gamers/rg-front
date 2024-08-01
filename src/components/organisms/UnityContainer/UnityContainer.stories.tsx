@@ -5,9 +5,8 @@ const meta = {
   title: "UnityContainer",
   component: UnityContainer,
   args: {
-    category: "level_tests",
     id: 1,
-    keyNum: 4,
+    referer: "level_tests",
   },
 } satisfies Meta<typeof UnityContainer>;
 

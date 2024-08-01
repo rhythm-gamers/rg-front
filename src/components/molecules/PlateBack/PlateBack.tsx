@@ -8,7 +8,7 @@ interface IPlateBack {
 const PlateBack = ({ fromBgColor, toBgColor }: IPlateBack) => {
   return (
     <div
-      className={`min-w-[31rem] min-h-[17rem] rounded-xl shadow-lg bg-gradient-to-b ${`${fromBgColor} ${toBgColor}`}`}
+      className={`w-[31rem] h-[17rem] rounded-xl shadow-lg bg-gradient-to-b ${`${fromBgColor} ${toBgColor}`}`}
     >
       <div className="flex justify-end px-6 py-4">
         <MdStar className="text-yellow-400" size={40} />
