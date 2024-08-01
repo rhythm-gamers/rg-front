@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import returnFetch from "return-fetch";
 
 const fetchExtended = returnFetch({
@@ -13,8 +14,10 @@ const fetchExtended = returnFetch({
 
     response: async (response, requestArgs) => {
       try {
-        if (response.status === 403)
-          throw new Error("You are not authorized to this action");
+        if (response.status === 401) {
+          const router = useRouter();
+          router.replace("/login");
+        }
         if (response.status === 500) throw new Error("Server went wrong!");
 
         console.log("********* after receiving response *********");
