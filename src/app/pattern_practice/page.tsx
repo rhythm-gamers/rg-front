@@ -6,6 +6,7 @@ import PatternPracticeAPI from "@/api/pattern_practice";
 
 const PatternPractice = async () => {
   const { data: practices } = await PatternPracticeAPI.getAll();
+  console.log(practices);
   return (
     <PatternPracticeTP
       KeyNumTabs={<PPKeyNumTabs keyNums={[4, 5, 6]} />}

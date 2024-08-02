@@ -13,6 +13,7 @@ const meta = {
         patternInfo: { stairs: 2, trill: 1 },
         level: 2,
         keyNum: 4,
+        goalRate: "88.12",
       },
       {
         id: 0,
@@ -21,6 +22,7 @@ const meta = {
         patternInfo: { stairs: 2, trill: 1 },
         level: 2,
         keyNum: 4,
+        goalRate: "88.12",
       },
     ],
   },

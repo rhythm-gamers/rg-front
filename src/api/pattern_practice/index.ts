@@ -26,6 +26,9 @@ export interface IPatternPracticeRes {
   level: number;
   keyNum: TKeyNum;
   imgSrc: string;
+  noteSrc?: string;
+  musicSrc?: string;
+  goalRate: string;
   patternInfo: IPatternInfo;
 }
 
