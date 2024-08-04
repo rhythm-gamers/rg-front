@@ -6,11 +6,11 @@ export interface IPaging {
 }
 
 export interface IPatternInfo {
-  roll: number;
-  offGrid: number;
-  stairs: number;
-  peak: number;
-  multiples: number;
-  trill: number;
-  hold: number;
+  roll?: number;
+  offGrid?: number;
+  stairs?: number;
+  peak?: number;
+  multiple?: number;
+  trill?: number;
+  hold?: number;
 }

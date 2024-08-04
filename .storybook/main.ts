@@ -1,66 +1,22 @@
 import type { StorybookConfig } from "@storybook/nextjs";
+import path from "path";
 
 const config: StorybookConfig = {
   stories: [
     {
-      directory: "../src/components/level_tests/molecules",
+      directory: "../src/components/atoms",
       files: "**/*.stories.*",
-      titlePrefix: "level_tests/molecules",
+      titlePrefix: "atoms",
     },
     {
-      directory: "../src/components/level_tests/organisms",
+      directory: "../src/components/molecules",
       files: "**/*.stories.*",
-      titlePrefix: "level_tests/organisms",
+      titlePrefix: "molecules",
     },
     {
-      directory: "../src/components/pattern_practice/atoms",
+      directory: "../src/components/organisms",
       files: "**/*.stories.*",
-      titlePrefix: "pattern_practice/atoms",
-    },
-    {
-      directory: "../src/components/pattern_practice/molecules",
-      files: "**/*.stories.*",
-      titlePrefix: "pattern_practice/molecules",
-    },
-    {
-      directory: "../src/components/pattern_practice/organisms",
-      files: "**/*.stories.*",
-      titlePrefix: "pattern_practice/organisms",
-    },
-    {
-      directory: "../src/components/my_page/atoms",
-      files: "**/*.stories.*",
-      titlePrefix: "my_page/atoms",
-    },
-    {
-      directory: "../src/components/my_page/molecules",
-      files: "**/*.stories.*",
-      titlePrefix: "my_page/molecules",
-    },
-    {
-      directory: "../src/components/my_page/organisms",
-      files: "**/*.stories.*",
-      titlePrefix: "my_page/organisms",
-    },
-    {
-      directory: "../src/components/wiki/atoms",
-      files: "**/*.stories.*",
-      titlePrefix: "wiki/atoms",
-    },
-    {
-      directory: "../src/components/public/atoms",
-      files: "**/*.stories.*",
-      titlePrefix: "public/atoms",
-    },
-    {
-      directory: "../src/components/public/molecules",
-      files: "**/*.stories.*",
-      titlePrefix: "public/molecules",
-    },
-    {
-      directory: "../src/components/public/organisms",
-      files: "**/*.stories.*",
-      titlePrefix: "public/organisms",
+      titlePrefix: "organisms",
     },
   ],
   addons: [

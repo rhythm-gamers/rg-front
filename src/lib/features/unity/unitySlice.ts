@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface UnityState {
   speed: number;
-  judgeTime: number;
+  judgeOffset: number;
   fourKeyMaps: string[];
   fiveKeyMaps: string[];
   sixKeyMaps: string[];
@@ -11,7 +11,7 @@ interface UnityState {
 
 const initialState: UnityState = {
   speed: 1.0,
-  judgeTime: 0,
+  judgeOffset: 0,
   fourKeyMaps: ["a", "s", ";", "'"],
   fiveKeyMaps: ["a", "s", "d", "l", ";", "'"],
   sixKeyMaps: ["a", "s", "d", "l", ";", "'"],
@@ -24,8 +24,8 @@ const unitySlice = createSlice({
     setSpeed(state, action: PayloadAction<typeof state.speed>) {
       state.speed = action.payload;
     },
-    setJudgeTime(state, action: PayloadAction<typeof state.judgeTime>) {
-      state.judgeTime = action.payload;
+    setJudgeOffset(state, action: PayloadAction<typeof state.judgeOffset>) {
+      state.judgeOffset = action.payload;
     },
     setFourKeyMaps(state, action: PayloadAction<typeof state.fourKeyMaps>) {
       state.fourKeyMaps = action.payload;
@@ -41,7 +41,7 @@ const unitySlice = createSlice({
 
 export const {
   setSpeed,
-  setJudgeTime,
+  setJudgeOffset,
   setFourKeyMaps,
   setFiveKeyMaps,
   setSixKeyMaps,
