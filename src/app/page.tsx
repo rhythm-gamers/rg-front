@@ -3,9 +3,9 @@
 import { MdStar } from "react-icons/md";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { useRef, useState } from "react";
-import SectionTitle from "@/components/public/atoms/SectionTitle/SectionTitle";
-import PlateFront from "@/components/public/molecules/PlateFront/PlateFront";
-import CustomImage from "@/components/public/atoms/CustomImage/CustomImage";
+import CustomImage from "@/components/atoms/CustomImage/CustomImage";
+import SectionTitle from "@/components/atoms/SectionTitle/SectionTitle";
+import PlateFront from "@/components/molecules/PlateFront/PlateFront";
 
 const Home = () => {
   const cardRef = useRef<HTMLDivElement>(null);
