@@ -2,7 +2,7 @@
 
 import LevelTestAPI from "@/api/level_tests";
 import PatternPracticeAPI from "@/api/pattern_practice";
-import { setJudgeTime, setSpeed } from "@/lib/features/unity/unitySlice";
+import { setJudgeOffset, setSpeed } from "@/lib/features/unity/unitySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
 import { useRouteChangeEvents } from "nextjs-router-events";
@@ -37,7 +37,7 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
   });
 
   const unloadRef = useRef<() => void>();
-  const { speed, judgeTime, fourKeyMaps, fiveKeyMaps, sixKeyMaps } =
+  const { speed, judgeOffset, fourKeyMaps, fiveKeyMaps, sixKeyMaps } =
     useAppSelector((state) => state.unity);
 
   const enableFullScreen = () => {
@@ -91,7 +91,7 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
 
   const initUserState = () => {
     sendMessage("GameManager", "WebGLInitUserSpeed", speed);
-    sendMessage("Judgement", "WebGLInitUserJudgeTime", judgeTime);
+    sendMessage("Sync", "WebGLInitUserJudgeOffset", judgeOffset);
   };
 
   useEffect(() => {
@@ -106,25 +106,27 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
     }
   }, []);
 
-  const handleSetJudgeTime = useCallback((speed: ReactUnityEventParameter) => {
-    if (typeof speed === "number") {
-      console.log(speed);
-      dispatch(setJudgeTime(speed));
-    }
-  }, []);
+  const handleSetJudgeOffset = useCallback(
+    (offset: ReactUnityEventParameter) => {
+      if (typeof offset === "number") {
+        dispatch(setJudgeOffset(offset));
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     addEventListener("SetSpeed", handleSetSpeed);
-    addEventListener("SetJudgeTime", handleSetJudgeTime);
+    addEventListener("SetJudgeOffset", handleSetJudgeOffset);
     return () => {
       removeEventListener("SetSpeed", handleSetSpeed);
-      removeEventListener("SetJudgeTime", handleSetJudgeTime);
+      removeEventListener("SetJudgeOffset", handleSetJudgeOffset);
     };
   }, [
     addEventListener,
     removeEventListener,
     handleSetSpeed,
-    handleSetJudgeTime,
+    handleSetJudgeOffset,
   ]);
   /** END Set Speed, JudgeTime From Unity */
 
