@@ -65,7 +65,8 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
     }
 
     rebindAllNoteKey(keyNum);
-    sendMessage("SheetLoader", "WebGLLoadSheet", title);
+    const combinedArgs = `${title},${keyNum}`;
+    sendMessage("SheetLoader", "WebGLLoadSheet", combinedArgs);
   };
 
   const rebindAllNoteKey = (keyNum: number) => {
