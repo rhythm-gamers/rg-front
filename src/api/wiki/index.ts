@@ -19,10 +19,14 @@ export interface IWikiReq {
 
 export interface IWikiReqOptional extends Partial<IWikiReq> {}
 
-export interface IWikiRes {
+export type TMenu = "mustread"|"ㄱ"|"ㄴ"|"ㄷ"|"ㄹ"|"ㅁ"|"ㅂ"|"ㅅ"|"ㅇ"|"ㅈ"|"ㅊ"|"ㅋ"|"ㅌ"|"ㅍ"|"ㅎ"|"ㄲ"|"ㄸ"|"ㅃ"|"ㅉ"|"ㅆ";
+
+export type TWikis = {
+  [key in TMenu]?: IWiki[];
+};
+
+export interface IWikiRes extends TWikis {
   id: number;
-  mustread: IWiki[];
-  [type: string]: number | IWiki[];
 }
 
 const WikiAPI = {
