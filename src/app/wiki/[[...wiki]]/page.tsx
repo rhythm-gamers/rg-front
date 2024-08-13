@@ -51,12 +51,12 @@ const Wiki = async ({ params }: { params: { wiki?: string[] } }) => {
         {/* 우측 설명란 */}
         <div className="ml-16 flex flex-1 flex-col">
           <SectionTitle className="!mt-0 !text-3xl">
-            {selectedWiki ? selectedWiki.data.title : "리듬 게임 용어집 항목 1"}
+            {selectedWiki ? selectedWiki.data.title : "리듬 게임 용어집"}
           </SectionTitle>
           <p className="text-lg">
             {selectedWiki
               ? selectedWiki.data.content
-              : "리듬 게임 용어집 항목1 내용1"}
+              : "리듬 게임과 관련된 용어들을 정리해놓은 용어집 입니다."}
           </p>
         </div>
       </div>
