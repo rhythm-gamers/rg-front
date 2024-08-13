@@ -1,46 +1,50 @@
+"use client";
+
 import { IWiki } from "@/api/wiki";
-import React, { Dispatch, SetStateAction } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface IDropdown {
   menuItem: string;
-  idx: number;
-  activeIdx: number;
   active: boolean;
-  setActiveIdx: Dispatch<SetStateAction<number>>;
-  subMenu: IWiki[];
+  subMenuActive: string | undefined;
+  subMenus: IWiki[];
 }
 
-const Dropdown = ({
-  menuItem,
-  idx,
-  active,
-  setActiveIdx,
-  subMenu,
-}: IDropdown) => {
+const Dropdown = ({ menuItem, active, subMenuActive, subMenus }: IDropdown) => {
+  const router = useRouter();
+
+  const handleOnClick = () => {
+    router.replace(`/wiki/${menuItem}`);
+  };
+
   return (
     <>
       <div
-        className="w-full py-2 flex justify-center items-center cursor-pointer hover:bg-blue-gray-50 transition-all"
-        onClick={() => {
-          setActiveIdx(idx);
-        }}
+        className="w-full py-3 flex justify-center items-center cursor-pointer bg-rhythm-theme text-white font-bold transition-all"
+        onClick={handleOnClick}
       >
         {menuItem}
       </div>
       <div
-        className={`${active ? "visibile" : "invisible"} ${
-          active && subMenu.length > 0 ? "" : "h-0"
-        } transition-all duration-300`}
+        className={`${active ? "visible" : "invisible"} ${
+          active && subMenus.length > 0 ? "" : "h-0"
+        } w-full transition-all duration-300`}
       >
         {active &&
-          subMenu.map((submenu, index) => {
+          subMenus.map((subMenu, index) => {
             return (
-              <div
+              <Link
+                href={`/wiki/${menuItem}/${subMenu.title}`}
                 key={index}
-                className="w-full flex first-letter:flex justify-center items-center cursor-pointer hover:bg-blue-gray-50 transition-all"
+                className={`${
+                  subMenu.title === subMenuActive
+                    ? " bg-yellow-200"
+                    : " bg-gray-100"
+                } py-1.5 flex justify-center items-center cursor-pointer text-rhythm-theme font-bold transition-all`}
               >
-                {submenu.title}
-              </div>
+                {subMenu.title}
+              </Link>
             );
           })}
       </div>
