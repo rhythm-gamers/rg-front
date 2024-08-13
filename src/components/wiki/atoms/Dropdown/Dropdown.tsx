@@ -39,9 +39,9 @@ const Dropdown = ({ menuItem, active, subMenuActive, subMenus }: IDropdown) => {
                 key={index}
                 className={`${
                   subMenu.title === subMenuActive
-                    ? " bg-yellow-200"
-                    : " bg-gray-100"
-                } py-1.5 flex justify-center items-center cursor-pointer text-rhythm-theme font-bold transition-all`}
+                    ? " bg-orange-300 text-white"
+                    : " bg-gray-100  text-rhythm-theme"
+                } py-1.5 flex justify-center items-center cursor-pointer font-bold transition-all`}
               >
                 {subMenu.title}
               </Link>
