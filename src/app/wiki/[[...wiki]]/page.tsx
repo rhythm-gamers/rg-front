@@ -1,7 +1,7 @@
 import WikiAPI, { IWiki, TMenu } from "@/api/wiki";
 import SectionTitle from "@/components/atoms/SectionTitle/SectionTitle";
 import MainSectionWithBothSideAds from "@/components/molecules/MainSectionWithBothSideAds/MainSectionWithBothSideAds";
-import Dropdown from "@/components/wiki/atoms/Dropdown/Dropdown";
+import Dropdown from "@/components/organisms/Dropdown/Dropdown";
 
 type TWikis = [string, IWiki[]];
 
