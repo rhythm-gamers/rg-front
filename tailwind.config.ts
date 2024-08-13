@@ -14,7 +14,8 @@ const config: Config = {
         "chingho-rank-2": colors.lime[300],
         "chingho-rank-3": colors.indigo[400],
         "chingho-rank-4": colors.red[400],
-        "bright-cream-1": '#F6FDC4',
+        "rhythm-theme": colors.rose[400],
+        "bright-cream-1": "#F6FDC4",
       },
       animation: {
         leftZoom: "leftZoom 6s ease-in-out infinite",

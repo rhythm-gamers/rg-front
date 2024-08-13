@@ -1,4 +1,3 @@
-import { URLSearchParams } from "url";
 import { IWiki } from ".";
 import fetchExtended from "../fetchExtended";
 import { parseJsonWithWrap } from "../utils";
@@ -9,8 +8,7 @@ import { parseJsonWithWrap } from "../utils";
  * @returns
  */
 const getOne = async (title: string): Promise<{ data: IWiki }> => {
-  const parsedTitle = new URLSearchParams(title);
-  const res = await fetchExtended(`/wiki/spec/${parsedTitle}`, {
+  const res = await fetchExtended(`/wiki/spec/${title}`, {
     method: "get",
   });
   const json = await res.json();
