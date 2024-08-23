@@ -2,12 +2,12 @@ import Link from "next/link";
 
 interface IBoardRow {
   isHeader: boolean;
-  index: string;
+  index: string | number;
   title: string;
   writer: string;
   createdAt: string;
-  views: string;
-  likes: string;
+  views: string | number;
+  likes: string | number;
 }
 
 const BoardContent = ({
