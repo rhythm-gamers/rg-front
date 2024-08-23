@@ -18,7 +18,17 @@ export interface IPostRes {
   id: number;
   title: string;
   content: string;
-  boardName: string;
+  views: number;
+  likes: number;
+  modified: boolean;
+  user: IPostUser;
+  createdAt: string;
+  modifiedAt: string;
+}
+
+interface IPostUser {
+  id: number;
+  nickname: string;
 }
 
 const PostAPI = {
