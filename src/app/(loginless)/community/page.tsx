@@ -7,12 +7,12 @@ const Community = async () => {
   return (
     <MainSectionWithBothSideAds sectionTitle="자유 게시판">
       <div className="w-[900px] mx-auto flex flex-col mt-4">
-        <BoardRow
+        <BoardRow // 게시판 헤더
           isHeader
           index="번호"
           title="제목"
           writer="작성자"
-          date="작성일"
+          createdAt="작성일"
           views="조회수"
           likes="추천"
         />
@@ -21,97 +21,7 @@ const Community = async () => {
           index="3939"
           title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
           writer="zeppline"
-          date="2024-08-18"
-          views="3939"
-          likes="39"
-        />
-        <BoardRow
-          isHeader={false}
-          index="3939"
-          title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
-          writer="zeppline"
-          date="2024-08-18"
-          views="3939"
-          likes="39"
-        />
-        <BoardRow
-          isHeader={false}
-          index="3939"
-          title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
-          writer="zeppline"
-          date="2024-08-18"
-          views="3939"
-          likes="39"
-        />
-        <BoardRow
-          isHeader={false}
-          index="3939"
-          title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
-          writer="zeppline"
-          date="2024-08-18"
-          views="3939"
-          likes="39"
-        />
-        <BoardRow
-          isHeader={false}
-          index="3939"
-          title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
-          writer="zeppline"
-          date="2024-08-18"
-          views="3939"
-          likes="39"
-        />
-        <BoardRow
-          isHeader={false}
-          index="3939"
-          title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
-          writer="zeppline"
-          date="2024-08-18"
-          views="3939"
-          likes="39"
-        />
-        <BoardRow
-          isHeader={false}
-          index="3939"
-          title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
-          writer="zeppline"
-          date="2024-08-18"
-          views="3939"
-          likes="39"
-        />
-        <BoardRow
-          isHeader={false}
-          index="3939"
-          title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
-          writer="zeppline"
-          date="2024-08-18"
-          views="3939"
-          likes="39"
-        />
-        <BoardRow
-          isHeader={false}
-          index="3939"
-          title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
-          writer="zeppline"
-          date="2024-08-18"
-          views="3939"
-          likes="39"
-        />
-        <BoardRow
-          isHeader={false}
-          index="3939"
-          title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
-          writer="zeppline"
-          date="2024-08-18"
-          views="3939"
-          likes="39"
-        />
-        <BoardRow
-          isHeader={false}
-          index="3939"
-          title="ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ"
-          writer="zeppline"
-          date="2024-08-18"
+          createdAt="2024-08-18"
           views="3939"
           likes="39"
         />

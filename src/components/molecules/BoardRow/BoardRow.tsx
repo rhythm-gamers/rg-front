@@ -5,7 +5,7 @@ interface IBoardRow {
   index: string;
   title: string;
   writer: string;
-  date: string;
+  createdAt: string;
   views: string;
   likes: string;
 }
@@ -14,7 +14,7 @@ const BoardContent = ({
   index,
   title,
   writer,
-  date,
+  createdAt,
   views,
   likes,
 }: IBoardRow) => (
@@ -29,7 +29,7 @@ const BoardContent = ({
       <p>{writer}</p>
     </div>
     <div className="basis-2/12">
-      <p>{date}</p>
+      <p>{createdAt}</p>
     </div>
     <div className="basis-1/12">
       <p>{views}</p>
@@ -45,7 +45,7 @@ const BoardRow = ({
   index,
   title,
   writer,
-  date,
+  createdAt,
   views,
   likes,
 }: IBoardRow) => {
@@ -58,7 +58,7 @@ const BoardRow = ({
             index={index}
             title={title}
             writer={writer}
-            date={date}
+            createdAt={createdAt}
             views={views}
             likes={likes}
           />
@@ -73,7 +73,7 @@ const BoardRow = ({
             index={index}
             title={title}
             writer={writer}
-            date={date}
+            createdAt={createdAt}
             views={views}
             likes={likes}
           />
