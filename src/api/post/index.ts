@@ -33,6 +33,7 @@ interface IPost {
   user: IPostUser;
   createdAt: string;
   modifiedAt: string;
+  commentCount: number;
 }
 
 interface IPostUser {

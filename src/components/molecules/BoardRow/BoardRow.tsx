@@ -8,6 +8,7 @@ interface IBoardRow {
   createdAt: string;
   views: string | number;
   likes: string | number;
+  commentCount?: number;
 }
 
 const BoardContent = ({
@@ -17,13 +18,19 @@ const BoardContent = ({
   createdAt,
   views,
   likes,
+  commentCount,
 }: IBoardRow) => (
   <>
     <div className="basis-1/12">
       <p>{index}</p>
     </div>
     <div className="basis-6/12 text-left">
-      <p>{title}</p>
+      <p className="flex items-center gap-1">
+        <span>{title}</span>
+        <span className="text-sm">
+          {commentCount ? `[${commentCount}]` : ""}
+        </span>
+      </p>
     </div>
     <div className="basis-2/12">
       <p>{writer}</p>
@@ -48,6 +55,7 @@ const BoardRow = ({
   createdAt,
   views,
   likes,
+  commentCount,
 }: IBoardRow) => {
   return (
     <>
@@ -76,6 +84,7 @@ const BoardRow = ({
             createdAt={createdAt}
             views={views}
             likes={likes}
+            commentCount={commentCount}
           />
         </Link>
       )}

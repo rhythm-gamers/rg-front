@@ -37,6 +37,7 @@ const Community = async ({
             createdAt={new Date(post.createdAt).toLocaleDateString()}
             views={post.views}
             likes={post.likes}
+            commentCount={post.commentCount}
           />
         ))}
 
