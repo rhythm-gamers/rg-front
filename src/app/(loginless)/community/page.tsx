@@ -13,6 +13,26 @@ import {
 
 const boardRowLimit = 1;
 
+const generatePages = (currentPage: number, totalPage: number): number[] => {
+  let start, end;
+
+  if (totalPage <= 10) {
+    start = 1;
+    end = totalPage;
+  } else if (currentPage <= 5) {
+    start = 1;
+    end = 10;
+  } else if (currentPage >= totalPage - 4) {
+    start = Math.max(totalPage - 9, 1);
+    end = totalPage;
+  } else {
+    start = currentPage - 4;
+    end = currentPage + 5;
+  }
+
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+};
+
 const Community = async ({
   searchParams,
 }: {
@@ -25,27 +45,6 @@ const Community = async ({
     limit: boardRowLimit,
   });
   const pageCount = Math.ceil(newPosts.data.allCount / boardRowLimit);
-
-  const generatePages = (currentPage: number, totalPage: number): number[] => {
-    let start, end;
-
-    if (totalPage <= 10) {
-      start = 1;
-      end = totalPage;
-    } else if (currentPage <= 5) {
-      start = 1;
-      end = 10;
-    } else if (currentPage >= totalPage - 4) {
-      start = Math.max(totalPage - 9, 1);
-      end = totalPage;
-    } else {
-      start = currentPage - 4;
-      end = currentPage + 5;
-    }
-
-    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-  };
-
   const pages = generatePages(page, pageCount);
 
   return (
