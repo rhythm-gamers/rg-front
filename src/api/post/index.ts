@@ -14,7 +14,16 @@ export interface IPostReq {
 export interface IPostReqOptional
   extends Partial<Omit<IPostReq, "boardName">> {}
 
-export interface IPostRes {
+export interface IGetAllPosts {
+  posts: IPost[];
+  allCount: number;
+}
+
+export interface IGetOnePost {
+  post: IPost;
+}
+
+interface IPost {
   id: number;
   title: string;
   content: string;
@@ -24,6 +33,7 @@ export interface IPostRes {
   user: IPostUser;
   createdAt: string;
   modifiedAt: string;
+  commentCount: number;
 }
 
 interface IPostUser {

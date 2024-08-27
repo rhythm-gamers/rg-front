@@ -26,5 +26,5 @@ export const parseJsonWithWrap = (json: string) => {
 
 export const makePagingQueryString = (page: number, limit?: number) => {
   const defaultLimit = 10;
-  return `?page=${page}?limit=${limit || defaultLimit}`;
+  return `?page=${page}&limit=${limit || defaultLimit}`;
 };
