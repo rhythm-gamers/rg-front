@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./rootReducer";
 import { persistReducer } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
-import logger from "redux-logger";
 
 const createNoopStorage = () => {
   return {
@@ -39,7 +38,7 @@ export const makeStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
-      }).concat(logger),
+      }),
     devTools: process.env.NODE_ENV === "development",
   });
   return store;
