@@ -7,6 +7,7 @@ import MyPageTP from "@/components/templates/MyPageTP/MyPageTP";
 import MPPlateSettings from "@/components/organisms/MPPlateSettings/MPPlateSettings";
 import MPGameSettings from "@/components/organisms/MPGameSettings/MPGameSettings";
 import MPAccountSettings from "@/components/organisms/MPAccountSettings/MPAccountSettings";
+import Footer from "@/components/organisms/Footer/Footer";
 
 const MyPage = () => {
   // Sidebar Shortcut
@@ -35,33 +36,36 @@ const MyPage = () => {
   });
 
   return (
-    <MyPageTP
-      SideBar={
-        <MPSideBar
-          settingTitles={["계정 설정", "플레이트 설정", "게임 설정"]}
-          moveToSettingRef={moveToSettingRef}
-          refs={[accountSettingRef, plateSettingRef, gameSettingRef]}
-        />
-      }
-      AccountSettings={
-        <MPAccountSettings
-          accountSettingRef={accountSettingRef}
-          nicknameState={[nickname, changeNickname]}
-          localProfileImgSrcState={[
-            localProfileImgSrc,
-            changeLocalProfileImgSrc,
-          ]}
-        />
-      }
-      PlateSettings={
-        <MPPlateSettings
-          plateSettingRef={plateSettingRef}
-          nickname={nickname}
-          localProfileImgSrc={localProfileImgSrc}
-        />
-      }
-      GameSettings={<MPGameSettings gameSettingRef={gameSettingRef} />}
-    />
+    <>
+      <MyPageTP
+        SideBar={
+          <MPSideBar
+            settingTitles={["계정 설정", "플레이트 설정", "게임 설정"]}
+            moveToSettingRef={moveToSettingRef}
+            refs={[accountSettingRef, plateSettingRef, gameSettingRef]}
+          />
+        }
+        AccountSettings={
+          <MPAccountSettings
+            accountSettingRef={accountSettingRef}
+            nicknameState={[nickname, changeNickname]}
+            localProfileImgSrcState={[
+              localProfileImgSrc,
+              changeLocalProfileImgSrc,
+            ]}
+          />
+        }
+        PlateSettings={
+          <MPPlateSettings
+            plateSettingRef={plateSettingRef}
+            nickname={nickname}
+            localProfileImgSrc={localProfileImgSrc}
+          />
+        }
+        GameSettings={<MPGameSettings gameSettingRef={gameSettingRef} />}
+      />
+      <Footer />
+    </>
   );
 };
 

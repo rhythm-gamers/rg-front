@@ -2,6 +2,7 @@ import WikiAPI, { IWiki, TMenu } from "@/api/wiki";
 import SectionTitle from "@/components/atoms/SectionTitle/SectionTitle";
 import MainSectionWithBothSideAds from "@/components/molecules/MainSectionWithBothSideAds/MainSectionWithBothSideAds";
 import Dropdown from "@/components/organisms/Dropdown/Dropdown";
+import Footer from "@/components/organisms/Footer/Footer";
 
 type TWikis = [string, IWiki[]];
 
@@ -25,42 +26,44 @@ const Wiki = async ({ params }: { params: { wiki?: string[] } }) => {
   };
 
   const selectedWiki = await getSelectedWiki();
-
   return (
-    <MainSectionWithBothSideAds sectionTitle="리듬 게임 용어집">
-      <div className="flex flex-row mt-8">
-        {/* 좌측 네비게이터 */}
-        <div className="flex w-52">
-          <div className="w-full h-[40rem] rounded-xl border-2 border-stone-300 flex flex-col items-center shadow-lg overflow-auto">
-            {parsedNewWikis?.map((menus, idx) => {
-              const active = menus[0] === decodedMenu ? true : false;
-              const subMenus = menus[1];
+    <>
+      <MainSectionWithBothSideAds sectionTitle="리듬 게임 용어집">
+        <div className="flex flex-row mt-8">
+          {/* 좌측 네비게이터 */}
+          <div className="flex w-52">
+            <div className="w-full h-[40rem] rounded-xl border-2 border-stone-300 flex flex-col items-center shadow-lg overflow-auto">
+              {parsedNewWikis?.map((menus, idx) => {
+                const active = menus[0] === decodedMenu ? true : false;
+                const subMenus = menus[1];
 
-              return (
-                <Dropdown
-                  menuItem={menus[0]}
-                  key={idx}
-                  active={active}
-                  subMenuActive={decodedSubMenu ?? subMenus[0].title}
-                  subMenus={subMenus}
-                />
-              );
-            })}
+                return (
+                  <Dropdown
+                    menuItem={menus[0]}
+                    key={idx}
+                    active={active}
+                    subMenuActive={decodedSubMenu ?? subMenus[0].title}
+                    subMenus={subMenus}
+                  />
+                );
+              })}
+            </div>
+          </div>
+          {/* 우측 설명란 */}
+          <div className="ml-16 flex flex-1 flex-col">
+            <SectionTitle className="!mt-0 !text-3xl">
+              {selectedWiki ? selectedWiki.data.title : "리듬 게임 용어집"}
+            </SectionTitle>
+            <p className="text-lg">
+              {selectedWiki
+                ? selectedWiki.data.content
+                : "리듬 게임과 관련된 용어들을 정리해놓은 용어집 입니다."}
+            </p>
           </div>
         </div>
-        {/* 우측 설명란 */}
-        <div className="ml-16 flex flex-1 flex-col">
-          <SectionTitle className="!mt-0 !text-3xl">
-            {selectedWiki ? selectedWiki.data.title : "리듬 게임 용어집"}
-          </SectionTitle>
-          <p className="text-lg">
-            {selectedWiki
-              ? selectedWiki.data.content
-              : "리듬 게임과 관련된 용어들을 정리해놓은 용어집 입니다."}
-          </p>
-        </div>
-      </div>
-    </MainSectionWithBothSideAds>
+      </MainSectionWithBothSideAds>
+      <Footer />
+    </>
   );
 };
 
