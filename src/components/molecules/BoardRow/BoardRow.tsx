@@ -57,6 +57,14 @@ const BoardRow = ({
   likes,
   commentCount,
 }: IBoardRow) => {
+  const parsedDate = new Date(createdAt)
+    .toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .slice(0, -1);
+
   return (
     <>
       {isHeader ? (
@@ -81,7 +89,7 @@ const BoardRow = ({
             index={index}
             title={title}
             writer={writer}
-            createdAt={createdAt}
+            createdAt={parsedDate}
             views={views}
             likes={likes}
             commentCount={commentCount}
