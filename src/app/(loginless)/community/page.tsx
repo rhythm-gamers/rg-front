@@ -10,6 +10,7 @@ import {
   MdKeyboardArrowLeft,
   MdKeyboardDoubleArrowLeft,
 } from "react-icons/md";
+import Footer from "@/components/organisms/Footer/Footer";
 
 const boardRowLimit = 1;
 
@@ -48,45 +49,48 @@ const Community = async ({
   const pages = generatePages(page, pageCount);
 
   return (
-    <MainSectionWithBothSideAds sectionTitle="자유 게시판">
-      <div className="w-[900px] mx-auto flex flex-col mt-4">
-        <BoardRow // 게시판 헤더
-          isHeader
-          index="번호"
-          title="제목"
-          writer="작성자"
-          createdAt="작성일"
-          views="조회수"
-          likes="추천"
-        />
-        {newPosts.data.posts.map((post) => (
-          <BoardRow
-            isHeader={false}
-            index={post.id}
-            title={post.title}
-            writer={post.user.nickname}
-            createdAt={new Date(post.createdAt).toLocaleDateString()}
-            views={post.views}
-            likes={post.likes}
-            commentCount={post.commentCount}
+    <>
+      <MainSectionWithBothSideAds sectionTitle="자유 게시판">
+        <div className="w-[900px] mx-auto flex flex-col mt-4">
+          <BoardRow // 게시판 헤더
+            isHeader
+            index="번호"
+            title="제목"
+            writer="작성자"
+            createdAt="작성일"
+            views="조회수"
+            likes="추천"
           />
-        ))}
-        <div>
-          <div className="flex justify-end">
-            <Link href="/community/write">
-              <CustomBtn size={"sm"} type={"deny"} className="my-2">
-                글쓰기
-              </CustomBtn>
-            </Link>
-          </div>
-          <div className="flex justify-center gap-1">
-            {pages.map((page) => (
-              <PaginationBtn pageNumber={page} />
-            ))}
+          {newPosts.data.posts.map((post) => (
+            <BoardRow
+              isHeader={false}
+              index={post.id}
+              title={post.title}
+              writer={post.user.nickname}
+              createdAt={post.createdAt}
+              views={post.views}
+              likes={post.likes}
+              commentCount={post.commentCount}
+            />
+          ))}
+          <div>
+            <div className="flex justify-end">
+              <Link href="/community/write">
+                <CustomBtn size={"sm"} type={"deny"} className="my-2">
+                  글쓰기
+                </CustomBtn>
+              </Link>
+            </div>
+            <div className="flex justify-center gap-1">
+              {pages.map((page) => (
+                <PaginationBtn pageNumber={page} />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </MainSectionWithBothSideAds>
+      </MainSectionWithBothSideAds>
+      <Footer />
+    </>
   );
 };
 

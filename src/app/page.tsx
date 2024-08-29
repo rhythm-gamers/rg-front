@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import CustomImage from "@/components/atoms/CustomImage/CustomImage";
 import SectionTitle from "@/components/atoms/SectionTitle/SectionTitle";
 import PlateFront from "@/components/molecules/PlateFront/PlateFront";
+import Footer from "@/components/organisms/Footer/Footer";
 
 const Home = () => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -105,6 +106,7 @@ const Home = () => {
           />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
