@@ -10,7 +10,6 @@ import { parseJsonWithWrap } from "../utils";
 const getOne = async (id: number): Promise<{ data: IPatternPracticeRes }> => {
   const res = await fetchExtended(`/practice?id=${id}`, {
     method: "get",
-    cache: process.env.NODE_ENV == "development" ? "no-store" : "default",
   });
   const json = await res.json();
   const parsedJson = parseJsonWithWrap(json);
