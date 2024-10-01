@@ -6,6 +6,7 @@ const meta = {
   component: CategoryBtn,
   args: {
     value: 4,
+    currentKeyNum: 4,
   },
 } satisfies Meta<typeof CategoryBtn>;
 

@@ -30,7 +30,7 @@ const Header = ({ isLogin }: IHeader) => {
         <ul className={`flex gap-16 items-center`}>
           <li>
             <Link
-              href={LINK_PP}
+              href={`${LINK_PP}/4`}
               data-testid="link-pp"
               className={`relative after:block after:content-[''] after:absolute after:h-[2px] after:bg-rose-400 after:w-full after:-bottom-2 ${
                 pathname !== LINK_PP &&

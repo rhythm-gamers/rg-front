@@ -4,6 +4,7 @@ import GamePlayTP from "@/components/templates/GamePlayTP/GamePlayTP";
 
 interface IPatternPracticeFromPracticeId {
   params: {
+    keyNum: number;
     practiceId: number;
   };
 }

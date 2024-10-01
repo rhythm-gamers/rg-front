@@ -21,7 +21,6 @@ const getAllByBoardName = async ({
   const pagingQuery = makePagingQueryString(page, limit);
   const res = await fetchExtended(`/post/board/${boardName}${pagingQuery}`, {
     method: "get",
-    cache: process.env.NODE_ENV == "development" ? "no-store" : "default",
   });
   const json = await res.json();
   const parsedJson = parseJsonWithWrap(json);

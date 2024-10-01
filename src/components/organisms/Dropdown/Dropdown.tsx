@@ -1,54 +1,25 @@
-"use client";
-
-import { IWiki } from "@/api/wiki";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { ReactNode } from "react";
 
 interface IDropdown {
-  menuItem: string;
+  menu: ReactNode;
   active: boolean;
-  subMenuActive: string | undefined;
-  subMenus: IWiki[];
+  subMenu: ReactNode;
+  float?: "left" | "right";
 }
 
-const Dropdown = ({ menuItem, active, subMenuActive, subMenus }: IDropdown) => {
-  const router = useRouter();
-
-  const handleOnClick = () => {
-    router.replace(`/wiki/${menuItem}`);
-  };
-
+const Dropdown = ({ menu, active, subMenu, float }: IDropdown) => {
   return (
-    <>
-      <div
-        className="w-full py-3 flex justify-center items-center cursor-pointer bg-rhythm-theme text-white font-bold transition-all"
-        onClick={handleOnClick}
-      >
-        {menuItem}
-      </div>
-      <div
-        className={`${active ? "visible" : "invisible"} ${
-          active && subMenus.length > 0 ? "" : "h-0"
-        } w-full transition-all duration-300`}
-      >
-        {active &&
-          subMenus.map((subMenu, index) => {
-            return (
-              <Link
-                href={`/wiki/${menuItem}/${subMenu.title}`}
-                key={index}
-                className={`${
-                  subMenu.title === subMenuActive
-                    ? " bg-orange-300 text-white"
-                    : " bg-gray-100  text-rhythm-theme"
-                } py-1.5 flex justify-center items-center cursor-pointer font-bold transition-all`}
-              >
-                {subMenu.title}
-              </Link>
-            );
-          })}
-      </div>
-    </>
+    <div className={`w-fit relative`}>
+      {menu}
+      {active && (
+        <ul
+          className={`flex flex-col w-fit absolute right-0 z-10 bg-white border rounded-md mt-1 
+            ${float === "right" ? "right-0" : "left-0"}`}
+        >
+          {subMenu}
+        </ul>
+      )}
+    </div>
   );
 };
 

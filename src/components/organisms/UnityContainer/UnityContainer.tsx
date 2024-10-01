@@ -37,6 +37,7 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
   });
 
   const unloadRef = useRef<() => void>();
+
   const { speed, judgeOffset, fourKeyMaps, fiveKeyMaps, sixKeyMaps } =
     useAppSelector((state) => state.unity);
 
@@ -128,6 +129,7 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
     removeEventListener,
     handleSetSpeed,
     handleSetJudgeOffset,
+    isLoaded,
   ]);
   /** END Set Speed, JudgeTime From Unity */
 
