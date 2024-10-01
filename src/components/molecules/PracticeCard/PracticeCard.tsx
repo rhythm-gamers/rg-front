@@ -7,10 +7,11 @@ const PracticeCard = ({
   title,
   imgSrc,
   patternInfo,
+  keyNum,
 }: IPatternPracticeRes) => {
   return (
     <Link
-      href={`/pattern_practice/${id}`}
+      href={`/pattern_practice/${keyNum}/${id}`}
       className="flex flex-col items-center max-w-80 py-4 gap-3 rounded-2xl shadow-lg bg-white border hover:scale-105 transition-all"
     >
       <Image src={imgSrc} alt="계단" width={1000} height={0} priority />

@@ -2,47 +2,37 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface PracticeState {
-  keyNum: number;
-  filterItems: string[];
-  dropdownType: string;
-  sortType: string;
+  selectedLevels: string[];
+  selectedPatterns: string[];
+  selectedOrder: "레벨순" | "클리어 레이트순";
 }
 
 const initialState: PracticeState = {
-  keyNum: 4,
-  filterItems: [],
-  dropdownType: "",
-  sortType: "클리어 레이트순",
+  selectedLevels: [],
+  selectedPatterns: [],
+  selectedOrder: "레벨순",
 };
 
 const practiceSlice = createSlice({
   name: "practice",
   initialState,
   reducers: {
-    setKeyNum(state, action: PayloadAction<typeof state.keyNum>) {
-      state.keyNum = action.payload;
+    setSelectedLevels(state, action: PayloadAction<string[]>) {
+      state.selectedLevels = action.payload;
     },
-    setSortType(state, action: PayloadAction<typeof state.sortType>) {
-      state.sortType = action.payload;
+    setSelectedPatterns(state, action: PayloadAction<string[]>) {
+      state.selectedPatterns = action.payload;
     },
-    toggleFilterItems(state, action: PayloadAction<string>) {
-      const { payload } = action;
-      const prev = state.filterItems;
-
-      state.filterItems = prev.includes(payload)
-        ? prev.filter((currItem) => currItem !== payload)
-        : [...prev, payload];
-    },
-    toggleDropdownType(state, action: PayloadAction<string>) {
-      const { payload } = action;
-      const prev = state.dropdownType;
-
-      state.dropdownType = prev === "" ? payload : "";
+    setSelectedOrder(
+      state,
+      action: PayloadAction<"레벨순" | "클리어 레이트순">,
+    ) {
+      state.selectedOrder = action.payload;
     },
   },
 });
 
-export const { setKeyNum, setSortType, toggleFilterItems, toggleDropdownType } =
+export const { setSelectedLevels, setSelectedPatterns, setSelectedOrder } =
   practiceSlice.actions;
 
 export default practiceSlice.reducer;
