@@ -1,8 +1,8 @@
 import WikiAPI, { IWiki, TMenu } from "@/api/wiki";
 import SectionTitle from "@/components/atoms/SectionTitle/SectionTitle";
 import MainSectionWithBothSideAds from "@/components/molecules/MainSectionWithBothSideAds/MainSectionWithBothSideAds";
-import Dropdown from "@/components/organisms/Dropdown/Dropdown";
 import Footer from "@/components/organisms/Footer/Footer";
+import WikiDropdown from "@/components/organisms/WikiDropdown/WikiDropdown";
 
 type TWikis = [string, IWiki[]];
 
@@ -38,7 +38,7 @@ const Wiki = async ({ params }: { params: { wiki?: string[] } }) => {
                 const subMenus = menus[1];
 
                 return (
-                  <Dropdown
+                  <WikiDropdown
                     menuItem={menus[0]}
                     key={idx}
                     active={active}
