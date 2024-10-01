@@ -1,23 +1,40 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Dropdown from "./Dropdown";
+import { fn } from "@storybook/test";
+import { MdArrowDropDown } from "react-icons/md";
+import Checkbox from "@/components/atoms/Checkbox/Checkbox";
 
 const meta = {
   title: "Dropdown",
   component: Dropdown,
-  args: {
-    menuItem: "메뉴 이름",
-    active: true,
-    subMenuActive: "소제목 이름",
-    subMenus: [
-      { wikiId: 0, title: "소제목 이름", content: "내용", mustRead: true },
-      { wikiId: 1, title: "소제목 이름1", content: "내용1", mustRead: true },
-      { wikiId: 2, title: "소제목 이름2", content: "내용2", mustRead: true },
-      { wikiId: 3, title: "소제목 이름3", content: "내용3", mustRead: true },
-    ],
-  },
 } satisfies Meta<typeof Dropdown>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    menu: (
+      <div className="w-40 bg-white border rounded-md">
+        <button
+          type="button"
+          className="w-full relative px-4 py-2 text-start"
+          onClick={fn}
+        >
+          레벨
+          <MdArrowDropDown
+            size={20}
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10"
+          />
+        </button>
+      </div>
+    ),
+    subMenu: (
+      <li className="first:py-3 pb-3 px-4">
+        <Checkbox value={"subMenu"} checked={true} onClick={fn} onChange={fn} />
+      </li>
+    ),
+    float: "left",
+    active: true,
+  },
+};
