@@ -5,6 +5,8 @@ const meta = {
   title: "PPPracticeCards",
   component: PPPracticeCards,
   args: {
+    keyNum: 4,
+    selectedOrder: "레벨순",
     practices: [
       {
         id: 0,

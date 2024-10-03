@@ -48,6 +48,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/redux-logger": "^3.0.13",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
     "@typescript-eslint/parser": "^5.0.1",
     "autoprefixer": "^10.0.1",
     "chromatic": "^11.0.7",
