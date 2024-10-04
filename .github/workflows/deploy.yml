@@ -2,13 +2,15 @@ name: deploy at EC2
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: 
+      - main
+    types:
+      - closed
 
 jobs:
-  deploy:
-    name: deploy
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-24.04
-
     steps:
       - name: excuting remote ssh commands
         uses: appleboy/ssh-action@v0.1.6
