@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
 
 const config: Config = {
   content: [
@@ -8,21 +9,33 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "chingho-rank-1": colors.gray[200],
+        "chingho-rank-2": colors.lime[300],
+        "chingho-rank-3": colors.indigo[400],
+        "chingho-rank-4": colors.red[400],
+        "rhythm-theme": colors.rose[400],
+        "bright-cream-1": "#F6FDC4",
+      },
       animation: {
-        leftZoom: "leftZoom 4s ease-in-out infinite",
-        rightZoom: "rightZoom 4s ease-in-out infinite",
+        leftZoom: "leftZoom 6s ease-in-out infinite",
+        rightZoom: "rightZoom 6s ease-in-out infinite",
         clickAndDrag: "clickAndDrag 6s ease-in-out infinite",
         leftDrag: "leftDrag 3s ease-in-out infinite",
         rightDrag: "rightDrag 3s ease-in-out infinite",
       },
       keyframes: {
         leftZoom: {
-          "0, 40%": { transform: "translate(0, 0)" },
-          "30%": { transform: "translate(50%, 0)" },
+          "0%": { transform: "translate(0, 0)" },
+          "20%": { transform: "translate(150%, 0) scale(1.2)" },
+          "60%": { transform: "translate(150%, 0) scale(1.2)" },
+          "75%": { transform: "translate(0, 0)" },
         },
         rightZoom: {
-          "0, 40%": { transform: "translate(0, 0)" },
-          "30%": { transform: "translate(-50%, 0)" },
+          "0%": { transform: "translate(0, 0)" },
+          "20%": { transform: "translate(-150%, 0) scale(1.2)" },
+          "60%": { transform: "translate(-150%, 0) scale(1.2)" },
+          "75%": { transform: "translate(0, 0)" },
         },
         clickAndDrag: {
           "10%": { transform: "scale(0.8)" },

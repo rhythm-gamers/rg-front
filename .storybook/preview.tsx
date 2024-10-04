@@ -6,7 +6,7 @@ import { RouteChangesProvider } from "nextjs-router-events";
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    actions: { argTypesRegex: "^(on[A-Z].*|set[A-Z].*)" },
     controls: {
       matchers: {
         color: /(background|color)$/i,

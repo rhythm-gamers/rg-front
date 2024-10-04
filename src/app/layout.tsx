@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import StoreProvider from "./storeProvider";
-import Header from "@/components/public/organisms/Header/Header";
 import { RouteChangesProvider } from "nextjs-router-events";
+import React, { ReactNode } from "react";
+import StoreProvider from "./storeProvider";
+import Header from "@/components/organisms/Header/Header";
 
 export const metadata: Metadata = {
   title: "리듬게이머스",
@@ -31,14 +32,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className="bg-gray-50">
         <StoreProvider>
           <RouteChangesProvider>
-            <Header />
+            <Header isLogin={true} />
             {children}
           </RouteChangesProvider>
         </StoreProvider>

@@ -1,46 +1,22 @@
 import type { StorybookConfig } from "@storybook/nextjs";
+import path from "path";
 
 const config: StorybookConfig = {
   stories: [
     {
-      directory: "../src/components/level_tests/molecules",
+      directory: "../src/components/atoms",
       files: "**/*.stories.*",
-      titlePrefix: "level_tests/molecules",
+      titlePrefix: "atoms",
     },
     {
-      directory: "../src/components/level_tests/organisms",
+      directory: "../src/components/molecules",
       files: "**/*.stories.*",
-      titlePrefix: "level_tests/organisms",
+      titlePrefix: "molecules",
     },
     {
-      directory: "../src/components/pattern_practice/atoms",
+      directory: "../src/components/organisms",
       files: "**/*.stories.*",
-      titlePrefix: "pattern_practice/atoms",
-    },
-    {
-      directory: "../src/components/pattern_practice/molecules",
-      files: "**/*.stories.*",
-      titlePrefix: "pattern_practice/molecules",
-    },
-    {
-      directory: "../src/components/pattern_practice/organisms",
-      files: "**/*.stories.*",
-      titlePrefix: "pattern_practice/organisms",
-    },
-    {
-      directory: "../src/components/public/atoms",
-      files: "**/*.stories.*",
-      titlePrefix: "public/atoms",
-    },
-    {
-      directory: "../src/components/public/molecules",
-      files: "**/*.stories.*",
-      titlePrefix: "public/molecules",
-    },
-    {
-      directory: "../src/components/public/organisms",
-      files: "**/*.stories.*",
-      titlePrefix: "public/organisms",
+      titlePrefix: "organisms",
     },
   ],
   addons: [
@@ -53,6 +29,10 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs",
     options: {},
   },
+  env: (config) => ({
+    ...config,
+    NEXT_PUBLIC_AWS_CLOUDFRONT_URL: process.env.STORYBOOK_AWS_CLOUDFRONT_URL!,
+  }),
   docs: {
     autodocs: "tag",
   },
