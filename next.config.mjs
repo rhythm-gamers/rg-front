@@ -24,6 +24,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "rhythm-gamers.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   rewrites: async () => {
