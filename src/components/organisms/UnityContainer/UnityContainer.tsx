@@ -46,12 +46,34 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
   };
 
   /** Send User Settings and SheetName To Unity */
-  const initGame = async () => {
-    loadSheet();
-    initUserState();
-  };
+  const rebindNoteKey = useCallback(
+    (noteLine: number, newKey: string) => {
+      const combinedArgs = `${noteLine},${newKey}`;
+      sendMessage("RebindController", "WebGLRebindNoteKey", combinedArgs);
+    },
+    [sendMessage],
+  );
 
-  const loadSheet = async () => {
+  const rebindAllNoteKey = useCallback(
+    (keyNum: number) => {
+      if (keyNum === 4) {
+        fourKeyMaps.forEach((key, idx) => {
+          rebindNoteKey(idx, key);
+        });
+      } else if (keyNum === 5) {
+        fiveKeyMaps.forEach((key, idx) => {
+          rebindNoteKey(idx, key);
+        });
+      } else if (keyNum === 6) {
+        sixKeyMaps.forEach((key, idx) => {
+          rebindNoteKey(idx, key);
+        });
+      }
+    },
+    [fiveKeyMaps, fourKeyMaps, rebindNoteKey, sixKeyMaps],
+  );
+
+  const loadSheet = useCallback(async () => {
     let title;
     let keyNum;
 
@@ -68,45 +90,32 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
     rebindAllNoteKey(keyNum);
     const combinedArgs = `${title},${keyNum}`;
     sendMessage("SheetLoader", "WebGLLoadSheet", combinedArgs);
-  };
+  }, [id, rebindAllNoteKey, referer, sendMessage]);
 
-  const rebindAllNoteKey = (keyNum: number) => {
-    if (keyNum === 4) {
-      fourKeyMaps.forEach((key, idx) => {
-        rebindNoteKey(idx, key);
-      });
-    } else if (keyNum === 5) {
-      fiveKeyMaps.forEach((key, idx) => {
-        rebindNoteKey(idx, key);
-      });
-    } else if (keyNum === 6) {
-      sixKeyMaps.forEach((key, idx) => {
-        rebindNoteKey(idx, key);
-      });
-    }
-  };
-
-  const rebindNoteKey = (noteLine: number, newKey: string) => {
-    const combinedArgs = `${noteLine},${newKey}`;
-    sendMessage("RebindController", "WebGLRebindNoteKey", combinedArgs);
-  };
-
-  const initUserState = () => {
+  const initUserState = useCallback(() => {
     sendMessage("GameManager", "WebGLInitUserSpeed", speed);
     sendMessage("Sync", "WebGLInitUserJudgeOffset", judgeOffset);
-  };
+  }, [judgeOffset, sendMessage, speed]);
 
   useEffect(() => {
+    const initGame = async () => {
+      await loadSheet();
+      initUserState();
+    };
+
     if (isLoaded) initGame();
-  }, [isLoaded]);
+  }, [initUserState, isLoaded, loadSheet]);
   /** END Send User Setting To Unity */
 
   /** Set Speed, JudgeTime From Unity */
-  const handleSetSpeed = useCallback((speed: ReactUnityEventParameter) => {
-    if (typeof speed === "string") {
-      dispatch(setSpeed(parseFloat(speed)));
-    }
-  }, []);
+  const handleSetSpeed = useCallback(
+    (speed: ReactUnityEventParameter) => {
+      if (typeof speed === "string") {
+        dispatch(setSpeed(parseFloat(speed)));
+      }
+    },
+    [dispatch],
+  );
 
   const handleSetJudgeOffset = useCallback(
     (offset: ReactUnityEventParameter) => {
@@ -114,7 +123,7 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
         dispatch(setJudgeOffset(offset));
       }
     },
-    [],
+    [dispatch],
   );
 
   useEffect(() => {
@@ -142,7 +151,7 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
 
   useEffect(() => {
     unloadRef.current = unload;
-  }, [isLoaded]);
+  }, [isLoaded, unload]);
 
   useEffect(() => {
     const unloadAndBack = () => {
@@ -158,7 +167,7 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
       window.removeEventListener("popstate", unloadAndBack);
       window.removeEventListener("beforeunload", unloadAndBack);
     };
-  }, []);
+  }, [router]);
   /** END Prevent WebGL Canvas Unmount Error */
 
   /** Use Device Pixel Ratio */

@@ -105,7 +105,16 @@ const PPPracticeCardsFilter = ({
       ]);
       router.replace(`${LINK_PP}/${keyNum}${query}`);
     }
-  }, [selectedLevels, selectedOrder, selectedPatterns]);
+  }, [
+    keyNum,
+    localSelectedLevels,
+    localSelectedOrder,
+    localSelectedPatterns,
+    router,
+    selectedLevels,
+    selectedOrder,
+    selectedPatterns,
+  ]);
 
   useEffect(() => {
     window.addEventListener("click", () => setCurrentDropdownName(""));
