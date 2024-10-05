@@ -1,7 +1,6 @@
 import { ReactNode, RefObject, useState } from "react";
 import useInput from "@/hooks/useInput";
 import { TChinghoRank } from "../../../types";
-import React from "react";
 import { IChingho } from "../../../interfaces";
 import SettingTitle from "@/components/atoms/SettingTitle/SettingTitle";
 import SettingElem from "@/components/molecules/SettingElem/SettingElem";

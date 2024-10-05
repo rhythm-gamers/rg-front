@@ -26,7 +26,11 @@ const PatternPractice = async ({
       <MainSectionWithBothSideAds sectionTitle="패턴 연습">
         <div className="flex text-black py-2 mt-5 text-lg bg-white border rounded-md">
           {[4, 5, 6].map((value) => (
-            <CategoryBtn currentKeyNum={parsedKeyNum} value={value} />
+            <CategoryBtn
+              key={`${value}키`}
+              currentKeyNum={parsedKeyNum}
+              value={value}
+            />
           ))}
         </div>
         <PPPracticeCardsFilter

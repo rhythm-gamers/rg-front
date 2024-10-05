@@ -4,7 +4,7 @@ import LevelCard from "../../molecules/LevelCard/LevelCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { MouseEvent, useEffect, useRef } from "react";
+import { MouseEvent, useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setCurrentLevel } from "@/lib/features/levelTest/levelTestSlice";
@@ -25,14 +25,17 @@ const LTLevelCards = ({ levelTests }: ILTLevelCards) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const navigateToLevelTestByKeyboard = (e: KeyboardEvent) => {
-    e.preventDefault();
-    if (isDragging.current) return;
-    if (e.key === "Enter") {
-      dispatch(setCurrentLevel(currentLevel.current));
-      router.push(`/level_tests/${currentLevel.current}`);
-    }
-  };
+  const navigateToLevelTestByKeyboard = useCallback(
+    (e: KeyboardEvent) => {
+      e.preventDefault();
+      if (isDragging.current) return;
+      if (e.key === "Enter") {
+        dispatch(setCurrentLevel(currentLevel.current));
+        router.push(`/level_tests/${currentLevel.current}`);
+      }
+    },
+    [dispatch, router],
+  );
   const navigateToLevelTestByClick = (e: MouseEvent, level: number) => {
     e.preventDefault();
     if (isDragging.current) return;
@@ -77,7 +80,7 @@ const LTLevelCards = ({ levelTests }: ILTLevelCards) => {
     return () => {
       window?.removeEventListener("keydown", navigateToLevelTestByKeyboard);
     };
-  }, []);
+  }, [navigateToLevelTestByKeyboard]);
 
   return (
     <Slider
@@ -87,7 +90,8 @@ const LTLevelCards = ({ levelTests }: ILTLevelCards) => {
     >
       {levelTests.map((levelTest) => (
         <LevelCard
-          key={levelTest.id}
+          key={`levelTest ${levelTest.id}`}
+          id={levelTest.id}
           level={levelTest.level}
           onClick={navigateToLevelTestByClick}
         />

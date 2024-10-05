@@ -41,7 +41,7 @@ const KeySetting = ({ keyNum, setKeyNum, state, setState }: IKeySetting) => {
     if (state === "finished") return;
 
     let value = e.key;
-    let newKeyMaps = [...localKeyMaps];
+    const newKeyMaps = [...localKeyMaps];
     const changeIdx = newKeyMaps.indexOf("");
 
     // 쉬프트 키의 경우
@@ -71,7 +71,9 @@ const KeySetting = ({ keyNum, setKeyNum, state, setState }: IKeySetting) => {
   const modifyKeys = () => {
     setState("started");
     dispatch(
-      setLocalKeyMaps(Array(keyNum === 5 ? keyNum + 1 : keyNum).fill("")),
+      setLocalKeyMaps(
+        Array<string>(keyNum === 5 ? keyNum + 1 : keyNum).fill(""),
+      ),
     );
   };
   return (
@@ -118,10 +120,10 @@ const KeySetting = ({ keyNum, setKeyNum, state, setState }: IKeySetting) => {
         {state === "init"
           ? "재설정 버튼을 누르고, 사용할 조작키를 차례대로 눌러주세요!"
           : state === "started"
-          ? `진행도: ${localKeyMaps.indexOf("")}개 설정 / ${
-              keyNum === 5 ? keyNum + 1 : keyNum
-            }개`
-          : "재설정이 정상적으로 완료되었습니다!"}
+            ? `진행도: ${localKeyMaps.indexOf("")}개 설정 / ${
+                keyNum === 5 ? keyNum + 1 : keyNum
+              }개`
+            : "재설정이 정상적으로 완료되었습니다!"}
       </p>
     </div>
   );

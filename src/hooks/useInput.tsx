@@ -23,8 +23,8 @@ function useInput<T>({
           patternName === "space"
             ? (currValue = currValue.replace(notIncludeSpace, ""))
             : patternName === "specialChar"
-            ? (currValue = currValue.replace(notIncludeSpecialChar, ""))
-            : null;
+              ? (currValue = currValue.replace(notIncludeSpecialChar, ""))
+              : null;
         });
         setValue(currValue as T);
         break;

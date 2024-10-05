@@ -15,7 +15,8 @@ import Footer from "@/components/organisms/Footer/Footer";
 const boardRowLimit = 1;
 
 const generatePages = (currentPage: number, totalPage: number): number[] => {
-  let start, end;
+  let start = 1;
+  let end = totalPage;
 
   if (totalPage <= 10) {
     start = 1;
@@ -63,6 +64,7 @@ const Community = async ({
           />
           {newPosts.data.posts.map((post) => (
             <BoardRow
+              key={`post ${post.id}`}
               isHeader={false}
               index={post.id}
               title={post.title}
@@ -83,7 +85,7 @@ const Community = async ({
             </div>
             <div className="flex justify-center gap-1">
               {pages.map((page) => (
-                <PaginationBtn pageNumber={page} />
+                <PaginationBtn key={`page ${page}`} pageNumber={page} />
               ))}
             </div>
           </div>
