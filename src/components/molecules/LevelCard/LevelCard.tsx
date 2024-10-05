@@ -3,16 +3,17 @@ import { MouseEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 interface ILevelCard {
+  id: number;
   level: number;
   onClick: (e: MouseEvent, level: number) => void;
 }
 
-const LevelCard = ({ level, onClick }: ILevelCard) => {
+const LevelCard = ({ id, level, onClick }: ILevelCard) => {
   const router = useRouter();
 
   useEffect(() => {
-    router.prefetch(`/level_tests/${level}`);
-  }, []);
+    router.prefetch(`/level_tests/${id}`);
+  }, [id, router]);
   return (
     <button
       id={`lt-${level}`}

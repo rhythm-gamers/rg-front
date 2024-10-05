@@ -20,7 +20,10 @@ const PracticeCard = ({
         {Object.entries(patternInfo).map(
           (pattern) =>
             pattern[1] !== 0 && (
-              <p className="flex justify-between gap-5">
+              <p
+                key={`${pattern[0]} Lv.${pattern[1]}`}
+                className="flex justify-between gap-5"
+              >
                 <span>{pattern[0]}</span>
                 <span>Lv.{pattern[1]}</span>
               </p>

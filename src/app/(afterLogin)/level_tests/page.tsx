@@ -1,6 +1,6 @@
 import LevelTestTP from "@/components/templates/LevelTestTP/LevelTestTP";
 
-const RhythmLevelTests = async () => {
+const RhythmLevelTests = () => {
   return <LevelTestTP />;
 };
 
