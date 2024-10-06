@@ -28,7 +28,7 @@ interface IPost {
   title: string;
   content: string;
   views: number;
-  likes: number;
+  likeCount: number;
   modified: boolean;
   user: IPostUser;
   createdAt: string;

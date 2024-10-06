@@ -46,7 +46,7 @@ const Login = () => {
         className="text-white flex justify-center items-center"
       >
         <form
-          className="w-1/5 backdrop-blur-2xl flex flex-col justify-center items-center border-2 rounded-3xl border-bright-cream-1 p-10 gap-4 shadow-lg"
+          className="w-96 backdrop-blur-2xl flex flex-col justify-center items-center border-2 rounded-3xl border-bright-cream-1 p-10 gap-4 shadow-lg"
           onSubmit={login}
         >
           <h3 className="text-3xl mb-4">로그인</h3>

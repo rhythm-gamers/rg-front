@@ -1,9 +1,10 @@
+"use client";
 import { TSize } from "@/types";
 import { ReactNode } from "react";
 
 type TCustomBtnType = "clear" | "disabled" | "accept" | "deny";
 
-interface ICustomBtn {
+export interface ICustomBtn {
   size: TSize;
   type: TCustomBtnType;
   children: ReactNode;
