@@ -38,8 +38,8 @@ const MPSideBar = ({ settingTitles, moveToSettingRef, refs }: IMPSideBar) => {
         haveShadow
         onClick={() =>
           AuthAPI.login({
-            username: "admin",
-            password: "XZGU9UGNmK69G2R",
+            username: process.env.NEXT_PUBLIC_API_ADMIN_ID,
+            password: process.env.NEXT_PUBLIC_API_ADMIN_PW,
           })
         }
       >
