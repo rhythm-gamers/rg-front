@@ -5,5 +5,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_API_SERVER_URL: string;
     STORYBOOK_AWS_CLOUDFRONT_HOSTNAME: string;
     STORYBOOK_AWS_CLOUDFRONT_URL: string;
+    NEXT_PUBLIC_API_ADMIN_ID: string;
+    NEXT_PUBLIC_API_ADMIN_PW: string;
   }
 }

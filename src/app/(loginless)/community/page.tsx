@@ -71,7 +71,7 @@ const Community = async ({
               writer={post.user.nickname}
               createdAt={post.createdAt}
               views={post.views}
-              likes={post.likes}
+              likes={post.likeCount}
               commentCount={post.commentCount}
             />
           ))}
