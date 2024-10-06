@@ -24,7 +24,7 @@ const BoardContent = ({
     <div className="basis-1/12">
       <p>{index}</p>
     </div>
-    <div className="basis-6/12 text-left">
+    <div className="basis-5/12 text-left">
       <p className="flex items-center gap-1">
         <span>{title}</span>
         <span className="text-sm">
@@ -32,7 +32,7 @@ const BoardContent = ({
         </span>
       </p>
     </div>
-    <div className="basis-2/12">
+    <div className="basis-3/12">
       <p>{writer}</p>
     </div>
     <div className="basis-2/12">
