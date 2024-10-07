@@ -11,7 +11,7 @@ const meta = {
     writer: "작성자",
     createdAt: "작성일",
     views: "조회수",
-    likes: "추천",
+    likeCount: "추천",
     commentCount: 0,
   },
 } satisfies Meta<typeof BoardRow>;
@@ -27,7 +27,7 @@ export const typeHeader: Story = {
     writer: "작성자",
     createdAt: "작성일",
     views: "조회수",
-    likes: "추천",
+    likeCount: "추천",
   },
 };
 export const typeDefault: Story = {
@@ -38,7 +38,7 @@ export const typeDefault: Story = {
     writer: "관리자",
     createdAt: "1901-01-01",
     views: "123",
-    likes: "12",
+    likeCount: "12",
     commentCount: 1,
   },
 };
