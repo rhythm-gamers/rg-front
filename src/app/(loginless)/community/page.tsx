@@ -38,16 +38,18 @@ const generatePages = (currentPage: number, totalPage: number): number[] => {
 const Community = async ({
   searchParams,
 }: {
-  searchParams: { page?: number };
+  searchParams: { page?: string };
 }) => {
-  const page = searchParams.page ?? 1;
+  const page = searchParams.page ?? "1";
+  const parsedPageNum = parseInt(page);
   const newPosts = await PostAPI.getAllByBoardName({
     boardName: "자유게시판",
-    page: page - 1,
+    page: parsedPageNum - 1,
     limit: boardRowLimit,
   });
+
   const pageCount = Math.ceil(newPosts.data.allCount / boardRowLimit);
-  const pages = generatePages(page, pageCount);
+  const pages = generatePages(parsedPageNum, pageCount);
 
   return (
     <>
@@ -60,7 +62,7 @@ const Community = async ({
             writer="작성자"
             createdAt="작성일"
             views="조회수"
-            likes="추천"
+            likeCount="추천"
           />
           {newPosts.data.posts.map((post) => (
             <BoardRow
@@ -71,7 +73,7 @@ const Community = async ({
               writer={post.user.nickname}
               createdAt={post.createdAt}
               views={post.views}
-              likes={post.likeCount}
+              likeCount={post.likeCount}
               commentCount={post.commentCount}
             />
           ))}
