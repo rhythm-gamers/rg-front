@@ -6,6 +6,7 @@ const meta = {
   component: PaginationBtn,
   args: {
     pageNumber: 1,
+    currentPage: 1,
   },
 } satisfies Meta<typeof PaginationBtn>;
 
