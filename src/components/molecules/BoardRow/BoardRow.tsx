@@ -7,7 +7,7 @@ interface IBoardRow {
   writer: string;
   createdAt: string;
   views: string | number;
-  likes: string | number;
+  likeCount: string | number;
   commentCount?: number;
 }
 
@@ -17,7 +17,7 @@ const BoardContent = ({
   writer,
   createdAt,
   views,
-  likes,
+  likeCount,
   commentCount,
 }: IBoardRow) => (
   <>
@@ -42,7 +42,7 @@ const BoardContent = ({
       <p>{views}</p>
     </div>
     <div className="basis-1/12">
-      <p>{likes}</p>
+      <p>{likeCount}</p>
     </div>
   </>
 );
@@ -54,7 +54,7 @@ const BoardRow = ({
   writer,
   createdAt,
   views,
-  likes,
+  likeCount,
   commentCount,
 }: IBoardRow) => {
   const parsedDate = new Date(createdAt)
@@ -76,7 +76,7 @@ const BoardRow = ({
             writer={writer}
             createdAt={createdAt}
             views={views}
-            likes={likes}
+            likeCount={likeCount}
           />
         </div>
       ) : (
@@ -91,7 +91,7 @@ const BoardRow = ({
             writer={writer}
             createdAt={parsedDate}
             views={views}
-            likes={likes}
+            likeCount={likeCount}
             commentCount={commentCount}
           />
         </Link>

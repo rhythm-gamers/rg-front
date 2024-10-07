@@ -11,6 +11,7 @@ import {
   MdKeyboardDoubleArrowLeft,
 } from "react-icons/md";
 import Footer from "@/components/organisms/Footer/Footer";
+import { LINK_COMMUNITY } from "@/const";
 
 const boardRowLimit = 1;
 
@@ -38,16 +39,18 @@ const generatePages = (currentPage: number, totalPage: number): number[] => {
 const Community = async ({
   searchParams,
 }: {
-  searchParams: { page?: number };
+  searchParams: { page?: string };
 }) => {
-  const page = searchParams.page ?? 1;
+  const page = searchParams.page ?? "1";
+  const parsedPage = parseInt(page);
   const newPosts = await PostAPI.getAllByBoardName({
     boardName: "자유게시판",
-    page: page - 1,
+    page: parsedPage - 1,
     limit: boardRowLimit,
   });
+
   const pageCount = Math.ceil(newPosts.data.allCount / boardRowLimit);
-  const pages = generatePages(page, pageCount);
+  const pages = generatePages(parsedPage, pageCount);
 
   return (
     <>
@@ -60,7 +63,7 @@ const Community = async ({
             writer="작성자"
             createdAt="작성일"
             views="조회수"
-            likes="추천"
+            likeCount="추천"
           />
           {newPosts.data.posts.map((post) => (
             <BoardRow
@@ -71,7 +74,7 @@ const Community = async ({
               writer={post.user.nickname}
               createdAt={post.createdAt}
               views={post.views}
-              likes={post.likeCount}
+              likeCount={post.likeCount}
               commentCount={post.commentCount}
             />
           ))}
@@ -84,9 +87,59 @@ const Community = async ({
               </Link>
             </div>
             <div className="flex justify-center gap-1">
+              {parsedPage !== 1 && (
+                <>
+                  <Link
+                    href={`${LINK_COMMUNITY}?page=1`}
+                    className="flex h-5 w-5 justify-center items-center"
+                  >
+                    <MdKeyboardDoubleArrowLeft
+                      size={20}
+                      className="text-rhythm-theme"
+                    />
+                  </Link>
+                  <Link
+                    href={`${LINK_COMMUNITY}?page=${parsedPage - 10 < 1 ? 1 : parsedPage - 10}`}
+                    className="flex h-5 w-5 justify-center items-center"
+                  >
+                    <MdKeyboardArrowLeft
+                      size={20}
+                      className="text-rhythm-theme"
+                    />
+                  </Link>
+                </>
+              )}
+
               {pages.map((page) => (
-                <PaginationBtn key={`page ${page}`} pageNumber={page} />
+                <PaginationBtn
+                  key={`page ${page}`}
+                  currentPage={parsedPage}
+                  pageNumber={page}
+                />
               ))}
+
+              {parsedPage !== pageCount && (
+                <>
+                  <Link
+                    href={`${LINK_COMMUNITY}?page=${parsedPage + 10 <= pageCount ? parsedPage + 10 : pageCount}`}
+                    className="flex h-5 w-5 justify-center items-center"
+                  >
+                    <MdKeyboardArrowRight
+                      size={20}
+                      className="text-rhythm-theme"
+                    />
+                  </Link>
+                  <Link
+                    href={`${LINK_COMMUNITY}?page=${pageCount}`}
+                    className="flex h-5 w-5 justify-center items-center"
+                  >
+                    <MdKeyboardDoubleArrowRight
+                      size={20}
+                      className="text-rhythm-theme"
+                    />
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -97,15 +150,3 @@ const Community = async ({
 };
 
 export default Community;
-
-{
-  /* <button className="flex h-5 w-5 justify-center items-center">
-              <MdKeyboardArrowRight size={20} className="text-rhythm-theme" />
-            </button>
-            <button className="flex h-5 w-5 justify-center items-center">
-              <MdKeyboardDoubleArrowRight
-                size={20}
-                className="text-rhythm-theme"
-              />
-            </button> */
-} //TODO: 애로우 버튼 생성 필요
