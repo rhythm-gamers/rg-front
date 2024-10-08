@@ -13,7 +13,7 @@ import {
 import Footer from "@/components/organisms/Footer/Footer";
 import { LINK_COMMUNITY } from "@/const";
 
-const boardRowLimit = 1;
+const boardRowLimit = 15;
 
 const generatePages = (currentPage: number, totalPage: number): number[] => {
   let start = 1;
@@ -49,7 +49,7 @@ const Community = async ({
     limit: boardRowLimit,
   });
 
-  const pageCount = Math.ceil(newPosts.data.allCount / boardRowLimit);
+  const pageCount = newPosts.data.allCount;
   const pages = generatePages(parsedPage, pageCount);
 
   return (

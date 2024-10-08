@@ -8,6 +8,7 @@ const meta = {
   args: {
     id: 1,
     level: 1,
+    title:'제목',
     onClick: fn,
   },
 } satisfies Meta<typeof LevelCard>;

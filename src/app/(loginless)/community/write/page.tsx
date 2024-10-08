@@ -5,14 +5,24 @@ import dynamic from "next/dynamic";
 import MainSectionWithBothSideAds from "@/components/molecules/MainSectionWithBothSideAds/MainSectionWithBothSideAds";
 import Footer from "@/components/organisms/Footer/Footer";
 import CustomBtn from "@/components/atoms/CustomBtn/CustomBtn";
-import Link from "next/link";
+import PostAPI from "@/api/post";
+import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
+import { LINK_COMMUNITY } from "@/const";
 
 const BoardWrite = () => {
-  const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
-    ssr: false,
-    loading: () => <p>Loading ...</p>,
-  });
+  const router = useRouter();
 
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const QuillNoSSRWrapper = useCallback(
+    dynamic(() => import("react-quill"), {
+      ssr: false,
+      loading: () => <p>Loading ...</p>,
+    }),
+    [],
+  );
   const modules = {
     toolbar: [
       [{ header: "1" }],
@@ -38,6 +48,16 @@ const BoardWrite = () => {
     "video",
   ];
 
+  const createPost = async (title: string, content: string) => {
+    await PostAPI.create({
+      title: title,
+      content: content,
+      boardName: "자유게시판",
+    });
+
+    router.replace(`${LINK_COMMUNITY}?page=1`);
+  };
+
   return (
     <>
       <MainSectionWithBothSideAds sectionTitle="자유 게시판">
@@ -51,6 +71,10 @@ const BoardWrite = () => {
                     rows={1}
                     className="w-full mt-2 p-3 resize-none border border-gray-300"
                     placeholder="제목을 입력해주세요"
+                    value={title}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -64,14 +88,20 @@ const BoardWrite = () => {
               theme="snow"
               className="h-full"
               placeholder="내용을 입력해주세요"
+              onChange={setContent}
             />
           </div>
           <div className="flex justify-end mt-14">
-            <Link href="/community">
-              <CustomBtn size={"sm"} type={"deny"} className="my-2">
-                글쓰기
-              </CustomBtn>
-            </Link>
+            <CustomBtn
+              size={"sm"}
+              type={"deny"}
+              className="my-2"
+              onClick={() => {
+                createPost(title, content);
+              }}
+            >
+              글쓰기
+            </CustomBtn>
           </div>
         </div>
       </MainSectionWithBothSideAds>

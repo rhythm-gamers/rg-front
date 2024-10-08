@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
 import fetchExtended from "../fetchExtended";
 import { IPostReq } from ".";
+import { revalidateFromTag } from "@/app/actions";
 
 /**
  * @param {IPostReq} req
@@ -9,14 +9,11 @@ import { IPostReq } from ".";
  */
 const create = async (req: IPostReq) => {
   const body = JSON.stringify(req);
-  const res = await fetchExtended("/post", {
+  await fetchExtended("/post", {
     method: "post",
     body,
   });
-
-  if (res.status === 401) {
-    redirect("/login");
-  }
+  revalidateFromTag("modifyPost");
 };
 
 export default create;
