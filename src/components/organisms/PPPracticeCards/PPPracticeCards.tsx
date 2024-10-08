@@ -1,6 +1,7 @@
 import { IPatternPracticeRes } from "@/api/pattern_practice";
 import { TKeyNum } from "@/api/types";
 import PracticeCard from "@/components/molecules/PracticeCard/PracticeCard";
+import { getGeneratedImgURL } from "@/utils";
 import React from "react";
 
 interface IPPPracticeCards {
@@ -17,7 +18,7 @@ const PPPracticeCards = ({ practices, keyNum }: IPPPracticeCards) => {
           key={practice.title}
           id={practice.id}
           title={practice.title}
-          imgSrc={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/pp_stair.png`}
+          imgSrc={getGeneratedImgURL({ title: practice.title })}
           patternInfo={practice.patternInfo}
           goalRate={practice.goalRate}
           level={0}

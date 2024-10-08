@@ -31,7 +31,7 @@ const LTLevelCards = ({ levelTests }: ILTLevelCards) => {
       if (isDragging.current) return;
       if (e.key === "Enter") {
         dispatch(setCurrentLevel(currentLevel.current));
-        router.push(`/level_tests/${currentLevel.current}`);
+        router.push(`/level_tests/${currentLevel.current - 1}`); // 임시 코드: 차후에 수정
       }
     },
     [dispatch, router],
@@ -40,7 +40,7 @@ const LTLevelCards = ({ levelTests }: ILTLevelCards) => {
     e.preventDefault();
     if (isDragging.current) return;
     dispatch(setCurrentLevel(level));
-    router.push(`/level_tests/${level}`);
+    router.push(`/level_tests/${level - 1}`); // 임시 코드: 차후에 수정
   };
 
   const settings = {
@@ -56,8 +56,9 @@ const LTLevelCards = ({ levelTests }: ILTLevelCards) => {
     lazyLoading: "ondemand",
     onInit: () => {
       const focusTarget = sliderRef.current?.innerSlider?.list?.querySelector(
-        `[data-index='${currentLevel.current - 1}']`,
+        `[data-index='${currentLevel.current - 2}']`, // 임시 코드: 차후에 수정
       )?.firstChild?.firstChild as HTMLDivElement;
+      console.log(focusTarget);
 
       focusTarget?.focus();
     },
@@ -93,6 +94,7 @@ const LTLevelCards = ({ levelTests }: ILTLevelCards) => {
           key={`levelTest ${levelTest.id}`}
           id={levelTest.id}
           level={levelTest.level}
+          title={levelTest.title}
           onClick={navigateToLevelTestByClick}
         />
       ))}

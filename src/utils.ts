@@ -1,7 +1,6 @@
 interface IQueryObject {
   [key: string]: number | string | string[];
 }
-
 export const toQueryString = (objects: IQueryObject[]) => {
   const queryStringParts: string[] = [];
 
@@ -28,4 +27,11 @@ export const toQueryString = (objects: IQueryObject[]) => {
   }
 
   return "?" + queryStringParts.join("&");
+};
+
+interface IGeneratedImg {
+  title: string;
+}
+export const getGeneratedImgURL = ({ title }: IGeneratedImg): string => {
+  return `/og?title=${title}`;
 };

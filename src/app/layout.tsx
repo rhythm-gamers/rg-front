@@ -5,6 +5,7 @@ import React, { ReactNode } from "react";
 import StoreProvider from "./storeProvider";
 import Header from "@/components/organisms/Header/Header";
 import { META } from "@/const";
+import { Black_Han_Sans } from "next/font/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL(META.url),
@@ -24,13 +25,20 @@ export const metadata: Metadata = {
   },
 };
 
+const BlackHanSans = Black_Han_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-black-han-sans",
+  weight: "400",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={`${BlackHanSans.variable}`}>
       <body className="bg-gray-50">
         <StoreProvider>
           <RouteChangesProvider>
