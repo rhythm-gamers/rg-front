@@ -14,7 +14,8 @@
     ".eslintrc.json",
     "!.storybook",
     "*.stories.tsx",
-    "src/api/**"
+    "src/api/**",
+    "src/app/og/**"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -38,6 +39,7 @@
     "@typescript-eslint/no-misused-promises": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "warn",
-    "react-hooks/rules-of-hooks": "error"
+    "react-hooks/rules-of-hooks": "error",
+    "@typescript-eslint/await-thenable": "off"
   }
 }
