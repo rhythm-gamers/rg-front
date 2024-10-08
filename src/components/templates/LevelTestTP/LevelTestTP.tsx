@@ -8,10 +8,11 @@ const LevelTestTP = async () => {
   const { data: levelTests } = await LevelTestAPI.getAll();
 
   return (
-    <FullScreenSection direction="col" className="bg-orange-100" asMainTag>
-      {levelTests.map((list) => (
-        <p key={list.id}>{list.title}</p>
-      ))}
+    <FullScreenSection
+      direction="row"
+      className="bg-gradient-to-b from-orange-50 to-orange-200"
+      asMainTag
+    >
       <div className="flex w-full h-full justify-evenly items-center">
         <LTLevelCards levelTests={levelTests} />
         <LTTips />

@@ -5,6 +5,7 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import PostAPI from "@/api/post";
 import { useState } from "react";
 import CommentAPI from "@/api/comment";
+import { revalidateFromTag } from "@/app/actions";
 
 interface ILikeBtn extends ICustomBtn {
   apiType: "post" | "comment";
@@ -27,11 +28,17 @@ const LikeBtn = ({
   const [likes, setLikes] = useState(initialLikes);
 
   const handleLike = async () => {
-    if (apiType === "post") await PostAPI.increaseLike(index);
-    else if (apiType === "comment") await CommentAPI.increaseLike(index);
-    else return;
-
-    setLikes(likes + 1);
+    if (apiType === "post") {
+      const isStatusOk = await PostAPI.increaseLike(index);
+      if (isStatusOk) {
+        revalidateFromTag("modifyPost");
+        revalidateFromTag(`increaseLike-${index}`);
+        setLikes(likes + 1);
+      }
+    } else if (apiType === "comment") {
+      await CommentAPI.increaseLike(index);
+      setLikes(likes + 1);
+    } else return;
   };
 
   return (

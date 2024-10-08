@@ -1,10 +1,14 @@
 import Image from "next/image";
 import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const { searchParams } = req.nextUrl;
+    const title = searchParams.get("title") ?? "리듬게이머즈";
+
     const fontData = await fetch(
       new URL("../../../assets/BlackHanSans-Regular.ttf", import.meta.url),
     ).then((res) => res.arrayBuffer());
@@ -33,13 +37,13 @@ export async function GET() {
               color: "white",
             }}
           >
-            <Image
+            <img
               src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/og-image-v3.png`}
               width="160"
               height="160"
               alt={"OG Logo"}
             />
-            <p style={{ fontSize: 100 }}>리듬게이머즈</p>
+            <p style={{ fontSize: 100 }}>{title}</p>
           </div>
         </div>
       ),

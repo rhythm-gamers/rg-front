@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        BlackHanSans: "var(--font-black-han-sans)",
+      },
       colors: {
         "chingho-rank-1": colors.gray[200],
         "chingho-rank-2": colors.lime[300],

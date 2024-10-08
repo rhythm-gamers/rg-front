@@ -10,6 +10,9 @@ import { parseJsonWithWrap } from "../utils";
 const getOne = async (id: number): Promise<{ data: IGetOnePost }> => {
   const res = await fetchExtended(`/post/spec/${id}`, {
     method: "get",
+    next: {
+      tags: [`increaseLike-${id}`],
+    },
   });
   const json = await res.json();
   const parsedJson = parseJsonWithWrap(json);
