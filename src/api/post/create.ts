@@ -9,11 +9,11 @@ import { revalidateFromTag } from "@/app/actions";
  */
 const create = async (req: IPostReq) => {
   const body = JSON.stringify(req);
-  const res = await fetchExtended("/post", {
+  await fetchExtended("/post", {
     method: "post",
     body,
   });
-  // revalidateFromTag("modifyPost");
+  revalidateFromTag("modifyPost");
 };
 
 export default create;
