@@ -31,8 +31,6 @@ const LikeBtn = ({
     if (apiType === "post") {
       const isStatusOk = await PostAPI.increaseLike(index);
       if (isStatusOk) {
-        revalidateFromTag("modifyPost");
-        revalidateFromTag(`increaseLike-${index}`);
         setLikes(likes + 1);
       }
     } else if (apiType === "comment") {
