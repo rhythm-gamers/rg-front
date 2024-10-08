@@ -7,8 +7,12 @@ import Footer from "@/components/organisms/Footer/Footer";
 import CustomBtn from "@/components/atoms/CustomBtn/CustomBtn";
 import PostAPI from "@/api/post";
 import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
+import { LINK_COMMUNITY } from "@/const";
 
 const BoardWrite = () => {
+  const router = useRouter();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -45,12 +49,13 @@ const BoardWrite = () => {
   ];
 
   const createPost = async (title: string, content: string) => {
-    console.log(title, content);
     await PostAPI.create({
       title: title,
       content: content,
       boardName: "자유게시판",
     });
+
+    router.replace(`${LINK_COMMUNITY}?page=1`);
   };
 
   return (

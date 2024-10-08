@@ -49,7 +49,7 @@ const Community = async ({
     limit: boardRowLimit,
   });
 
-  const pageCount = Math.ceil(newPosts.data.allCount / boardRowLimit);
+  const pageCount = newPosts.data.allCount;
   const pages = generatePages(parsedPage, pageCount);
 
   return (
