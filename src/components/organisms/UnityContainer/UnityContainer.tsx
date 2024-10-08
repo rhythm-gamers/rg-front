@@ -107,41 +107,6 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
   }, [initUserState, isLoaded, loadSheet]);
   /** END Send User Setting To Unity */
 
-  /** Set Speed, JudgeTime From Unity */
-  const handleSetSpeed = useCallback(
-    (speed: ReactUnityEventParameter) => {
-      if (typeof speed === "string") {
-        dispatch(setSpeed(parseFloat(speed)));
-      }
-    },
-    [dispatch],
-  );
-
-  const handleSetJudgeOffset = useCallback(
-    (offset: ReactUnityEventParameter) => {
-      if (typeof offset === "number") {
-        dispatch(setJudgeOffset(offset));
-      }
-    },
-    [dispatch],
-  );
-
-  useEffect(() => {
-    addEventListener("SetSpeed", handleSetSpeed);
-    addEventListener("SetJudgeOffset", handleSetJudgeOffset);
-    return () => {
-      removeEventListener("SetSpeed", handleSetSpeed);
-      removeEventListener("SetJudgeOffset", handleSetJudgeOffset);
-    };
-  }, [
-    addEventListener,
-    removeEventListener,
-    handleSetSpeed,
-    handleSetJudgeOffset,
-    isLoaded,
-  ]);
-  /** END Set Speed, JudgeTime From Unity */
-
   /** Prevent WebGL Canvas Unmount Error */
   useRouteChangeEvents({
     onBeforeRouteChange: () => {
