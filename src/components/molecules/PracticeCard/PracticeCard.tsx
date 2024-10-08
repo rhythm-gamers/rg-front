@@ -9,6 +9,7 @@ const PracticeCard = ({
   patternInfo,
   keyNum,
 }: IPatternPracticeRes) => {
+  const dump = patternInfo; //임시데이터
   return (
     <Link
       href={`/pattern_practice/${keyNum}/${id}`}
