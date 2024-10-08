@@ -33,7 +33,7 @@ export async function GET() {
               color: "white",
             }}
           >
-            <Image
+            <img
               src={`${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL}/og-image-v3.png`}
               width="160"
               height="160"
