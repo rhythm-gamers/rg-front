@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { makeStore, AppStore } from "../lib/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Persistor, persistStore } from "redux-persist";
+import { CURRENT_STORE_VERSION } from "@/const";
 
 interface IStoreProvider {
   children: ReactNode;
@@ -16,10 +17,24 @@ interface IEnhancedAppStore extends AppStore {
 
 export default function StoreProvider({ children }: IStoreProvider) {
   const storeRef = useRef<IEnhancedAppStore>();
+
   if (!storeRef.current) {
-    // Create the store instance the first time this renders
     storeRef.current = makeStore();
-    storeRef.current.__persistor = persistStore(storeRef.current);
+    storeRef.current.__persistor = persistStore(
+      storeRef.current,
+      null,
+      async () => {
+        if (!storeRef.current) return;
+        const persistedState = storeRef.current.getState();
+
+        if (persistedState.user.STORE_VERSION !== CURRENT_STORE_VERSION) {
+          console.log("스토어 버전이 변경됨. 스토어를 초기화합니다.");
+          await storeRef.current.__persistor!.flush();
+          await storeRef.current.__persistor!.purge();
+          storeRef.current.__persistor!.persist();
+        }
+      },
+    );
   }
   return (
     <Provider store={storeRef.current}>
