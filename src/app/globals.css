@@ -63,3 +63,8 @@ div::-webkit-scrollbar-thumb {
   width: 100%;
   height: 490px;
 }
+
+input[type="range"] {
+  height: 5px;
+  outline: none;
+}
