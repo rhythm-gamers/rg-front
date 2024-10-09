@@ -1,3 +1,6 @@
+// Redux Store Version
+export const CURRENT_STORE_VERSION = "v0.1.0";
+
 // metadata
 export const META = {
   title: "리듬게이머즈: 모두의 리듬게임 길잡이",
