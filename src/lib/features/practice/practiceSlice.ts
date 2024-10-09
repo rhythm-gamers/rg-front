@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PURGE } from "redux-persist";
 
 interface PracticeState {
   selectedLevels: string[];
@@ -28,6 +29,9 @@ const practiceSlice = createSlice({
     ) {
       state.selectedOrder = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => initialState);
   },
 });
 
