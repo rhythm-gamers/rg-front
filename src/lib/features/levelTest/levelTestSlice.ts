@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PURGE } from "redux-persist";
 
 interface LevelTestState {
   currentLevel: number;
@@ -15,6 +16,9 @@ const levelTestSlice = createSlice({
     setCurrentLevel(state, action: PayloadAction<number>) {
       state.currentLevel = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => initialState);
   },
 });
 

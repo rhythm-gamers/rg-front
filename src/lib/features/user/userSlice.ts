@@ -1,23 +1,22 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CURRENT_STORE_VERSION } from "@/const";
+import { createSlice } from "@reduxjs/toolkit";
+import { PURGE } from "redux-persist";
 
 interface UserState {
-  isLogin: boolean;
+  STORE_VERSION: string;
 }
 
 const initialState: UserState = {
-  isLogin: false,
+  STORE_VERSION: CURRENT_STORE_VERSION,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    setIsLogin(state, action: PayloadAction<typeof state.isLogin>) {
-      state.isLogin = action.payload;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => initialState);
   },
 });
-
-export const { setIsLogin } = userSlice.actions;
 
 export default userSlice.reducer;
