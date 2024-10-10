@@ -24,5 +24,13 @@ jobs:
             git pull origin main
             pm2 kill
             yarn install
-            yarn build
-            pm2 start "yarn start"
+            
+            # lint 결과에 따라 이후 명령 실행 여부 결정
+            if yarn lint; then
+              echo "Lint passed, proceeding with build."
+              yarn build
+              pm2 start "yarn start"
+            else
+              echo "Lint failed, stopping process."
+              exit 1
+            fi
