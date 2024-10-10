@@ -93,4 +93,9 @@ div::-webkit-scrollbar-thumb {
 .ql-picker.ql-font .ql-picker-item[data-value="Pretendard"]::before {
   font-family: "Pretendard Variable", Pretendard, serif;
   content: "Pretendard" !important;
+
+/** ----------------------------- Unity Control Sound CSS -----------------------------*/
+input[type="range"] {
+  height: 5px;
+  outline: none;
 }
