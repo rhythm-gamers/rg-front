@@ -94,3 +94,9 @@ div::-webkit-scrollbar-thumb {
   font-family: "Pretendard Variable", Pretendard, serif;
   content: "Pretendard" !important;
 }
+
+/** ----------------------------- Unity Sound Input CSS -----------------------------*/
+input[type="range"] {
+  height: 5px;
+  outline: none;
+}
