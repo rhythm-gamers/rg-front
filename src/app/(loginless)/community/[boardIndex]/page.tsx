@@ -1,3 +1,4 @@
+import "react-quill/dist/quill.core.css";
 import CommentAPI from "@/api/comment";
 import PostAPI from "@/api/post";
 import SectionTitle from "@/components/atoms/SectionTitle/SectionTitle";
@@ -53,9 +54,10 @@ const Board = async ({ params }: { params: { boardIndex: number } }) => {
             </div>
           </div>
           <hr className="mt-2 mb-5 border-black" />
-          <div className="leading-relaxed">
-            <p>{content}</p>
-          </div>
+          <div
+            dangerouslySetInnerHTML={{ __html: content }}
+            className="leading-relaxed ql-editor !h-fit !p-0"
+          ></div>
           <div className="mt-12 mb-4 flex flex-col justify-center items-center">
             <p>추천</p>
             <LikeBtn
