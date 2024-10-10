@@ -10,23 +10,45 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LINK_COMMUNITY } from "@/const";
 
+/**
+ *  [게시판 폰트 추가 방법]
+ *  1. app/fonts.ts => 로컬 or 구글 폰트 추가
+ *  2. app/layout.ts => 폰트의 CSS variable을 html className에 추가
+ *  3. app/globals.css에서 다른 폰트의 CSS를 보고, CSS 추가
+ *  4. app/globals.css의 .ql-font-{fontName}의 fontName 부분을 아래 리스트에 추가
+ */
+const FONT_LIST = ["Pretendard", "Gyeonggi"];
+
 const BoardWrite = () => {
   const router = useRouter();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const QuillNoSSRWrapper = useCallback(
-    dynamic(() => import("react-quill"), {
-      ssr: false,
-      loading: () => <p>Loading ...</p>,
-    }),
+    dynamic(
+      async () => {
+        const reactQuill = await import("react-quill");
+        const Quill = reactQuill.default.Quill;
+
+        const Font = Quill.import("formats/font") as { whitelist: string[] };
+        Font.whitelist = FONT_LIST;
+
+        Quill.register(Font, true);
+        return reactQuill;
+      },
+      {
+        ssr: false,
+        loading: () => <p>Loading ...</p>,
+      },
+    ),
     [],
   );
   const modules = {
     toolbar: [
       [{ header: "1" }],
-      [{ font: [] }, { size: [] }],
+      [{ font: FONT_LIST }, { size: [] }],
       ["bold", "italic", "underline", "strike"],
       ["link", "image", "video"],
     ],
