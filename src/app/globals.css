@@ -42,6 +42,7 @@ div::-webkit-scrollbar-thumb {
   border: 3px solid rgb(254 205 211);
 }
 
+/** ----------------------------- React Slick CSS -----------------------------*/
 .slick-list,
 .slick-track {
   display: flex !important;
@@ -59,7 +60,37 @@ div::-webkit-scrollbar-thumb {
   display: none !important;
 }
 
+/** ----------------------------- React Quill CSS -----------------------------*/
 .ql-video {
   width: 100%;
   height: 490px;
+}
+
+/** 에디터 Default 폰트 설정 */
+.ql-container {
+  font-family: "Pretendard Variable", Pretendard, serif !important;
+}
+.ql-picker.ql-font .ql-picker-label:not(:has(.ql-active))::before {
+  font-family: "Pretendard Variable", Pretendard, serif;
+  content: "Pretendard" !important;
+}
+
+/** 에디터 폰트 - 경기 천년체 */
+.ql-font-Gyeonggi {
+  font-family: var(--font-gyeonggi), serif;
+}
+.ql-picker.ql-font .ql-picker-label.ql-active[data-value="Gyeonggi"]::before,
+.ql-picker.ql-font .ql-picker-item[data-value="Gyeonggi"]::before {
+  font-family: var(--font-gyeonggi), serif;
+  content: "경기 천년체" !important;
+}
+
+/** 에디터 폰트 - Pretendard */
+.ql-font-Pretendard {
+  font-family: "Pretendard Variable", Pretendard, serif;
+}
+.ql-picker.ql-font .ql-picker-label.ql-active[data-value="Pretendard"]::before,
+.ql-picker.ql-font .ql-picker-item[data-value="Pretendard"]::before {
+  font-family: "Pretendard Variable", Pretendard, serif;
+  content: "Pretendard" !important;
 }
