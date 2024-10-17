@@ -14,17 +14,16 @@ import CommentWriteBox from "../../../../components/molecules/CommentWriteBox/Co
 const Board = async ({ params }: { params: { boardIndex: number } }) => {
   const {
     data: {
-      post: { title, content, views, likeCount: likes, user, createdAt },
+      post: { title, content, views, likeCount, user, createdAt },
     },
   } = await PostAPI.getOne(params.boardIndex);
 
   const comments = await CommentAPI.getAllByPostId({
     postId: params.boardIndex,
     page: 0,
-    limit: 10,
+    limit: 30,
   });
-
-  const commentCount = comments.data.length;
+  const commentCount = comments.data.commentCount;
 
   const parsedDate = new Date(createdAt)
     .toLocaleDateString("ko-KR", {
@@ -63,49 +62,45 @@ const Board = async ({ params }: { params: { boardIndex: number } }) => {
             <LikeBtn
               apiType="post"
               index={params.boardIndex}
-              initialLikes={likes}
+              initialLikes={likeCount}
               size={"md"}
               type={"accept"}
               className="mb-2 !px-8 flex gap-3 items-center"
             >
               <FaRegThumbsUp />
-              <span>{likes}</span>
+              <span>{likeCount}</span>
             </LikeBtn>
           </div>
           <div>
             <p className="w-60 pb-2 mb-4 border-b border-black text-xl">
               댓글 {commentCount}개
             </p>
-            {/* TODO: 매핑 작업 필요함 */}
-            <CommentBox
-              isReComment={false}
-              content={"댓글"}
-              imgSrc={"pp_stair.png"}
-              imgAlt={"프로필 사진"}
-              nickname={"닉네임1"}
-              level={1}
-            />
-            <CommentBox
-              isReComment={true}
-              content={"대댓글"}
-              imgSrc={"pp_stair.png"}
-              imgAlt={"프로필 사진"}
-              nickname={"닉네임2"}
-              level={2}
-            />
+            {comments.data.comments.map((comment) => (
+              <CommentBox
+                key={comment.id}
+                content={comment.content}
+                imgSrc={"pp_stair.png"}
+                imgAlt={"프로필 사진"}
+                nickname={comment.user.nickname}
+                userLevel={comment.user.userLevel}
+                createdAt={comment.createdAt}
+                reComments={comment.reComments}
+              />
+            ))}
+            {/*
             <CommentWriteBox
               isReComment={true}
               imgSrc={"pp_stair.png"}
               imgAlt={"프로필 사진"}
               nickname={"닉네임3"}
               level={3}
-            />
+            /> */}
             <CommentWriteBox
               isReComment={false}
               imgSrc={"pp_stair.png"}
               imgAlt={"프로필 사진"}
-              nickname={"닉네임4"}
-              level={4}
+              nickname={user.nickname}
+              userLevel={0}
             />
           </div>
         </div>
