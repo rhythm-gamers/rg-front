@@ -30,16 +30,17 @@ interface IPost {
   views: number;
   likeCount: number;
   modified: boolean;
-  user: IPostUser;
+  user: IUser;
   createdAt: string;
   modifiedAt: string;
-  commentCount: number;
+  commentsCount: number;
 }
 
-interface IPostUser {
+export interface IUser {
   id: number;
+  userLevel: number;
   nickname: string;
-}
+} // TODO: 인터페이스 수정 필요!!!!!!!
 
 const PostAPI = {
   create,
