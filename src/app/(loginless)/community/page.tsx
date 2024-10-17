@@ -75,7 +75,7 @@ const Community = async ({
               createdAt={post.createdAt}
               views={post.views}
               likeCount={post.likeCount}
-              commentCount={post.commentCount}
+              commentCount={post.commentsCount}
             />
           ))}
           <div>
