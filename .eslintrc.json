@@ -40,6 +40,7 @@
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "warn",
     "react-hooks/rules-of-hooks": "error",
-    "@typescript-eslint/await-thenable": "off"
+    "@typescript-eslint/await-thenable": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off"
   }
 }
