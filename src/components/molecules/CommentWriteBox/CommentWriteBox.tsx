@@ -13,7 +13,7 @@ const CommentWriteView = ({
   imgSrc,
   imgAlt,
   nickname,
-  level,
+  userLevel,
 }: ICommentWriteBox) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const changeTextareaHeight = () => {
@@ -32,7 +32,7 @@ const CommentWriteView = ({
         imgSrc={imgSrc}
         imgAlt={imgAlt}
         nickname={nickname}
-        level={level}
+        userLevel={userLevel}
       />
       <div className="flex flex-row items-end justify-between w-full p-4 gap-2 bg-white rounded-xl">
         <textarea
@@ -60,30 +60,32 @@ const CommentWriteBox = ({
   imgSrc,
   imgAlt,
   nickname,
-  level,
+  userLevel,
 }: ICommentWriteBox) => {
   if (isReComment)
     return (
-      <div className="flex flex-row my-2">
+      <div className="flex flex-row mb-2">
         <PiArrowElbowDownRightBold className="text-2xl mx-2 mt-2" />
         <CommentWriteView
           isReComment={isReComment}
           imgSrc={imgSrc}
           imgAlt={imgAlt}
           nickname={nickname}
-          level={level}
+          userLevel={userLevel}
         />
       </div>
     );
   else
     return (
-      <CommentWriteView
-        isReComment={isReComment}
-        imgSrc={imgSrc}
-        imgAlt={imgAlt}
-        nickname={nickname}
-        level={level}
-      />
+      <div className="mb-2">
+        <CommentWriteView
+          isReComment={isReComment}
+          imgSrc={imgSrc}
+          imgAlt={imgAlt}
+          nickname={nickname}
+          userLevel={userLevel}
+        />
+      </div>
     );
 };
 
