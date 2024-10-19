@@ -100,7 +100,8 @@ const Board = async ({ params }: { params: { boardIndex: number } }) => {
               imgSrc={"pp_stair.png"}
               imgAlt={"프로필 사진"}
               nickname={user.nickname}
-              userLevel={0}
+              userLevel={user.userLevel}
+              postId={params.boardIndex}
             />
           </div>
         </div>

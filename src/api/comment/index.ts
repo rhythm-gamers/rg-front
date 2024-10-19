@@ -10,9 +10,9 @@ import { IUser } from "../post";
 
 export interface ICommentReq {
   content: string;
-  postId: number;
+  postid: number;
   parentId?: number;
-}
+} //TODO: postid 인터페이스 변경해야함
 
 export interface ICommentReqOptional
   extends Partial<Pick<ICommentReq, "content">> {}
