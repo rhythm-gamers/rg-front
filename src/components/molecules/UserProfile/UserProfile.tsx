@@ -1,13 +1,12 @@
+import { IUser } from "@/api/post";
 import Image from "next/image";
 
-export interface IUserProfile {
+export interface IUserProfile extends Omit<IUser, "id"> {
   imgSrc: string;
   imgAlt: string;
-  nickname: string;
-  level: number;
 }
 
-const UserProfile = ({ imgSrc, imgAlt, nickname, level }: IUserProfile) => {
+const UserProfile = ({ imgSrc, imgAlt, nickname, userLevel }: IUserProfile) => {
   return (
     <div className="flex flex-row gap-2 items-center">
       <Image
@@ -17,7 +16,7 @@ const UserProfile = ({ imgSrc, imgAlt, nickname, level }: IUserProfile) => {
         alt={imgAlt}
       />
       <span>{nickname}</span>
-      <span>LV.{level}</span>
+      <span>LV.{userLevel}</span>
     </div>
   );
 };
