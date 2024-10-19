@@ -3,9 +3,13 @@
 import { PiArrowElbowDownRightBold, PiPaperPlaneTilt } from "react-icons/pi";
 import UserProfile, { IUserProfile } from "../UserProfile/UserProfile";
 import { useRef } from "react";
+import CommentAPI from "@/api/comment";
+import { useRouter } from "next/navigation";
 
 interface ICommentWriteBox extends IUserProfile {
   isReComment: boolean;
+  postId: number;
+  parentId?: number;
 }
 
 const CommentWriteView = ({
@@ -14,12 +18,33 @@ const CommentWriteView = ({
   imgAlt,
   nickname,
   userLevel,
+  postId,
+  parentId,
 }: ICommentWriteBox) => {
+  const router = useRouter();
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const changeTextareaHeight = () => {
     if (textareaRef.current == null) return;
     textareaRef.current.style.height = "auto";
     textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+  };
+
+  const createComment = async (
+    content: string | undefined,
+    postId: number,
+    parentId: number,
+  ) => {
+    if (!content) return;
+
+    await CommentAPI.create({
+      content: content,
+      postid: postId,
+      parentId: parentId,
+    });
+    console.log(content);
+
+    router.refresh();
   };
 
   return (
@@ -45,7 +70,7 @@ const CommentWriteView = ({
         />
         <button
           onClick={() => {
-            console.log(textareaRef.current?.value);
+            createComment(textareaRef.current?.value, postId, parentId ?? 0);
           }}
         >
           <PiPaperPlaneTilt className="text-2xl" />
@@ -61,6 +86,8 @@ const CommentWriteBox = ({
   imgAlt,
   nickname,
   userLevel,
+  postId,
+  parentId,
 }: ICommentWriteBox) => {
   if (isReComment)
     return (
@@ -72,6 +99,8 @@ const CommentWriteBox = ({
           imgAlt={imgAlt}
           nickname={nickname}
           userLevel={userLevel}
+          postId={postId}
+          parentId={parentId}
         />
       </div>
     );
@@ -84,6 +113,7 @@ const CommentWriteBox = ({
           imgAlt={imgAlt}
           nickname={nickname}
           userLevel={userLevel}
+          postId={postId}
         />
       </div>
     );
