@@ -11,15 +11,16 @@ import UserProfile from "@/components/molecules/UserProfile/UserProfile";
 import CommentBox from "../../../../components/molecules/CommentBox/CommentBox";
 import CommentWriteBox from "../../../../components/molecules/CommentWriteBox/CommentWriteBox";
 
-const Board = async ({ params }: { params: { boardIndex: number } }) => {
+const Board = async ({ params }: { params: { boardIndex: string } }) => {
+  const boardIndex = parseInt(params.boardIndex);
   const {
     data: {
       post: { title, content, views, likeCount, user, createdAt },
     },
-  } = await PostAPI.getOne(params.boardIndex);
+  } = await PostAPI.getOne(boardIndex);
 
   const comments = await CommentAPI.getAllByPostId({
-    postId: params.boardIndex,
+    postId: boardIndex,
     page: 0,
     limit: 30,
   });
@@ -61,7 +62,7 @@ const Board = async ({ params }: { params: { boardIndex: number } }) => {
             <p>추천</p>
             <LikeBtn
               apiType="post"
-              index={params.boardIndex}
+              index={boardIndex}
               initialLikes={likeCount}
               size={"md"}
               type={"accept"}
@@ -101,7 +102,7 @@ const Board = async ({ params }: { params: { boardIndex: number } }) => {
               imgAlt={"프로필 사진"}
               nickname={user.nickname}
               userLevel={user.userLevel}
-              postId={params.boardIndex}
+              postId={boardIndex}
             />
           </div>
         </div>
