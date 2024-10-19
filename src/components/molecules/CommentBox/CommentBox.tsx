@@ -1,32 +1,42 @@
 import { FiThumbsUp, FiAlertTriangle } from "react-icons/fi";
 import { PiArrowElbowDownRightBold } from "react-icons/pi";
 import UserProfile, { IUserProfile } from "../UserProfile/UserProfile";
+import { ICommentRes } from "@/api/comment";
 
-interface ICommentBox extends IUserProfile {
-  isReComment: boolean;
+interface ICommentView extends IUserProfile {
   content: string;
+  createdAt: string;
 }
 
+interface ICommentBox extends ICommentView, Pick<ICommentRes, "reComments"> {}
+
 const CommentView = ({
-  isReComment,
   content,
   imgSrc,
   imgAlt,
   nickname,
-  level,
-}: ICommentBox) => {
+  userLevel,
+  createdAt,
+}: ICommentView) => {
+  const parsedDate = new Date(createdAt)
+    .toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .slice(0, -1);
+
   return (
-    <div
-      className={`flex flex-col p-6 gap-3 bg-gray-200 rounded-2xl ${
-        isReComment && `w-full`
-      }`}
-    >
-      <UserProfile
-        imgSrc={imgSrc}
-        imgAlt={imgAlt}
-        nickname={nickname}
-        level={level}
-      />
+    <div className="flex flex-col p-6 gap-3 bg-gray-200 rounded-2xl w-full">
+      <div className="flex justify-between items-center">
+        <UserProfile
+          imgSrc={imgSrc}
+          imgAlt={imgAlt}
+          nickname={nickname}
+          userLevel={userLevel}
+        />
+        <span>{parsedDate}</span>
+      </div>
       <div>
         <p>{content}</p>
       </div>
@@ -40,38 +50,41 @@ const CommentView = ({
 };
 
 const CommentBox = ({
-  isReComment,
   content,
   imgSrc,
   imgAlt,
   nickname,
-  level,
+  userLevel,
+  createdAt,
+  reComments,
 }: ICommentBox) => {
-  if (isReComment)
-    return (
-      <div className="flex flex-row my-2">
-        <PiArrowElbowDownRightBold className="text-2xl mx-2 mt-2" />
+  return (
+    <>
+      <div className="mb-2">
         <CommentView
-          isReComment={isReComment}
           content={content}
           imgSrc={imgSrc}
           imgAlt={imgAlt}
           nickname={nickname}
-          level={level}
+          userLevel={userLevel}
+          createdAt={createdAt}
         />
       </div>
-    );
-  else
-    return (
-      <CommentView
-        isReComment={isReComment}
-        content={content}
-        imgSrc={imgSrc}
-        imgAlt={imgAlt}
-        nickname={nickname}
-        level={level}
-      />
-    );
+      {reComments.map((reComment) => (
+        <div key={reComment.id} className="flex flex-row mb-2">
+          <PiArrowElbowDownRightBold className="text-2xl mx-2 mt-2" />
+          <CommentView
+            content={reComment.content}
+            imgSrc={imgSrc}
+            imgAlt={imgAlt}
+            nickname={reComment.user.nickname}
+            userLevel={reComment.user.userLevel}
+            createdAt={reComment.createdAt}
+          />
+        </div>
+      ))}
+    </>
+  );
 };
 
 export default CommentBox;

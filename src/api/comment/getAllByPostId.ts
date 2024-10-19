@@ -1,4 +1,4 @@
-import { ICommentRes } from ".";
+import { ICommentWithCount } from ".";
 import fetchExtended from "../fetchExtended";
 import { IPaging } from "../interfaces";
 import { makePagingQueryString, parseJsonWithWrap } from "../utils";
@@ -17,7 +17,7 @@ const getAllByPostId = async ({
   postId,
   page,
   limit,
-}: ICommentGetAll): Promise<{ data: ICommentRes[] }> => {
+}: ICommentGetAll): Promise<{ data: ICommentWithCount }> => {
   const pagingQuery = makePagingQueryString(page, limit);
   const res = await fetchExtended(`/comment/post/${postId}${pagingQuery}`, {
     method: "get",
