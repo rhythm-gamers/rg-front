@@ -2,12 +2,15 @@ import returnFetch from "return-fetch";
 
 const fetchExtended = returnFetch({
   baseUrl: process.env.NEXT_PUBLIC_API_SERVER_URL,
-  headers: { Accept: "application/json", "Content-Type": "application/json" },
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    access_token: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
+    refresh_token: process.env.NEXT_PUBLIC_REFRESH_TOKEN,
+  },
   fetch: (url, init) =>
     fetch(url, {
-      cache: process.env.NODE_ENV == "production" ? "default" : "no-store",
-      credentials:
-        process.env.NODE_ENV === "production" ? "include" : "same-origin",
+      credentials: "include",
       ...init,
     }),
   interceptors: {
