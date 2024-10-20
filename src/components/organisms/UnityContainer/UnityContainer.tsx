@@ -117,7 +117,7 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
     }
 
     rebindAllNoteKey(keyNum);
-    const combinedArgs = `${title},${keyNum}`;
+    const combinedArgs = `${title}|${keyNum}`;
     sendMessage("SheetLoader", "WebGLLoadSheet", combinedArgs);
   };
 
@@ -138,13 +138,14 @@ const UnityContainer = ({ id, referer }: IUnityContainer) => {
   };
 
   const rebindNoteKey = (noteLine: number, newKey: string) => {
-    const combinedArgs = `${noteLine},${newKey}`;
+    const combinedArgs = `${noteLine}|${newKey}`;
     sendMessage("RebindController", "WebGLRebindNoteKey", combinedArgs);
   };
 
   const initUserState = () => {
     sendMessage("GameManager", "WebGLInitUserSpeed", speed);
     sendMessage("Sync", "WebGLInitUserJudgeOffset", judgeOffset);
+    sendMessage("AudioManager", "WebGLSetVolume", volume.current);
   };
 
   useEffect(() => {
