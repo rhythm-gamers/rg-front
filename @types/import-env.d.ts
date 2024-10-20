@@ -7,5 +7,7 @@ declare namespace NodeJS {
     STORYBOOK_AWS_CLOUDFRONT_URL: string;
     NEXT_PUBLIC_API_ADMIN_ID: string;
     NEXT_PUBLIC_API_ADMIN_PW: string;
+    NEXT_PUBLIC_ACCESS_TOKEN: string;
+    NEXT_PUBLIC_REFRESH_TOKEN: string;
   }
 }
